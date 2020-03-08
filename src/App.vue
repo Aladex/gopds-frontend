@@ -18,7 +18,8 @@
                             tag="span"
                             class="pointer pl-8"
                     >
-                        Новые книги</router-link>
+                        Новые книги
+                    </router-link>
                 </v-toolbar-title>
                 <v-btn icon
                        :to="{ name: 'page', params: { page: 1 }}"
@@ -39,11 +40,12 @@
                 >
 
                 </v-text-field>
-              <v-btn
-                      icon
-                      @click="toPage"
-              ><v-icon>mdi-magnify</v-icon></v-btn>
-
+                <v-btn
+                        icon
+                        @click="toPage"
+                >
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
 
 
             </v-app-bar>
@@ -55,18 +57,18 @@
     </v-app>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        localTitle: ''
-      }
-    },
-    methods: {
-      toPage() {
-        this.$router.push(`/find/books/${this.localTitle}/1`)
-      }
+    export default {
+        data() {
+            return {
+                localTitle: ''
+            }
+        },
+        methods: {
+            toPage() {
+                this.$router.push(`/find/books/${this.localTitle}/1`)
+            }
+        }
     }
-  }
 </script>
 <style>
     .pointer {

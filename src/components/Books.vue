@@ -151,14 +151,11 @@
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
-                            this.books = response.data.books
-                            this.pagesLength = response.data.lenght
-                            this.loading = false
+                        this.books = response.data.books
+                        this.pagesLength = response.data.lenght
+                        this.loading = false
                     })
-                    .catch(error => {
-
-                        // eslint-disable-next-line no-console
-                        console.log(error)
+                    .catch(() => {
                         this.logout()
                     })
                 window.scrollTo(0, 0)
