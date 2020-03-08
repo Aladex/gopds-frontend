@@ -56,11 +56,12 @@
                     >
 
                     </v-text-field>
+
                     <v-btn
-                            icon
+                            text
                             @click="toPage"
                     >
-                        <v-icon>mdi-magnify</v-icon>
+                        Искать
                     </v-btn>
                 </template>
 

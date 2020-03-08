@@ -32,7 +32,7 @@
                                 <v-text-field
                                         label="Login"
                                         name="login"
-                                        prepend-icon="mdi-lock"
+                                        prepend-icon="mdi-account"
                                         type="text"
                                         v-model="email"
                                         :rules="emailRules"

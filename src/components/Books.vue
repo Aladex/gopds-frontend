@@ -40,25 +40,25 @@
                                     class="mt-4"
                             >
                                 <v-btn
-                                        class="success ma-2"
+                                        class="secondary ma-2"
                                         min-width="100px"
                                         :href="`https://aladex.ru/opds/download/${b.id}/0/`"
                                 >FB2
                                 </v-btn>
                                 <v-btn
-                                        class="success ma-2"
+                                        class="secondary ma-2"
                                         min-width="100px"
                                         :href="`https://aladex.ru/opds/download/${b.id}/1/`"
                                 >FB2+ZIP
                                 </v-btn>
                                 <v-btn
-                                        class="success ma-2"
+                                        class="secondary ma-2"
                                         min-width="100px"
                                         :href="`https://aladex.ru/opds/convert/${b.id}/epub/`"
                                 >EPUB
                                 </v-btn>
                                 <v-btn
-                                        class="success ma-2"
+                                        class="secondary ma-2"
                                         min-width="100px"
                                         :href="`https://aladex.ru/opds/convert/${b.id}/mobi/`"
                                 >MOBI
