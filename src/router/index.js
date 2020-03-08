@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Books from '../components/Books.vue'
 import Login from '../components/auth/Login.vue'
+import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
 
 Vue.use(VueRouter)
@@ -53,11 +54,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
-    meta: {checkAuth: true}
+    meta: { checkAuth: true, title: "Вход в библиотеку" }
   },
   {
     path: '/logout',
     name: 'logout',
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
   },
 ]
 
