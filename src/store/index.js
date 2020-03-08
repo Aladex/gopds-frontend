@@ -79,6 +79,12 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
             commit('logout')
             localStorage.removeItem('token')
+            axios(
+                {
+                  url: process.env.VUE_APP_BACKEND_API_URL + 'api/logout',
+                  method: "GET"
+                },
+            )
             resolve()
           }
       )
