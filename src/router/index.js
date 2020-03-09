@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Books from '../components/Books.vue'
 import Login from '../components/auth/Login.vue'
+import Authors from "@/components/Authors";
 import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
 
@@ -67,6 +68,22 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Поиск книги по автору: ",
+    }
+  },
+  {
+    path: '/authors/:author/:page',
+    name: 'findAuthor',
+    component: Authors,
+    props: (route) => {
+      const page = Number.parseInt(route.params.page, 10)
+      if (Number.isNaN(page)) {
+        return 1
+      }
+      return { page, author: route.params.author, searchBar: true }
+    },
+    meta: {
+      requiresAuth: true,
+      title: "Поиск автора: ",
     }
   },
   {

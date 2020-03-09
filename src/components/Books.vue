@@ -12,8 +12,11 @@
                 :key="b.id"
         >
             <v-col
-                    lg="8"
+                    cols="12"
+                    xs="10"
                     sm="10"
+                    md="10"
+                    lg="8"
             >
                 <v-skeleton-loader
                         :loading="loading"
@@ -112,14 +115,16 @@
         name: "Books",
         props: ["page", "title", "searchBar", "author"],
         components: {
-            BookFind
+            BookFind,
         },
         data() {
             return {
                 pagesLength: 1,
                 loading: true,
                 books: [],
-                localTitle: ''
+                localTitle: '',
+                searchSelect: "book",
+                searchSelects: ["book", "author"]
             }
         },
         computed: {
@@ -180,15 +185,6 @@
                 }
                 return dhd
             },
-            authorsJoin(authors) {
-                // return authors.map(e => e.full_name).join(", ");
-                let authorsHTML = []
-                for (let a of authors) {
-                    // authorsHTML.push(`<a href="/find/author/${a.id}/1">${a.full_name}</a>`)
-                    authorsHTML.push(`"/find/author/${a.id}/1"`)
-                }
-                return authorsHTML
-            },
             getBooks() {
                 this.loading = true
                 let numberedPage = Number.parseInt(this.pageLocal, 10)
@@ -204,7 +200,7 @@
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
                         this.books = response.data.books
-                        this.pagesLength = response.data.lenght
+                        this.pagesLength = response.data.length
                         this.loading = false
                     })
                     .catch(() => {

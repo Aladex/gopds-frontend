@@ -1,23 +1,49 @@
 <template>
     <v-row justify="center">
         <v-col
+                cols="12"
+                sm="12"
+                md="10"
                 lg="8"
-                sm="10"
+                class="mt-4"
         >
             <v-row justify="start">
-                <v-col lg="4"
-                       sm="8">
+                <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="4"
+                >
+                    <v-select
+                            v-model="selectedSearch"
+                            :items="selects"
+                            :item-text="itemText"
+                            label="Категория поиска"
+                            return-object
+                    ></v-select>
+                </v-col>
+                <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="4"
+                >
+
                     <v-text-field
                             v-model="localTitle"
-                            label="Искать книгу по названию"
+                            label="Что ищем?"
                             single-line
                             hide-details
                             @keyup.enter="findByTitle"
                     >
-
                     </v-text-field>
                 </v-col>
-                <v-col lg="2" sm="4">
+                <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="4"
+                >
                     <v-btn
                             class="search-btn"
                             @click="findByTitle"
@@ -33,14 +59,28 @@
 <script>
     export default {
         name: "BookFind",
-        data () {
+        data() {
             return {
-                localTitle: ""
+                openSelect: false,
+                selectedSearch: { name: "book", title: "Поиск книги по названию" },
+                localTitle: "",
+                selects: [
+                    { name: "book", title: "Поиск книги по названию" },
+                    { name: "author", title: "Поиск автора" },
+                ]
             }
         },
         methods: {
+            itemText: item => item.title,
             findByTitle() {
-                this.$router.push(`/find/books/${this.localTitle}/1`)
+                switch (this.selectedSearch.name) {
+                    case "book":
+                        this.$router.push(`/find/books/${this.localTitle}/1`)
+                        break;
+                    case "author":
+                        this.$router.push(`/authors/${this.localTitle}/1`)
+                        break;
+                }
             },
         }
     }
