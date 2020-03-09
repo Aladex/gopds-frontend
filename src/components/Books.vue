@@ -152,7 +152,10 @@
                 let thisPath = this.$router.currentRoute
                 if (thisPath.name === 'findBook') {
                     this.$router.push(`/find/books/${thisPath.params.title}/${page}`)
-                } else {
+                } else if (thisPath.name === 'findByAuthor') {
+                    this.$router.push(`/find/author/${thisPath.params.author}/${page}`)
+                }
+                else {
                     this.$router.push(`/page/${page}`)
                 }
             },
