@@ -20,7 +20,7 @@
             >
                 <v-toolbar-title class="d-none d-sm-flex">
                     <router-link
-                            :to="{ name: 'page', params: { page: 1 }}"
+                            :to="{ name: 'Books'}"
                             tag="span"
                             class="pointer pl-8"
                     >

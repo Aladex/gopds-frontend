@@ -212,7 +212,7 @@
 
         },
         watch: {
-            pageLocal() {
+            page() {
                 this.setThisPage(this.page)
                 this.getBooks()
             },
