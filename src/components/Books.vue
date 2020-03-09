@@ -25,8 +25,10 @@
                     >
                         <v-row class="mr-4">
                             <v-col
-                                    lg="10"
+                                    cols="12"
                                     sm="12"
+                                    md="12"
+                                    lg="10"
                             >
                                 <v-card-title>{{ b.title }}</v-card-title>
                                 <v-card-text>
@@ -39,8 +41,10 @@
                                 </v-card-text>
                             </v-col>
                             <v-col
-                                    lg="2"
+                                    cols="12"
                                     sm="12"
+                                    md="12"
+                                    lg="2"
                                     class="mt-4"
                             >
                                 <v-btn
