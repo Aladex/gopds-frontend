@@ -33,6 +33,11 @@
 <script>
     export default {
         name: "BookFind",
+        data () {
+            return {
+                localTitle: ""
+            }
+        },
         methods: {
             findByTitle() {
                 this.$router.push(`/find/books/${this.localTitle}/1`)

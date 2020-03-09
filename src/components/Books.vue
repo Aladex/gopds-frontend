@@ -2,7 +2,10 @@
     <v-container
             fluid
     >
-        <book-find></book-find>
+        <book-find
+                v-if="searchBar"
+        ></book-find>
+
         <v-row
                 v-for="b in books"
                 justify="center"
@@ -88,7 +91,7 @@
     import BookFind from "@/components/utils/BookFind";
     export default {
         name: "Books",
-        props: ["page", "title"],
+        props: ["page", "title", "searchBar"],
         components: {
             BookFind
         },
@@ -113,7 +116,8 @@
                 set(page) {
                     this.$store.dispatch('setPage', page)
                 }
-            }
+            },
+
         },
         methods: {
             setThisPage(page) {
@@ -181,7 +185,6 @@
         mounted() {
             this.setThisPage(this.page)
             this.getBooks()
-
         },
         watch: {
             page() {

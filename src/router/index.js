@@ -12,10 +12,14 @@ const routes = [
     path: '/',
     name: 'Books',
     component: Books,
-    props: {page: 1},
+    props: {
+      page: 1,
+      searchBar: true
+    },
     meta: {
       requiresAuth: true,
-      title: "Новые книги"
+      title: "Новые книги",
+
     }
   },
   {
@@ -27,11 +31,11 @@ const routes = [
       if (Number.isNaN(page)) {
         return 1
       }
-      return { page }
+      return { page, searchBar: true }
     },
     meta: {
       requiresAuth: true,
-      title: "Новые книги"
+      title: "Новые книги",
     }
   },
   {
@@ -43,11 +47,11 @@ const routes = [
       if (Number.isNaN(page)) {
         return 1
       }
-      return { page, title: route.params.title }
+      return { page, title: route.params.title, searchBar: true }
     },
     meta: {
       requiresAuth: true,
-      title: "Поиск книги: "
+      title: "Поиск книги: ",
     }
   },
   {
