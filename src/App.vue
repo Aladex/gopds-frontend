@@ -75,8 +75,4 @@
         cursor: pointer;
     }
 
-    .search-btn {
-        position: relative;
-        top: 12px;
-    }
 </style>

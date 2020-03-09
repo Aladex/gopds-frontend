@@ -22,6 +22,7 @@
                     </v-col>
                     <v-col lg="2" sm="4">
                         <v-btn
+                                class="search-btn"
                                 @click="findByTitle"
                         >
                             Искать
@@ -224,5 +225,8 @@
 </script>
 
 <style scoped>
-
+    .search-btn {
+        position: relative;
+        top: 12px;
+    }
 </style>
