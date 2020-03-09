@@ -54,6 +54,22 @@ const routes = [
     }
   },
   {
+    path: '/find/author/:author/:page',
+    name: 'findByAuthor',
+    component: Books,
+    props: (route) => {
+      const page = Number.parseInt(route.params.page, 10)
+      if (Number.isNaN(page)) {
+        return 1
+      }
+      return { page, author: route.params.author, searchBar: true }
+    },
+    meta: {
+      requiresAuth: true,
+      title: "Поиск книги по автору: ",
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login,

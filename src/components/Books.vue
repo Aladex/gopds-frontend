@@ -32,10 +32,24 @@
                             >
                                 <v-card-title>{{ b.title }}</v-card-title>
                                 <v-card-text>
-                                    <p>Дата добавления: <i>{{ toHumanDate(b.registerdate) }}</i></p>
-                                    <p>Дата документа: <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
-                                    <div v-if="b.authors !== null">Авторы: {{ authorsJoin(b.authors) }}</div>
-                                    <div class="my-4 subtitle-1">Описание:</div>
+                                    <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
+                                    <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
+                                    <div class="my-4 subtitle-1"><b>Авторы:</b>
+                                        <p>
+                                         <span
+                                                v-for="a in b.authors"
+                                                :key="a.id"
+                                        >
+                                            &#8195;&#8226;&#8195;
+                                             <router-link
+                                                    :to="`/find/author/${a.id}/1`"
+                                            >{{a.full_name }}
+                                            </router-link>
+                                        </span></p>
+                                    </div>
+
+
+                                    <div class="my-4 subtitle-1"><b>Описание:</b></div>
                                     <div>{{ b.annotation }}</div>
                                     <div v-if="b.annotation === ''">Описание отсутствует</div>
                                 </v-card-text>
@@ -96,7 +110,7 @@
 
     export default {
         name: "Books",
-        props: ["page", "title", "searchBar"],
+        props: ["page", "title", "searchBar", "author"],
         components: {
             BookFind
         },
@@ -164,7 +178,13 @@
                 return dhd
             },
             authorsJoin(authors) {
-                return authors.map(e => e.full_name).join(", ");
+                // return authors.map(e => e.full_name).join(", ");
+                let authorsHTML = []
+                for (let a of authors) {
+                    // authorsHTML.push(`<a href="/find/author/${a.id}/1">${a.full_name}</a>`)
+                    authorsHTML.push(`"/find/author/${a.id}/1"`)
+                }
+                return authorsHTML
             },
             getBooks() {
                 this.loading = true
@@ -206,6 +226,10 @@
                 this.getBooks()
             },
             title() {
+                this.setThisPage(this.page)
+                this.getBooks()
+            },
+            author() {
                 this.setThisPage(this.page)
                 this.getBooks()
             },
