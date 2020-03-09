@@ -24,7 +24,7 @@
                             tag="span"
                             class="pointer pl-8"
                     >
-                        Моя библиотека
+                        Лепробиблиотека
                     </router-link>
                 </v-toolbar-title>
                 <v-btn icon
