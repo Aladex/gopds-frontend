@@ -89,6 +89,7 @@
 
 <script>
     import BookFind from "@/components/utils/BookFind";
+
     export default {
         name: "Books",
         props: ["page", "title", "searchBar"],
@@ -117,6 +118,11 @@
                     this.$store.dispatch('setPage', page)
                 }
             },
+            thisPath: {
+                get() {
+                    return this.$router.currentRoute
+                }
+            }
 
         },
         methods: {
@@ -143,11 +149,15 @@
                 })
             },
             docDatetoHumanDate(value) {
-                return new Date(value).toLocaleDateString('ru-RU', {
+                let dhd = new Date(value).toLocaleDateString('ru-RU', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                 })
+                if (dhd === "Invalid Date") {
+                    return "Дата документа неизвестна"
+                }
+                return dhd
             },
             authorsJoin(authors) {
                 return authors.map(e => e.full_name).join(", ");
@@ -191,13 +201,14 @@
                 this.setThisPage(this.page)
                 this.getBooks()
             },
+            title() {
+                this.setThisPage(this.page)
+                this.getBooks()
+            },
         }
     }
 </script>
 
 <style scoped>
-    .search-btn {
-        position: relative;
-        top: 12px;
-    }
+
 </style>

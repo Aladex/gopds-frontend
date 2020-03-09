@@ -19,7 +19,6 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Новые книги",
-
     }
   },
   {
