@@ -216,10 +216,6 @@
                 this.setThisPage(this.page)
                 this.getBooks()
             },
-            title() {
-                this.setThisPage(this.page)
-                this.getBooks()
-            }
         }
     }
 </script>
