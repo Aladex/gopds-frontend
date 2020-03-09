@@ -64,6 +64,7 @@ const routes = [
     path: '*',
     name: 'NotFound',
     component: NotFound,
+    meta: { title: "Страница не найдена" }
   },
 ]
 

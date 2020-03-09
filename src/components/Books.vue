@@ -2,6 +2,36 @@
     <v-container
             fluid
     >
+        <v-row justify="center">
+            <v-col
+                    lg="8"
+                    sm="10"
+            >
+                <v-row justify="start">
+                    <v-col lg="4"
+                           sm="8">
+                        <v-text-field
+                                v-model="localTitle"
+                                label="Искать книгу по названию"
+                                single-line
+                                hide-details
+                                @keyup.enter="findByTitle"
+                        >
+
+                        </v-text-field>
+                    </v-col>
+                    <v-col lg="2" sm="4">
+                        <v-btn
+                                class="search-btn"
+                                @click="findByTitle"
+                        >
+                            Искать
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
         <v-row
                 v-for="b in books"
                 justify="center"
@@ -42,25 +72,25 @@
                                 <v-btn
                                         class="secondary ma-2"
                                         min-width="100px"
-                                        :href="`https://aladex.ru/opds/download/${b.id}/0/`"
+                                        :href="`${opdsURL}/opds/download/${b.id}/0/`"
                                 >FB2
                                 </v-btn>
                                 <v-btn
                                         class="secondary ma-2"
                                         min-width="100px"
-                                        :href="`https://aladex.ru/opds/download/${b.id}/1/`"
+                                        :href="`${opdsURL}/opds/download/${b.id}/1/`"
                                 >FB2+ZIP
                                 </v-btn>
                                 <v-btn
                                         class="secondary ma-2"
                                         min-width="100px"
-                                        :href="`https://aladex.ru/opds/convert/${b.id}/epub/`"
+                                        :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
                                 >EPUB
                                 </v-btn>
                                 <v-btn
                                         class="secondary ma-2"
                                         min-width="100px"
-                                        :href="`https://aladex.ru/opds/convert/${b.id}/mobi/`"
+                                        :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
                                 >MOBI
                                 </v-btn>
 
@@ -91,10 +121,16 @@
             return {
                 pagesLength: 1,
                 loading: true,
-                books: []
+                books: [],
+                localTitle: ''
             }
         },
         computed: {
+            opdsURL: {
+                get() {
+                    return process.env.VUE_APP_OPDS
+                }
+            },
             pageLocal: {
                 get() {
                     return this.$store.getters.myPage
@@ -116,6 +152,9 @@
                 } else {
                     this.$router.push(`/page/${page}`)
                 }
+            },
+            findByTitle() {
+                this.$router.push(`/find/books/${this.localTitle}/1`)
             },
 
             toHumanDate(value) {
