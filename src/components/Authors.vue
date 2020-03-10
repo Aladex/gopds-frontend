@@ -95,8 +95,15 @@
                         this.pagesLength = response.data.length
                         this.loading = false
                     })
-                    .catch(() => {
-                        this.logout()
+                    .catch(err => {
+                        switch (err.response.status) {
+                            case 403:
+                                this.logout()
+                                break
+                            case 404:
+                                this.$router.push("/404")
+                                break
+                        }
                     })
                 window.scrollTo(0, 0)
             },

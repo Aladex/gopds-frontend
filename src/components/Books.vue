@@ -199,12 +199,20 @@
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
+                        console.log(response)
                         this.books = response.data.books
                         this.pagesLength = response.data.length
                         this.loading = false
                     })
-                    .catch(() => {
-                        this.logout()
+                    .catch(err => {
+                        switch (err.response.status) {
+                            case 403:
+                                this.logout()
+                                break
+                            case 404:
+                                this.$router.push("/404")
+                                break
+                        }
                     })
                 window.scrollTo(0, 0)
             },
