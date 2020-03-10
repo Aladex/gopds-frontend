@@ -2,7 +2,7 @@
     <v-row justify="center">
         <v-col
                 cols="12"
-                sm="12"
+                sm="10"
                 md="10"
                 lg="8"
                 class="mt-4"
