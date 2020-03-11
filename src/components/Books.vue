@@ -104,7 +104,7 @@
         </div>
         <div
                 class="text-center"
-                v-if="(books.length > 0 && !loading)"
+                v-if="(books.length > 0)"
 
         >
             <v-pagination

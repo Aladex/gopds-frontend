@@ -39,7 +39,7 @@
             </v-row>
 
             <div class="text-center"
-                 v-if="(authors.length > 0 && !loading)"
+                 v-if="(authors.length > 0)"
             >
                 <v-pagination
                         v-model="pageLocal"
