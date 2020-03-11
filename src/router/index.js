@@ -67,11 +67,11 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-      title: "Поиск книги по автору: ",
+      title: "Книги по автору",
     }
   },
   {
-    path: '/authors/:author/:page',
+    path: '/authors/:title/:page',
     name: 'findAuthor',
     component: Authors,
     props: (route) => {
@@ -79,7 +79,7 @@ const routes = [
       if (Number.isNaN(page)) {
         return 1
       }
-      return { page, author: route.params.author, searchBar: true }
+      return { page, author: route.params.title, searchBar: true }
     },
     meta: {
       requiresAuth: true,
