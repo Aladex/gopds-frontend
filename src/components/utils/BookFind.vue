@@ -30,7 +30,7 @@
                 >
 
                     <v-text-field
-                            v-model="localTitle"
+                            v-model="searchItem"
                             label="Что ищем?"
                             single-line
                             hide-details
@@ -62,12 +62,29 @@
         data() {
             return {
                 openSelect: false,
-                selectedSearch: { name: "book", title: "Поиск книги по названию" },
-                localTitle: "",
-                selects: [
-                    { name: "book", title: "Поиск книги по названию" },
-                    { name: "author", title: "Поиск автора" },
-                ]
+            }
+        },
+        computed: {
+            selects: {
+                get() {
+                    return this.$store.getters.searchVariants
+                }
+            },
+            selectedSearch: {
+                get() {
+                    return this.$store.getters.selectedSearch
+                },
+                set(value) {
+                    this.$store.dispatch("searchSet", value)
+                }
+            },
+            searchItem: {
+                get() {
+                    return this.$store.getters.searchItem
+                },
+                set(value) {
+                    this.$store.dispatch("searchItem", value)
+                }
             }
         },
         methods: {
@@ -75,10 +92,10 @@
             findByTitle() {
                 switch (this.selectedSearch.name) {
                     case "book":
-                        this.$router.push(`/find/books/${this.localTitle}/1`)
+                        this.$router.push(`/find/books/${this.searchItem}/1`)
                         break;
                     case "author":
-                        this.$router.push(`/authors/${this.localTitle}/1`)
+                        this.$router.push(`/authors/${this.searchItem}/1`)
                         break;
                 }
             },

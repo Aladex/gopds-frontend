@@ -12,6 +12,12 @@ export default new Vuex.Store({
     authError: false,
     user: {},
     status: '',
+    searchItem: "",
+    selectedSearch: { name: "book", title: "Поиск книги по названию" },
+    searchVariants: [
+      { name: "book", title: "Поиск книги по названию" },
+      { name: "author", title: "Поиск автора" },
+    ]
   },
   mutations: {
     setPage(state, payload) {
@@ -37,6 +43,12 @@ export default new Vuex.Store({
     auth_error(state) {
       state.status = 'error'
     },
+    searchSet(state, searchType) {
+      state.selectedSearch = searchType
+    },
+    searchItem(state, item) {
+      state.searchItem = item
+    }
   },
   actions: {
     setPage({commit}, payload) {
@@ -89,12 +101,21 @@ export default new Vuex.Store({
           }
       )
     },
+    searchSet({commit}, payload) {
+      commit('searchSet', payload)
+    },
+    searchItem({commit}, payload) {
+      commit('searchItem', payload)
+    },
   },
   getters: {
     myPage: state => state.myPage,
     title: state => state.title,
     authError: state => state.authError,
     authStatus: state => state.status,
+    searchVariants: state => state.searchVariants,
+    selectedSearch: state => state.selectedSearch,
+    searchItem: state => state.searchItem,
     isLoggedIn: state => !!state.token,
   },
   modules: {
