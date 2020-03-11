@@ -90,7 +90,7 @@
             toPage(page) {
                 this.$store.dispatch('setPage', page)
                 let thisPath = this.$router.currentRoute
-                this.$router.push(`/authors/${thisPath.params.author}/${page}`)
+                this.$router.push(`/authors/${thisPath.params.title}/${page}`)
             },
             getAuthors() {
                 this.loading = true
