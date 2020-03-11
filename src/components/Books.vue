@@ -6,6 +6,11 @@
                 v-if="searchBar"
         ></book-find>
 
+        <items-not-found
+            v-if="(books.length === 0)"
+        ></items-not-found>
+
+        <div v-if="(books.length > 0)">
         <v-row
                 v-for="b in books"
                 justify="center"
@@ -96,7 +101,12 @@
             </v-col>
 
         </v-row>
-        <div class="text-center">
+        </div>
+        <div
+                class="text-center"
+                v-if="(books.length > 0 && !loading)"
+
+        >
             <v-pagination
                     v-model="pageLocal"
                     :length="pagesLength"
@@ -110,12 +120,14 @@
 
 <script>
     import BookFind from "@/components/utils/BookFind";
+    import ItemsNotFound from "@/components/errors/ItemsNotFound";
 
     export default {
         name: "Books",
         props: ["page", "title", "searchBar", "author"],
         components: {
             BookFind,
+            ItemsNotFound
         },
         data() {
             return {
@@ -186,6 +198,7 @@
             },
             getBooks() {
                 this.loading = true
+                this.books = Array.from(Array(10).keys())
                 let numberedPage = Number.parseInt(this.pageLocal, 10)
                 let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0
                 let requestBody = {

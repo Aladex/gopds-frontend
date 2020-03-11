@@ -92,10 +92,10 @@
             findByTitle() {
                 switch (this.selectedSearch.name) {
                     case "book":
-                        this.$router.push(`/find/books/${this.searchItem}/1`)
+                        this.$router.push(`/find/books/${this.searchItem}/1`).catch(() => {})
                         break;
                     case "author":
-                        this.$router.push(`/authors/${this.searchItem}/1`)
+                        this.$router.push(`/authors/${this.searchItem}/1`).catch(() => {})
                         break;
                 }
             },
