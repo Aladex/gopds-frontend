@@ -42,6 +42,14 @@
                                 <v-card-text>
                                     <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
                                     <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
+                                    <p v-if="b.lang"><b>Язык: </b><v-avatar
+                                            color="primary"
+                                            size="24"
+                                            tile
+                                    >
+                                        <span class="white--text">{{ b.lang }}</span>
+                                    </v-avatar>
+                                    </p>
                                     <div class="my-4 subtitle-1"><b>Авторы:</b>
                                         <p>
                                          <span
