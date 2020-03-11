@@ -12,6 +12,28 @@
 
         <div v-if="(books.length > 0)">
         <v-row
+                justify="center"
+        >
+            <v-col
+                    cols="12"
+                    xs="10"
+                    sm="10"
+                    md="10"
+                    lg="8"
+            >
+                <v-chip
+                        v-if="lang !== ''"
+                        class="ma-2"
+                        close
+                        color="primary"
+                        text-color="white"
+                        @click:close="lang = ''"
+                >
+                    {{ lang }}
+                </v-chip>
+            </v-col>
+        </v-row>
+        <v-row
                 v-for="b in books"
                 justify="center"
                 :key="b.id"
@@ -42,10 +64,15 @@
                                 <v-card-text>
                                     <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
                                     <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
-                                    <p v-if="b.lang"><b>Язык: </b><v-avatar
+                                    <p
+                                            v-if="b.lang"
+
+                                    ><b>Язык: </b><v-avatar
                                             color="primary"
                                             size="24"
                                             tile
+                                            @click="lang = b.lang"
+                                            class="pointer"
                                     >
                                         <span class="white--text">{{ b.lang }}</span>
                                     </v-avatar>
@@ -142,6 +169,7 @@
                 pagesLength: 1,
                 loading: true,
                 books: Array.from(Array(10).keys()),
+                lang: "",
                 searchSelect: "book",
                 searchSelects: ["book", "author"]
             }
@@ -213,7 +241,8 @@
                     limit: process.env.VUE_APP_ONPAGE,
                     offset: offset,
                     title: this.title,
-                    author: this.author
+                    author: this.author,
+                    lang: this.lang
                 }
 
                 this.$http
@@ -259,10 +288,16 @@
                 this.setThisPage(this.page)
                 this.getBooks()
             },
+            lang() {
+                this.toPage(1)
+                this.getBooks()
+            },
         }
     }
 </script>
 
 <style scoped>
-
+    .pointer {
+        cursor: pointer;
+    }
 </style>
