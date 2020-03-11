@@ -121,8 +121,7 @@
             return {
                 pagesLength: 1,
                 loading: true,
-                books: [],
-                localTitle: '',
+                books: Array.from(Array(10).keys()),
                 searchSelect: "book",
                 searchSelects: ["book", "author"]
             }
