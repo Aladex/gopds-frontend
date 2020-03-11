@@ -79,7 +79,6 @@
                 this.$router.push(`/authors/${thisPath.params.author}/${page}`)
             },
             getAuthors() {
-                this.loading = true
                 let numberedPage = Number.parseInt(this.pageLocal, 10)
                 let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0
                 let requestBody = {
@@ -93,7 +92,6 @@
                     .then(response => {
                         this.authors = response.data.authors
                         this.pagesLength = response.data.length
-                        this.loading = false
                     })
                     .catch(err => {
                         switch (err.response.status) {
