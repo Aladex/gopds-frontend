@@ -38,8 +38,15 @@
                 <v-toolbar-items>
                     <v-btn
                             text
+                            class="disable-login-btn"
+                    >{{ username }}
+                    </v-btn>
+                </v-toolbar-items>
+                <v-toolbar-items>
+                    <v-btn
+                            icon
                             @click="logout"
-                    >Выйти
+                    ><v-icon>mdi-export</v-icon>
                     </v-btn>
                 </v-toolbar-items>
 
@@ -59,6 +66,11 @@
             isLoggedIn() {
                 return this.$store.getters.isLoggedIn
             },
+            username: {
+                get() {
+                    return this.$store.getters.user
+                },
+            },
         },
         methods: {
             logout() {
@@ -67,12 +79,24 @@
                         this.$router.push('/login')
                     })
             },
+            setUser() {
+                if (this.username === '') {
+                    this.$store.dispatch('getMe')
+                }
+            }
+        },
+        mounted() {
+            this.setUser()
         }
     }
 </script>
 <style>
     .pointer {
         cursor: pointer;
+    }
+
+    .disable-login-btn {
+        pointer-events: none;
     }
 
 </style>
