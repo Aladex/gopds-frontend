@@ -236,14 +236,10 @@
                 let requestBody = {
                     book_id: book.id,
                     format: type,
-                    user: {
-                        username: this.$store.getters.user,
-                        token: this.$store.getters.token
-                    }
                 }
                 let filename = book.title.toLowerCase().split(" ").join("_")
                 this.$http.post(
-                    `${process.env.VUE_APP_BACKEND_API_URL}api/file`,
+                    `${process.env.VUE_APP_BACKEND_API_URL}api/books/file`,
                     requestBody,
                     {
                         responseType: 'blob',
