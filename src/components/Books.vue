@@ -7,135 +7,136 @@
         ></book-find>
 
         <items-not-found
-            v-if="(books.length === 0)"
+                v-if="(books.length === 0)"
         ></items-not-found>
 
         <div v-if="(books.length > 0)">
-        <v-row
-                justify="center"
-        >
-            <v-col
-                    cols="12"
-                    xs="10"
-                    sm="10"
-                    md="10"
-                    lg="8"
+            <v-row
+                    justify="center"
             >
-                <v-chip
-                        v-if="lang !== ''"
-                        class="ma-2"
-                        close
-                        color="primary"
-                        text-color="white"
-                        @click:close="lang = ''"
+                <v-col
+                        cols="12"
+                        xs="10"
+                        sm="10"
+                        md="10"
+                        lg="8"
                 >
-                    {{ lang }}
-                </v-chip>
-            </v-col>
-        </v-row>
-        <v-row
-                v-for="b in books"
-                justify="center"
-                :key="b.id"
-        >
-            <v-col
-                    cols="12"
-                    xs="10"
-                    sm="10"
-                    md="10"
-                    lg="8"
-            >
-                <v-skeleton-loader
-                        :loading="loading"
-                        height="94"
-                        type="list-item-two-line"
-                >
-                    <v-card
-                            class="mx-auto"
+                    <v-chip
+                            v-if="lang !== ''"
+                            class="ma-2"
+                            close
+                            color="primary"
+                            text-color="white"
+                            @click:close="lang = ''"
                     >
-                        <v-row class="mr-4">
-                            <v-col
-                                    cols="12"
-                                    sm="12"
-                                    md="12"
-                                    lg="10"
-                            >
-                                <v-card-title>{{ b.title }}</v-card-title>
-                                <v-card-text>
-                                    <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
-                                    <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
-                                    <p
-                                            v-if="b.lang"
+                        {{ lang }}
+                    </v-chip>
+                </v-col>
+            </v-row>
+            <v-row
+                    v-for="b in books"
+                    justify="center"
+                    :key="b.id"
+            >
+                <v-col
+                        cols="12"
+                        xs="10"
+                        sm="10"
+                        md="10"
+                        lg="8"
+                >
+                    <v-skeleton-loader
+                            :loading="loading"
+                            height="94"
+                            type="list-item-two-line"
+                    >
+                        <v-card
+                                class="mx-auto"
+                        >
+                            <v-row class="mr-4">
+                                <v-col
+                                        cols="12"
+                                        sm="12"
+                                        md="12"
+                                        lg="10"
+                                >
+                                    <v-card-title>{{ b.title }}</v-card-title>
+                                    <v-card-text>
+                                        <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
+                                        <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
+                                        <p
+                                                v-if="b.lang"
 
-                                    ><b>Язык: </b><v-avatar
-                                            color="primary"
-                                            size="24"
-                                            tile
-                                            @click="lang = b.lang"
-                                            class="pointer"
-                                    >
-                                        <span class="white--text">{{ b.lang }}</span>
-                                    </v-avatar>
-                                    </p>
-                                    <div class="my-4 subtitle-1"><b>Авторы:</b>
-                                        <p>
+                                        ><b>Язык: </b>
+                                            <v-avatar
+                                                    color="primary"
+                                                    size="24"
+                                                    tile
+                                                    @click="lang = b.lang"
+                                                    class="pointer"
+                                            >
+                                                <span class="white--text">{{ b.lang }}</span>
+                                            </v-avatar>
+                                        </p>
+                                        <div class="my-4 subtitle-1"><b>Авторы:</b>
+                                            <p>
                                          <span
-                                                v-for="a in b.authors"
-                                                :key="a.id"
-                                        >
+                                                 v-for="a in b.authors"
+                                                 :key="a.id"
+                                         >
                                             &#8195;&#8226;&#8195;
                                              <router-link
-                                                    :to="`/find/author/${a.id}/1`"
-                                            >{{a.full_name }}
+                                                     :to="`/find/author/${a.id}/1`"
+                                             >{{a.full_name }}
                                             </router-link>
                                         </span></p>
-                                    </div>
+                                        </div>
 
 
-                                    <div class="my-4 subtitle-1"><b>Описание:</b></div>
-                                    <div>{{ b.annotation }}</div>
-                                    <div v-if="b.annotation === ''">Описание отсутствует</div>
-                                </v-card-text>
-                            </v-col>
-                            <v-col
-                                    cols="12"
-                                    sm="12"
-                                    md="12"
-                                    lg="2"
-                                    class="mt-4"
-                            >
-                                <v-btn
-                                        class="secondary ma-2"
-                                        min-width="100px"
-                                        :href="`${opdsURL}/opds/download/${b.id}/0/`"
-                                >FB2
-                                </v-btn>
-                                <v-btn
-                                        class="secondary ma-2"
-                                        min-width="100px"
-                                        :href="`${opdsURL}/opds/download/${b.id}/1/`"
-                                >FB2+ZIP
-                                </v-btn>
-                                <v-btn
-                                        class="secondary ma-2"
-                                        min-width="100px"
-                                        :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
-                                >EPUB
-                                </v-btn>
-                                <v-btn
-                                        class="secondary ma-2"
-                                        min-width="100px"
-                                        :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
-                                >MOBI
-                                </v-btn>
+                                        <div class="my-4 subtitle-1"><b>Описание:</b></div>
+                                        <div>{{ b.annotation }}</div>
+                                        <div v-if="b.annotation === ''">Описание отсутствует</div>
+                                    </v-card-text>
+                                </v-col>
+                                <v-col
+                                        cols="12"
+                                        sm="12"
+                                        md="12"
+                                        lg="2"
+                                        class="mt-4"
+                                >
+                                    <v-btn
+                                            class="secondary ma-2"
+                                            min-width="100px"
+                                            @click="downloadFile(b, 'fb2')"
+                                    >FB2
+                                    </v-btn>
+                                    <v-btn
+                                            class="secondary ma-2"
+                                            min-width="100px"
+                                            :href="`${opdsURL}/opds/download/${b.id}/1/`"
+                                    >FB2+ZIP
+                                    </v-btn>
+                                    <v-btn
+                                            class="secondary ma-2"
+                                            min-width="100px"
+                                            :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
+                                    >EPUB
+                                    </v-btn>
+                                    <v-btn
+                                            class="secondary ma-2"
+                                            min-width="100px"
+                                            :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
+                                    >MOBI
+                                    </v-btn>
 
-                            </v-col>
-                        </v-row>
-                    </v-card>
-                </v-skeleton-loader>
-            </v-col>
+                                </v-col>
+                            </v-row>
+                        </v-card>
+                    </v-skeleton-loader>
+                </v-col>
 
-        </v-row>
+            </v-row>
         </div>
         <div
                 class="text-center"
@@ -206,8 +207,7 @@
                     this.$router.push(`/find/books/${thisPath.params.title}/${page}`)
                 } else if (thisPath.name === 'findByAuthor') {
                     this.$router.push(`/find/author/${thisPath.params.author}/${page}`)
-                }
-                else {
+                } else {
                     this.$router.push(`/page/${page}`)
                 }
             },
@@ -231,6 +231,33 @@
                     return "Дата документа неизвестна"
                 }
                 return dhd
+            },
+            downloadFile(book, type) {
+                let requestBody = {
+                    book_id: book.id,
+                    format: type,
+                    user: {
+                        username: this.$store.getters.user,
+                        token: this.$store.getters.token
+                    }
+                }
+                let filename = book.title.toLowerCase().split(" ").join("_")
+                this.$http.post(
+                    `${process.env.VUE_APP_BACKEND_API_URL}api/file`,
+                    requestBody,
+                    {
+                        responseType: 'blob',
+                        headers: {'Accept': 'application/octet-stream'},
+                    }
+                ).then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+
+                    link.setAttribute('download', `${filename}.${type}`);
+                    document.body.appendChild(link);
+                    link.click();
+                })
             },
             getBooks() {
                 this.loading = true

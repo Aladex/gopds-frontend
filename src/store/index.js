@@ -136,6 +136,7 @@ export default new Vuex.Store({
         myPage: state => state.myPage,
         title: state => state.title,
         user: state => state.username,
+        token: state => state.token,
         authError: state => state.authError,
         authStatus: state => state.status,
         searchVariants: state => state.searchVariants,
