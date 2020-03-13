@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Books from '../components/Books.vue'
 import Login from '../components/auth/Login.vue'
-import Authors from "@/components/Authors";
 import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
 
@@ -12,7 +10,7 @@ const routes = [
   {
     path: '/',
     name: 'Books',
-    component: Books,
+    component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),
     props: {
       page: 1,
       searchBar: true
@@ -25,7 +23,7 @@ const routes = [
   {
     path: '/page/:page',
     name: 'page',
-    component: Books,
+    component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),
     props: (route) => {
       const page = Number.parseInt(route.params.page, 10)
       if (Number.isNaN(page)) {
@@ -41,7 +39,7 @@ const routes = [
   {
     path: '/find/books/:title/:page',
     name: 'findBook',
-    component: Books,
+    component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),
     props: (route) => {
       const page = Number.parseInt(route.params.page, 10)
       if (Number.isNaN(page)) {
@@ -57,7 +55,7 @@ const routes = [
   {
     path: '/find/author/:author/:page',
     name: 'findByAuthor',
-    component: Books,
+    component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),
     props: (route) => {
       const page = Number.parseInt(route.params.page, 10)
       if (Number.isNaN(page)) {
@@ -73,7 +71,7 @@ const routes = [
   {
     path: '/authors/:title/:page',
     name: 'findAuthor',
-    component: Authors,
+    component: () => import(/* webpackChunkName: "authors" */ '../components/Authors.vue'),
     props: (route) => {
       const page = Number.parseInt(route.params.page, 10)
       if (Number.isNaN(page)) {
