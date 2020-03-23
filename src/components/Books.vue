@@ -219,12 +219,19 @@
             toPage(page) {
                 this.$store.dispatch('setPage', page)
                 let thisPath = this.$router.currentRoute
-                if (thisPath.name === 'findBook') {
-                    this.$router.push(`/find/books/${thisPath.params.title}/${page}`)
-                } else if (thisPath.name === 'findByAuthor') {
-                    this.$router.push(`/find/author/${thisPath.params.author}/${page}`)
-                } else {
-                    this.$router.push(`/page/${page}`)
+
+                switch (thisPath.name) {
+                    case "findBook":
+                        this.$router.push(`/find/books/${thisPath.params.title}/${page}`)
+                        break
+                    case "findByAuthor":
+                        this.$router.push(`/find/author/${thisPath.params.author}/${page}`)
+                        break
+                    case "findBySeries":
+                        this.$router.push(`/find/series/${thisPath.params.series}/${page}`)
+                        break
+                    default:
+                        this.$router.push(`/page/${page}`)
                 }
             },
 
