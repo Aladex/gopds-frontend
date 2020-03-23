@@ -93,7 +93,7 @@
                                         </div>
 
                                         <div class="my-4 subtitle-1"
-                                            v-if="b.series !== null"
+                                             v-if="b.series !== null"
                                         ><b>Серии:</b>
                                             <p>
                                          <span
@@ -121,30 +121,66 @@
                                         lg="2"
                                         class="mt-4"
                                 >
-                                    <v-btn
-                                            class="secondary ma-2"
-                                            min-width="100px"
-                                            @click="downloadFile(b, 'fb2')"
-                                    >FB2
-                                    </v-btn>
-                                    <v-btn
-                                            class="secondary ma-2"
-                                            min-width="100px"
-                                            :href="`${opdsURL}/opds/download/${b.id}/1/`"
-                                    >FB2+ZIP
-                                    </v-btn>
-                                    <v-btn
-                                            class="secondary ma-2"
-                                            min-width="100px"
-                                            :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
-                                    >EPUB
-                                    </v-btn>
-                                    <v-btn
-                                            class="secondary ma-2"
-                                            min-width="100px"
-                                            :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
-                                    >MOBI
-                                    </v-btn>
+                                    <v-row
+                                            class="ml-2"
+                                    >
+                                        <v-col
+                                                cols="6"
+                                                xs="6"
+                                                sm="6"
+                                                md="6"
+                                                lg="12"
+                                        >
+                                            <v-btn
+                                                    class="secondary"
+                                                    width="100%"
+                                                    @click="downloadFile(b, 'fb2')"
+                                            >FB2
+                                            </v-btn>
+                                        </v-col>
+                                        <v-col
+                                                cols="6"
+                                                xs="6"
+                                                sm="6"
+                                                md="6"
+                                                lg="12"
+                                        >
+                                            <v-btn
+                                                    class="secondary"
+                                                    width="100%"
+                                                    :href="`${opdsURL}/opds/download/${b.id}/1/`"
+                                            >FB2+ZIP
+                                            </v-btn>
+                                        </v-col>
+                                        <v-col
+                                                cols="6"
+                                                sm="6"
+                                                xs="6"
+                                                md="6"
+                                                lg="12"
+                                        >
+                                            <v-btn
+                                                    class="secondary"
+                                                    width="100%"
+                                                    :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
+                                            >EPUB
+                                            </v-btn>
+                                        </v-col>
+                                        <v-col
+                                                cols="6"
+                                                xs="6"
+                                                sm="6"
+                                                md="6"
+                                                lg="12"
+                                        >
+                                            <v-btn
+                                                    class="secondary"
+                                                    width="100%"
+                                                    :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
+                                            >MOBI
+                                            </v-btn>
+                                        </v-col>
+                                    </v-row>
 
                                 </v-col>
                             </v-row>
