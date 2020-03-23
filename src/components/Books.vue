@@ -21,16 +21,27 @@
                         md="10"
                         lg="8"
                 >
-                    <v-chip
-                            v-if="lang !== ''"
-                            class="ma-2"
-                            close
-                            color="primary"
-                            text-color="white"
-                            @click:close="lang = ''"
+                    <v-row
+                        justify="left"
                     >
-                        {{ lang }}
-                    </v-chip>
+                        <v-col
+                            cols="12"
+                            xs="6"
+                            sm="6"
+                            md="6"
+                            lg="3"
+                        >
+                    <v-select
+                            v-model="lang"
+                            :items="langs"
+                            :item-text="itemText"
+                            flat
+                            dense
+                            label="Язык"
+                            return-object
+                    ></v-select>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
             <v-row
@@ -223,6 +234,7 @@
                 loading: true,
                 books: Array.from(Array(10).keys()),
                 lang: "",
+                langs: [],
                 searchSelect: "book",
                 searchSelects: ["book", "author"]
             }
@@ -249,6 +261,7 @@
 
         },
         methods: {
+            itemText: item => item.language,
             setThisPage(page) {
                 this.$store.dispatch('setPage', page)
             },
@@ -325,13 +338,14 @@
                     title: this.title,
                     author: this.author,
                     series: this.series,
-                    lang: this.lang
+                    lang: this.lang.language
                 }
 
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
                         this.books = response.data.books
+                        this.langs = response.data.langs
                         this.pagesLength = response.data.length
                         this.loading = false
                     })
