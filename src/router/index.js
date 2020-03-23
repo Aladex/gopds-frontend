@@ -69,6 +69,22 @@ const routes = [
     }
   },
   {
+    path: '/find/series/:series/:page',
+    name: 'findBySeries',
+    component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),
+    props: (route) => {
+      const page = Number.parseInt(route.params.page, 10)
+      if (Number.isNaN(page)) {
+        return 1
+      }
+      return { page, series: route.params.series, searchBar: true }
+    },
+    meta: {
+      requiresAuth: true,
+      title: "Книги по серии",
+    }
+  },
+  {
     path: '/authors/:title/:page',
     name: 'findAuthor',
     component: () => import(/* webpackChunkName: "authors" */ '../components/Authors.vue'),

@@ -87,7 +87,23 @@
                                             &#8195;&#8226;&#8195;
                                              <router-link
                                                      :to="`/find/author/${a.id}/1`"
-                                             >{{a.full_name }}
+                                             >{{ a.full_name }}
+                                            </router-link>
+                                        </span></p>
+                                        </div>
+
+                                        <div class="my-4 subtitle-1"
+                                            v-if="b.series !== null"
+                                        ><b>Серии:</b>
+                                            <p>
+                                         <span
+                                                 v-for="s in b.series"
+                                                 :key="s.id"
+                                         >
+                                            &#8195;&#8226;&#8195;
+                                             <router-link
+                                                     :to="`/find/series/${s.id}/1`"
+                                             >{{ s.ser }}
                                             </router-link>
                                         </span></p>
                                         </div>
@@ -160,7 +176,7 @@
 
     export default {
         name: "Books",
-        props: ["page", "title", "searchBar", "author"],
+        props: ["page", "title", "searchBar", "author", "series"],
         components: {
             BookFind,
             ItemsNotFound
@@ -265,6 +281,7 @@
                     offset: offset,
                     title: this.title,
                     author: this.author,
+                    series: this.series,
                     lang: this.lang
                 }
 
@@ -308,6 +325,10 @@
                 this.getBooks()
             },
             author() {
+                this.setThisPage(this.page)
+                this.getBooks()
+            },
+            series() {
                 this.setThisPage(this.page)
                 this.getBooks()
             },
