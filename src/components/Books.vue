@@ -68,6 +68,7 @@
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
+                                                     style="text-decoration: none"
                                                      :to="`/find/author/${a.id}/1`"
                                              >{{ a.full_name }}
                                             </router-link>
@@ -84,6 +85,7 @@
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
+                                                     style="text-decoration: none"
                                                      :to="`/find/series/${s.id}/1`"
                                              >{{ s.ser }}
                                             </router-link>
