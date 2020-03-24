@@ -68,7 +68,7 @@
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
-                                                     style="text-decoration: none"
+                                                     class="info-link"
                                                      :to="`/find/author/${a.id}/1`"
                                              >{{ a.full_name }}
                                             </router-link>
@@ -85,7 +85,7 @@
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
-                                                     style="text-decoration: none"
+                                                     class="info-link"
                                                      :to="`/find/series/${s.id}/1`"
                                              >{{ s.ser }}
                                             </router-link>
@@ -387,5 +387,8 @@
 <style scoped>
     .pointer {
         cursor: pointer;
+    }
+    .info-link {
+        text-decoration: none;
     }
 </style>
