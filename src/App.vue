@@ -28,7 +28,7 @@
                         max-width="36"
                         contain
                 ></v-img></router-link>
-                <v-toolbar-title class="d-none d-lg-block lib-title">
+                <v-toolbar-title class="d-none d-lg-block">
                     <router-link
                             :to="{ name: 'Books'}"
                             tag="span"
@@ -38,8 +38,10 @@
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
+                <span>
                 <v-tabs
                         class="d-none d-sm-block"
+                        background-color="primary"
                         right
                 >
                     <v-tab
@@ -48,7 +50,7 @@
                     <v-tab
                             :to="{ name: 'Donate'}"
                     >Донат</v-tab>
-                </v-tabs>
+                </v-tabs></span>
                 <v-tabs
                         class="d-flex d-sm-none"
                         centered
@@ -137,9 +139,6 @@
         position: relative;
         left: 25px;
         bottom: 2px;
-    }
-    .lib-title {
-        width: 350px;
     }
 
 </style>
