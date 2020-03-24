@@ -21,6 +21,19 @@ const routes = [
     }
   },
   {
+    path: '/donate',
+    name: 'Donate',
+    component: () => import(/* webpackChunkName: "books" */ '../components/Donate.vue'),
+    props: {
+      page: 1,
+      searchBar: true
+    },
+    meta: {
+      requiresAuth: true,
+      title: "Задонатить",
+    }
+  },
+  {
     path: '/page/:page',
     name: 'page',
     component: () => import(/* webpackChunkName: "books" */ '../components/Books.vue'),

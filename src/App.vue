@@ -22,14 +22,13 @@
                         :to="{ name: 'Books'}"
                 >
                 <v-img
-                        class="logo"
+                        class="d-none d-sm-block logo"
                         src="@/assets/logo.png"
                         max-height="36"
                         max-width="36"
-
                         contain
                 ></v-img></router-link>
-                <v-toolbar-title class="d-none d-sm-flex">
+                <v-toolbar-title class="d-none d-lg-block lib-title">
                     <router-link
                             :to="{ name: 'Books'}"
                             tag="span"
@@ -39,14 +38,44 @@
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-tabs
+                        class="d-none d-sm-block"
+                        right
+                >
+                    <v-tab
+                            :to="{ name: 'Books'}"
+                    >Книги</v-tab>
+                    <v-tab
+                            :to="{ name: 'Donate'}"
+                    >Донат</v-tab>
+                </v-tabs>
+                <v-tabs
+                        class="d-flex d-sm-none"
+                        centered
+
+                >
+                    <v-tab
+                            :to="{ name: 'Books'}"
+
+                    ><v-img
+                            src="@/assets/logo.png"
+                            max-height="36"
+                            max-width="36"
+                            contain
+                    ></v-img></v-tab>
+                    <v-tab
+                            :to="{ name: 'Donate'}"
+                    ><v-icon>mdi-currency-usd</v-icon></v-tab>
+                </v-tabs>
                 <v-toolbar-items>
+
+
                     <v-btn
                             text
                             class="disable-login-btn"
                     >{{ username }}
                     </v-btn>
-                </v-toolbar-items>
-                <v-toolbar-items>
+
                     <v-btn
                             icon
                             @click="logout"
@@ -108,6 +137,9 @@
         position: relative;
         left: 25px;
         bottom: 2px;
+    }
+    .lib-title {
+        width: 350px;
     }
 
 </style>
