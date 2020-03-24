@@ -14,35 +14,6 @@
             <v-row
                     justify="center"
             >
-                <v-col
-                        cols="12"
-                        xs="10"
-                        sm="10"
-                        md="10"
-                        lg="8"
-                >
-                    <v-row
-                        justify="left"
-                    >
-                        <v-col
-                            cols="12"
-                            xs="6"
-                            sm="6"
-                            md="6"
-                            lg="3"
-                        >
-                    <v-select
-                            v-model="lang"
-                            :items="langs"
-                            :item-text="itemText"
-                            flat
-                            dense
-                            label="Язык"
-                            return-object
-                    ></v-select>
-                        </v-col>
-                    </v-row>
-                </v-col>
             </v-row>
             <v-row
                     v-for="b in books"
@@ -233,13 +204,27 @@
                 pagesLength: 1,
                 loading: true,
                 books: Array.from(Array(10).keys()),
-                lang: "",
-                langs: [],
                 searchSelect: "book",
                 searchSelects: ["book", "author"]
             }
         },
         computed: {
+            lang: {
+                get() {
+                    return this.$store.getters.lang
+                },
+                set(lang) {
+                    this.$store.dispatch('setLang', lang)
+                }
+            },
+            langs: {
+                get() {
+                    return this.$store.getters.langs
+                },
+                set(langs) {
+                    this.$store.dispatch('setLangs', langs)
+                }
+            },
             opdsURL: {
                 get() {
                     return process.env.VUE_APP_OPDS

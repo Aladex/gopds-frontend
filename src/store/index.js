@@ -8,6 +8,8 @@ export default new Vuex.Store({
     state: {
         myPage: 1,
         title: '',
+        lang: {},
+        langs: [],
         token: localStorage.getItem('token') || '',
         authError: false,
         username: '',
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     mutations: {
         setPage(state, payload) {
             state.myPage = payload
+        },
+        setLang(state, payload) {
+            state.lang = payload
+        },
+        setLangs(state, payload) {
+            state.langs = payload
         },
         setTitle(state, payload) {
             state.title = payload
@@ -57,6 +65,12 @@ export default new Vuex.Store({
     actions: {
         setPage({commit}, payload) {
             commit('setPage', payload)
+        },
+        setLang({commit}, payload) {
+            commit('setLang', payload)
+        },
+        setLangs({commit}, payload) {
+            commit('setLangs', payload)
         },
         setTitle({commit}, payload) {
             commit('setTitle', payload)
@@ -135,6 +149,8 @@ export default new Vuex.Store({
     getters: {
         myPage: state => state.myPage,
         title: state => state.title,
+        lang: state => state.lang,
+        langs: state => state.langs,
         user: state => state.username,
         token: state => state.token,
         authError: state => state.authError,
