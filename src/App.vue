@@ -18,6 +18,17 @@
                     dark
                     fixed
             >
+                <router-link
+                        :to="{ name: 'Books'}"
+                >
+                <v-img
+                        class="logo"
+                        src="@/assets/logo.png"
+                        max-height="36"
+                        max-width="36"
+
+                        contain
+                ></v-img></router-link>
                 <v-toolbar-title class="d-none d-sm-flex">
                     <router-link
                             :to="{ name: 'Books'}"
@@ -27,13 +38,6 @@
                         Лепробиблиотека
                     </router-link>
                 </v-toolbar-title>
-                <v-btn icon
-                       :to="{ name: 'page', params: { page: 1 }}"
-                       class="d-flex d-sm-none"
-                >
-                    <v-icon>mdi-home</v-icon>
-                </v-btn>
-
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn
@@ -46,7 +50,8 @@
                     <v-btn
                             icon
                             @click="logout"
-                    ><v-icon>mdi-export</v-icon>
+                    >
+                        <v-icon>mdi-export</v-icon>
                     </v-btn>
                 </v-toolbar-items>
 
@@ -97,6 +102,12 @@
 
     .disable-login-btn {
         pointer-events: none;
+    }
+    .logo {
+        cursor: pointer;
+        position: relative;
+        left: 25px;
+        bottom: 2px;
     }
 
 </style>
