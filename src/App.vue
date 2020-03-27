@@ -70,12 +70,15 @@
                     ><v-icon>mdi-currency-usd</v-icon></v-tab>
                 </v-tabs>
                 <v-toolbar-items>
-
-
                     <v-btn
                             text
-                            class="disable-login-btn"
+                            class="disable-login-btn d-none d-sm-block"
                     >{{ username }}
+                    </v-btn>
+                    <v-btn
+                            icon
+                            class="disable-login-btn d-flex d-sm-none"
+                    ><v-icon>mdi-account</v-icon>
                     </v-btn>
 
                     <v-btn
