@@ -1,5 +1,7 @@
 # sopds-news
 
+Frontend wirh vuejs and vuetify for GOPDS-API
+
 ## Project setup
 ```
 npm install
