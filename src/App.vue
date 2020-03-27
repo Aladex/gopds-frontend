@@ -34,7 +34,7 @@
                             tag="span"
                             class="pointer pl-8"
                     >
-                        Лепробиблиотека
+                        Библиотека
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
