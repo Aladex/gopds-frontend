@@ -116,6 +116,8 @@
                                                 lg="12"
                                         >
                                             <v-btn
+                                                    :disabled="disabled"
+                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     @click="downloadFile(b, 'fb2')"
@@ -130,9 +132,11 @@
                                                 lg="12"
                                         >
                                             <v-btn
+                                                    :disabled="disabled"
+                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
-                                                    :href="`${opdsURL}/opds/download/${b.id}/1/`"
+                                                    @click="downloadFile(b, 'zip')"
                                             >FB2+ZIP
                                             </v-btn>
                                         </v-col>
@@ -144,6 +148,8 @@
                                                 lg="12"
                                         >
                                             <v-btn
+                                                    :disabled="disabled"
+                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
@@ -158,6 +164,8 @@
                                                 lg="12"
                                         >
                                             <v-btn
+                                                    :disabled="disabled"
+                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
@@ -207,7 +215,9 @@
                 loading: true,
                 books: Array.from(Array(10).keys()),
                 searchSelect: "book",
-                searchSelects: ["book", "author"]
+                searchSelects: ["book", "author"],
+                disabledButtons: [],
+                disabled: false
             }
         },
         computed: {
@@ -292,6 +302,7 @@
                 return dhd
             },
             downloadFile(book, type) {
+                this.disabled = true
                 let requestBody = {
                     book_id: book.id,
                     format: type,
@@ -305,13 +316,17 @@
                         headers: {'Accept': 'application/octet-stream'},
                     }
                 ).then((response) => {
+                    this.disabled = true
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
 
                     link.setAttribute('download', `${filename}.${type}`);
                     document.body.appendChild(link);
-                    link.click();
+                    link.click(function() {
+                        this.disabled = false
+                    });
+                    this.disabled = false
                 })
             },
             getBooks() {
