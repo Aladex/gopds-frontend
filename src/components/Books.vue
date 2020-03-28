@@ -54,8 +54,6 @@
                                                     color="primary"
                                                     size="24"
                                                     tile
-                                                    @click="lang = b.lang"
-                                                    class="pointer"
                                             >
                                                 <span class="white--text">{{ b.lang }}</span>
                                             </v-avatar>

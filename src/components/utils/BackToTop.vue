@@ -5,14 +5,15 @@
                 :style="`bottom:${this.bottom};right:${this.right};`"
                 v-show="visible"
                 @click="backToTop">
-            <slot>
+
                     <v-btn
-                            color="blue-grey"
+                            color="warning"
                             icon
+                            dark
                             x-small
                             fab
                     ><v-icon dark>mdi-arrow-up</v-icon></v-btn>
-            </slot>
+
         </div>
     </transition>
 </template>
