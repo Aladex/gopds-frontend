@@ -190,7 +190,7 @@
             <v-pagination
                     v-model="pageLocal"
                     :length="pagesLength"
-                    :total-visible="7"
+                    :total-visible="5"
                     @input="toPage(pageLocal)"
 
             ></v-pagination>

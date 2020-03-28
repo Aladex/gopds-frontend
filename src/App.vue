@@ -94,13 +94,22 @@
         </v-card>
 
         <v-content>
+
             <router-view></router-view>
         </v-content>
+        <back-to-top
+                v-if="isLoggedIn"
+        ></back-to-top>
+
     </v-app>
 </template>
 <script>
-    export default {
+    import BackToTop from "@/components/utils/BackToTop";
 
+    export default {
+        components: {
+            BackToTop
+        },
         computed: {
             isLoggedIn() {
                 return this.$store.getters.isLoggedIn
@@ -122,7 +131,7 @@
                 if (this.username === '') {
                     this.$store.dispatch('getMe')
                 }
-            }
+            },
         },
         mounted() {
             this.setUser()
