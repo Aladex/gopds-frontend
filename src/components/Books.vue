@@ -150,7 +150,7 @@
                                                     :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
-                                                    :href="`${opdsURL}/opds/convert/${b.id}/epub/`"
+                                                    @click="downloadFile(b, 'epub')"
                                             >EPUB
                                             </v-btn>
                                         </v-col>
