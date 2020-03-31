@@ -166,7 +166,7 @@
                                                     :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
-                                                    :href="`${opdsURL}/opds/convert/${b.id}/mobi/`"
+                                                    @click="downloadFile(b, 'mobi')"
                                             >MOBI
                                             </v-btn>
                                         </v-col>
