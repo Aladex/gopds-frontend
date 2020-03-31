@@ -1,8 +1,11 @@
 <template>
+
     <v-container
             class="fill-height"
             fluid
     >
+        <div class="devito"></div>
+        <div class="books d-none d-lg-block"></div>
         <v-row
                 align="center"
                 justify="center"
@@ -12,6 +15,7 @@
                     sm="8"
                     md="4"
             >
+
                 <v-expand-transition>
                     <v-card class="elevation-12"
                     >
@@ -107,5 +111,23 @@
 </script>
 
 <style scoped>
+    .devito {
+        width: 500px;
+        height: 350px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: url( '../../assets/devito_back.png');
+        background-size: cover;
+    }
+    .books {
+        width: 500px;
+        height: 350px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: url( '../../assets/books_back.png');
+        background-size: cover;
+    }
 
 </style>
