@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app id="app">
         <v-system-bar color="red"
                       v-if="this.$store.state.authError"
         >
@@ -152,5 +152,11 @@
         left: 25px;
         bottom: 2px;
     }
-
+    #app {
+        background: linear-gradient(to right, rgb(245, 245, 245) 0%, rgb(209, 209, 209) 100%);
+    }
+    .cardColor {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        border-color: white !important;
+    }
 </style>

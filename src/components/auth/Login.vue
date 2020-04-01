@@ -17,7 +17,7 @@
             >
 
                 <v-expand-transition>
-                    <v-card class="elevation-12"
+                    <v-card class="elevation-12 cardColor"
                     >
                         <v-toolbar
                                 color="custom accent-4"
@@ -129,5 +129,6 @@
         background: url( '../../assets/books_back.png');
         background-size: cover;
     }
+
 
 </style>
