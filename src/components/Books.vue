@@ -359,7 +359,7 @@
                     })
                     .catch(err => {
                         switch (err.response.status) {
-                            case 403:
+                            case 401:
                                 this.logout()
                                 break
                             case 404:
