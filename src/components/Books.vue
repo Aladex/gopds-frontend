@@ -192,7 +192,7 @@
                 width="300"
         >
             <v-card
-                    color="primary"
+                    color="accent"
                     dark
             >
                 <v-card-text>
