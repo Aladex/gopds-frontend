@@ -114,8 +114,6 @@
                                                 lg="12"
                                         >
                                             <v-btn
-                                                    :disabled="disabled"
-                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     @click="downloadFile(b, 'fb2')"
@@ -130,8 +128,6 @@
                                                 lg="12"
                                         >
                                             <v-btn
-                                                    :disabled="disabled"
-                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     @click="downloadFile(b, 'zip')"
@@ -146,8 +142,6 @@
                                                 lg="12"
                                         >
                                             <v-btn
-                                                    :disabled="disabled"
-                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     @click="downloadFile(b, 'epub')"
@@ -162,8 +156,6 @@
                                                 lg="12"
                                         >
                                             <v-btn
-                                                    :disabled="disabled"
-                                                    :loading="disabled"
                                                     class="secondary"
                                                     width="100%"
                                                     @click="downloadFile(b, 'mobi')"
@@ -193,6 +185,26 @@
 
             ></v-pagination>
         </div>
+        <v-dialog
+                v-model="disabled"
+                hide-overlay
+                persistent
+                width="300"
+        >
+            <v-card
+                    color="primary"
+                    dark
+            >
+                <v-card-text>
+                    Идёт подготовка книги
+                    <v-progress-linear
+                            indeterminate
+                            color="white"
+                            class="mb-0"
+                    ></v-progress-linear>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 

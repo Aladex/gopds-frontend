@@ -121,7 +121,7 @@
         background-size: cover;
     }
     .books {
-        width: 500px;
+        width: 300px;
         height: 350px;
         position: absolute;
         bottom: 0;
