@@ -7,7 +7,10 @@
                 lg="8"
                 class="mt-4"
         >
+            <v-card>
+            <v-card-text>
             <v-row justify="start">
+
                 <v-col
                         cols="12"
                         sm="12"
@@ -83,6 +86,8 @@
                 </v-col>
 
             </v-row>
+            </v-card-text>
+        </v-card>
         </v-col>
     </v-row>
 </template>
