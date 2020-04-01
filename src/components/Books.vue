@@ -187,7 +187,6 @@
         </div>
         <v-dialog
                 v-model="disabled"
-                hide-overlay
                 persistent
                 width="300"
         >
@@ -317,7 +316,7 @@
                     book_id: book.id,
                     format: type,
                 }
-                let filename = book.title.toLowerCase().split(" ").join("_")
+                let filename = book.title.toLowerCase().replace(/[^A-Za-z0-9а-яА-ЯёЁ]/g, "_")
                 this.$http.post(
                     `${process.env.VUE_APP_BACKEND_API_URL}api/books/file`,
                     requestBody,
@@ -326,16 +325,13 @@
                         headers: {'Accept': 'application/octet-stream'},
                     }
                 ).then((response) => {
-                    this.disabled = true
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
 
                     link.setAttribute('download', `${filename}.${type}`);
                     document.body.appendChild(link);
-                    link.click(function() {
-                        this.disabled = false
-                    });
+                    link.click();
                     this.disabled = false
                 })
             },
