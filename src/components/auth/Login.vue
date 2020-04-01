@@ -1,5 +1,4 @@
 <template>
-
     <v-container
             class="fill-height"
             fluid
@@ -15,57 +14,54 @@
                     sm="8"
                     md="4"
             >
-
-                <v-expand-transition>
-                    <v-card class="elevation-12 cardColor"
+                <v-card class="elevation-12 cardColor"
+                >
+                    <v-toolbar
+                            color="custom accent-4"
+                            flat
                     >
-                        <v-toolbar
-                                color="custom accent-4"
-                                flat
+                        <v-toolbar-title>Авторизация</v-toolbar-title>
+
+                    </v-toolbar>
+                    <v-card-text>
+                        <v-form
+                                v-model="valid"
+                                validation
+                                ref="form"
+
                         >
-                            <v-toolbar-title>Авторизация</v-toolbar-title>
+                            <v-text-field
+                                    label="Login"
+                                    name="login"
+                                    prepend-icon="mdi-account"
+                                    type="text"
+                                    v-model="email"
+                                    :rules="emailRules"
+                                    @keyup.enter="login"
+                            />
 
-                        </v-toolbar>
-                        <v-card-text>
-                            <v-form
-                                    v-model="valid"
-                                    validation
-                                    ref="form"
-
-                            >
-                                <v-text-field
-                                        label="Login"
-                                        name="login"
-                                        prepend-icon="mdi-account"
-                                        type="text"
-                                        v-model="email"
-                                        :rules="emailRules"
-                                        @keyup.enter="login"
-                                />
-
-                                <v-text-field
-                                        id="password"
-                                        label="Password"
-                                        name="password"
-                                        prepend-icon="mdi-lock"
-                                        type="password"
-                                        v-model="password"
-                                        :rules="passwordRules"
-                                        @keyup.enter="login"
-                                />
-                            </v-form>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer/>
-                            <v-btn
-                                    color="custom accent-4"
-                                    @click="login"
-                                    :disabled="!valid"
-                            >Войти
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-expand-transition>
+                            <v-text-field
+                                    id="password"
+                                    label="Password"
+                                    name="password"
+                                    prepend-icon="mdi-lock"
+                                    type="password"
+                                    v-model="password"
+                                    :rules="passwordRules"
+                                    @keyup.enter="login"
+                            />
+                        </v-form>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer/>
+                        <v-btn
+                                color="custom accent-4"
+                                @click="login"
+                                :disabled="!valid"
+                        >Войти
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
             </v-col>
         </v-row>
     </v-container>
@@ -117,16 +113,17 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        background: url( '../../assets/devito_back.png');
+        background: url('../../assets/devito_back.png');
         background-size: cover;
     }
+
     .books {
         width: 300px;
         height: 350px;
         position: absolute;
         bottom: 0;
         left: 0;
-        background: url( '../../assets/books_back.png');
+        background: url('../../assets/books_back.png');
         background-size: cover;
     }
 
