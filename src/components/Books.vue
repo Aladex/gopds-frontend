@@ -187,7 +187,7 @@
             <v-pagination
                     v-model="pageLocal"
                     :length="pagesLength"
-                    :total-visible="5"
+                    :total-visible="6"
                     @input="toPage(pageLocal)"
 
             ></v-pagination>
