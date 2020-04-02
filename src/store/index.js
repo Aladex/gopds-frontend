@@ -10,6 +10,7 @@ export default new Vuex.Store({
         title: '',
         lang: {},
         langs: [],
+        authorsBook: "",
         token: localStorage.getItem('token') || '',
         authError: false,
         username: '',
@@ -56,6 +57,9 @@ export default new Vuex.Store({
         },
         searchItem(state, item) {
             state.searchItem = item
+        },
+        authorsBook(state, item) {
+            state.authorsBook = item
         },
         setUser(state, user) {
             state.status = 'success'
@@ -145,6 +149,9 @@ export default new Vuex.Store({
         searchItem({commit}, payload) {
             commit('searchItem', payload)
         },
+        authorsBook({commit}, payload) {
+            commit('authorsBook', payload)
+        },
     },
     getters: {
         myPage: state => state.myPage,
@@ -158,6 +165,7 @@ export default new Vuex.Store({
         searchVariants: state => state.searchVariants,
         selectedSearch: state => state.selectedSearch,
         searchItem: state => state.searchItem,
+        authorsBook: state => state.authorsBook,
         isLoggedIn: state => !!state.token,
     },
     modules: {}

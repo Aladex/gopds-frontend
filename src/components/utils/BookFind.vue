@@ -37,7 +37,9 @@
                             label="Что ищем?"
                             single-line
                             hide-details
+                            :clearable="(selectedSearch.name === 'authorsBook')"
                             @keyup.enter="findByTitle"
+                            @click:clear="authorsBook = ''"
                     >
                     </v-text-field>
                 </v-col>
@@ -95,12 +97,15 @@
 <script>
     export default {
         name: "BookFind",
+        props: ["author"],
         data() {
             return {
                 openSelect: false,
+                selects: [],
             }
         },
         computed: {
+            myPath: function() {return this.$route.name},
             lang: {
                 get() {
                     return this.$store.getters.lang
@@ -115,11 +120,6 @@
                 },
                 set(langs) {
                     this.$store.dispatch('setLangs', langs)
-                }
-            },
-            selects: {
-                get() {
-                    return this.$store.getters.searchVariants
                 }
             },
             selectedSearch: {
@@ -137,6 +137,22 @@
                 set(value) {
                     this.$store.dispatch("searchItem", value)
                 }
+            },
+            searchVariants: {
+                set(value) {
+                    this.$store.dispatch("searchVariants", value)
+                },
+                get() {
+                    return this.$store.getters.searchVariants
+                },
+            },
+            authorsBook: {
+                set(value) {
+                    this.$store.dispatch("authorsBook", value)
+                },
+                get() {
+                    return this.$store.getters.authorsBook
+                },
             }
         },
         methods: {
@@ -153,8 +169,36 @@
                         this.$router.push(`/authors/${this.searchItem}/1`).catch(() => {
                         })
                         break;
+                    case "authorsBook":
+                        this.authorsBook = this.searchItem
+                        this.$router.push(`/find/author/${this.$route.params.author}/1`).catch(() => {
+                        })
+                        break;
                 }
             },
+            makeSelects(path) {
+                if (path === "findByAuthor") {
+                    this.searchItem = ""
+                    this.authorsBook = ""
+                    this.selects = this.searchVariants.slice()
+                    this.selects.push({name: "authorsBook", title: "Поиск книги у автора"})
+                    this.selectedSearch = this.selects[2]
+                } else {
+                    this.selects = this.searchVariants.slice()
+                    if (!this.selects.includes(this.selectedSearch)) {
+                        this.selectedSearch = this.searchVariants[0]
+                    }
+
+                }
+            },
+        },
+        watch: {
+            myPath(path) {
+                this.makeSelects(path)
+            },
+        },
+        mounted() {
+            this.makeSelects(this.myPath)
         }
     }
 </script>

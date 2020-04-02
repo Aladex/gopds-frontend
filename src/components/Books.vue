@@ -273,6 +273,14 @@
                 get() {
                     return this.$router.currentRoute
                 }
+            },
+            authorsBook: {
+                set(value) {
+                    this.$store.dispatch("authorsBook", value)
+                },
+                get() {
+                    return this.$store.getters.authorsBook
+                },
             }
 
         },
@@ -361,10 +369,17 @@
                 this.books = Array.from(Array(10).keys())
                 let numberedPage = Number.parseInt(this.pageLocal, 10)
                 let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0
+                let filterTitle = ""
+                if (this.$route.name === "findByAuthor") {
+                    filterTitle = this.authorsBook
+                } else {
+                    filterTitle = this.title
+                }
+
                 let requestBody = {
                     limit: process.env.VUE_APP_ONPAGE,
                     offset: offset,
-                    title: this.title,
+                    title: filterTitle,
                     author: this.author,
                     series: this.series,
                     lang: this.lang.language
@@ -407,6 +422,10 @@
                 this.getBooks()
             },
             title() {
+                this.setThisPage(this.page)
+                this.getBooks()
+            },
+            authorsBook() {
                 this.setThisPage(this.page)
                 this.getBooks()
             },
