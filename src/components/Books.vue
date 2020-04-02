@@ -92,7 +92,14 @@
 
 
                                         <div class="my-4 subtitle-1"><b>Описание:</b></div>
-                                        <div>{{ b.annotation }}</div>
+                                        <div
+                                                v-if="(b.annotation !== '' && !opened.includes(b))"
+                                        >{{ makeShort(b) }}... <br>
+                                            <span
+                                                @click="opened.push(b)"
+                                                class="open-long"
+                                        ><i>Полное описание</i></span></div>
+                                        <div v-if="opened.includes(b)">{{ b.annotation }}</div>
                                         <div v-if="b.annotation === ''">Описание отсутствует</div>
                                     </v-card-text>
                                 </v-col>
@@ -226,7 +233,8 @@
                 searchSelect: "book",
                 searchSelects: ["book", "author"],
                 disabledButtons: [],
-                disabled: false
+                disabled: false,
+                opened: []
             }
         },
         computed: {
@@ -267,6 +275,16 @@
 
         },
         methods: {
+            makeShort(b) {
+                if (b.annotation === undefined) {
+                    return ""
+                }
+                let wordsList = b.annotation.split(" ")
+                if (wordsList.length < 40) {
+                    return b.annotation
+                }
+                return wordsList.slice(0, 40).join(" ")
+            },
             itemText: item => item.language,
             setThisPage(page) {
                 this.$store.dispatch('setPage', page)
@@ -337,6 +355,7 @@
             },
             getBooks() {
                 this.loading = true
+                this.opened = []
                 this.books = Array.from(Array(10).keys())
                 let numberedPage = Number.parseInt(this.pageLocal, 10)
                 let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0
@@ -406,8 +425,9 @@
 </script>
 
 <style scoped>
-    .pointer {
+    .open-long {
         cursor: pointer;
+        text-decoration: underline;
     }
     .info-link {
         text-decoration: none;
