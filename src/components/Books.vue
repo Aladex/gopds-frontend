@@ -94,11 +94,13 @@
                                         <div class="my-4 subtitle-1"><b>Описание:</b></div>
                                         <div
                                                 v-if="(b.annotation !== '' && !opened.includes(b))"
-                                        >{{ makeShort(b) }}... <br>
+                                        >{{ makeShort(b) }}
                                             <span
-                                                @click="opened.push(b)"
-                                                class="open-long"
-                                        ><i>Полное описание</i></span></div>
+                                                    v-if="b.annotation !== makeShort(b)"
+                                            >...<br><i
+                                                    @click="opened.push(b)"
+                                                    class="open-long"
+                                            >Полное описание</i></span></div>
                                         <div v-if="opened.includes(b)">{{ b.annotation }}</div>
                                         <div v-if="b.annotation === ''">Описание отсутствует</div>
                                     </v-card-text>
@@ -429,6 +431,7 @@
         cursor: pointer;
         text-decoration: underline;
     }
+
     .info-link {
         text-decoration: none;
     }
