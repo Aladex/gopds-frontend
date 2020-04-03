@@ -1,11 +1,11 @@
 <template>
     <v-container
-            class="fill-height"
             fluid
     >
         <div class="devito"></div>
         <div class="books d-none d-lg-block"></div>
         <v-row
+                v-if="regError !== ''"
                 align="center"
                 justify="center"
         >
@@ -15,7 +15,6 @@
                     md="4"
             >
                 <v-card
-                        v-if="regError !== ''"
                         class="elevation-12"
                         color="warning"
                 >

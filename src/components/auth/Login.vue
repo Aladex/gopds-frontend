@@ -3,7 +3,10 @@
             class="fill-height"
             fluid
     >
-        <div class="devito"></div>
+        <router-link
+                class="devito"
+                :to="{ name: 'Registration'}"
+        ></router-link>
         <div class="books d-none d-lg-block"></div>
         <v-row
                 align="center"
