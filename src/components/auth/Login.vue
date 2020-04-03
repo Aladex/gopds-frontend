@@ -34,7 +34,7 @@
 
                         >
                             <v-text-field
-                                    label="Юзернейм"
+                                    label="Логин"
                                     name="login"
                                     prepend-icon="mdi-account"
                                     type="text"

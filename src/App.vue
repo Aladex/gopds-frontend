@@ -1,7 +1,7 @@
 <template>
     <v-app id="app">
         <v-system-bar color="red"
-                      v-if="this.$store.state.authError"
+                      v-if="(this.$store.state.authError && myPath === 'Login')"
         >
             <span><b>Неправильный логин или пароль</b></span>
         </v-system-bar>
@@ -111,6 +111,7 @@
             BackToTop
         },
         computed: {
+            myPath: function() {return this.$route.name},
             isLoggedIn() {
                 return this.$store.getters.isLoggedIn
             },
