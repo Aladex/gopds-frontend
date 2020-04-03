@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/auth/Login.vue'
+import Registration from "@/components/auth/Registration";
 import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
 
@@ -118,6 +119,12 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: { checkAuth: true, title: "Вход в библиотеку" }
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: Registration,
+    meta: { checkAuth: true, title: "Секретная страница" }
   },
   {
     path: '/logout',

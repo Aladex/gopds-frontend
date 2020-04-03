@@ -31,7 +31,7 @@
 
                         >
                             <v-text-field
-                                    label="Login"
+                                    label="Юзернейм"
                                     name="login"
                                     prepend-icon="mdi-account"
                                     type="text"
@@ -42,7 +42,7 @@
 
                             <v-text-field
                                     id="password"
-                                    label="Password"
+                                    label="Пароль"
                                     name="password"
                                     prepend-icon="mdi-lock"
                                     type="password"
@@ -76,10 +76,10 @@
                 password: "",
                 valid: false,
                 emailRules: [
-                    v => !!v || 'Login is required',
+                    v => !!v || 'Обязательное поле',
                 ],
                 passwordRules: [
-                    v => !!v || 'Password is required',
+                    v => !!v || 'Пароль тоже нужен',
                 ],
                 expand: false,
             }
