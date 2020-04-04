@@ -21,7 +21,7 @@
                         xs="12"
                         sm="12"
                         md="12"
-                        lg="4"
+                        lg="6"
                 >
                     <h2>Яндекс-Деньги</h2>
                     <p>Можно пройти по <a href="https://yasobe.ru/na/biblioteka_zhivi" target="_blank">ссылке</a></p>
@@ -32,26 +32,16 @@
                         xs="12"
                         sm="12"
                         md="12"
-                        lg="4"
+                        lg="6"
                 >
                     <h2>Альфа-Банк</h2>
                     <p>Можно сделать перевод на карту <a href="https://money.alfabank.ru/p2p/web/transfer/aaleksandrov8361" target="_blank">здесь</a></p>
-                </v-col>
-                <v-col
-                        cols="12"
-                        xs="12"
-                        sm="12"
-                        md="12"
-                        lg="4"
-                >
-                    <h2>Рокетбанк</h2>
-                    <p>Можно сделать перевод на карту <a href="https://rocketbank.ru/andrey-aleksandrov-broken-brook" target="_blank">здесь</a></p>
                 </v-col>
                 <v-col cols="12">
                     <h2>Через систему быстрых платежей</h2>
                     <p>Можно сделать перевод через СБП по номеру телефона</p>
                     <p>Переводите на номер <span v-clipboard:copy="+79254710919">+79254710919</span></p>
-                    <p>Среди банков выбирайте Альфа-Банк или Рокетбанк</p>
+                    <p>Среди банков выбирайте Альфа-Банк</p>
                 </v-col>
             </v-row>
 
