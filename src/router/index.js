@@ -4,9 +4,33 @@ import Login from '../components/auth/Login.vue'
 import Registration from "@/components/auth/Registration";
 import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
+import store from '@/store/index';
 
 Vue.use(VueRouter)
 
+const adminArea = (to, from, next) => {
+  function proceed() {
+    if (!store.state.isSuperUser) {
+      next({
+        path: '/404',
+        query: {redirect: to.fullPath}
+      })
+    } else {
+      next()
+    }
+  }
+  if (store.state.loading) {
+    store.watch(
+        (state) => state.loading,
+        (value) => {
+          if (!value)
+            proceed()
+        }
+    )
+  }
+  else
+    proceed()
+}
 const routes = [
   {
     path: '/',
@@ -19,6 +43,21 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Новые книги",
+    }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "books" */ '../components/Admin.vue'),
+    props: {
+      page: 1,
+      searchBar: false
+    },
+    beforeEnter: adminArea,
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+      title: "Управление пользователями",
     }
   },
   {
@@ -155,6 +194,15 @@ router.afterEach((to) => {
 })
 
 router.beforeEach((to, from, next) => {
+  // if (to.matched.some(record => record.meta.requiresAdmin)) {
+  //   console.log(store.state.isSuperUser)
+  //   if (!store.state.isSuperUser) {
+  //     next({
+  //       path: '/404',
+  //       query: {redirect: to.fullPath}
+  //     })
+  //   }
+  // }
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // этот путь требует авторизации, проверяем залогинен ли
     // пользователь, и если нет, перенаправляем на страницу логина

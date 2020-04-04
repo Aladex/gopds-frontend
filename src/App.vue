@@ -21,13 +21,14 @@
                 <router-link
                         :to="{ name: 'Books'}"
                 >
-                <v-img
-                        class="d-none d-sm-block logo"
-                        src="@/assets/logo.png"
-                        max-height="36"
-                        max-width="36"
-                        contain
-                ></v-img></router-link>
+                    <v-img
+                            class="d-none d-sm-block logo"
+                            src="@/assets/logo.png"
+                            max-height="36"
+                            max-width="36"
+                            contain
+                    ></v-img>
+                </router-link>
                 <v-toolbar-title class="d-none d-lg-block">
                     <router-link
                             :to="{ name: 'Books'}"
@@ -50,6 +51,10 @@
                     <v-tab
                             :to="{ name: 'Donate'}"
                     >Донат</v-tab>
+                    <v-tab
+                            v-if="isSuperUser"
+                            :to="{ name: 'Admin'}"
+                    >Админ</v-tab>
                 </v-tabs></span>
                 <v-tabs
                         class="d-flex d-sm-none"
@@ -59,15 +64,19 @@
                     <v-tab
                             :to="{ name: 'Books'}"
 
-                    ><v-img
-                            src="@/assets/logo.png"
-                            max-height="36"
-                            max-width="36"
-                            contain
-                    ></v-img></v-tab>
+                    >
+                        <v-img
+                                src="@/assets/logo.png"
+                                max-height="36"
+                                max-width="36"
+                                contain
+                        ></v-img>
+                    </v-tab>
                     <v-tab
                             :to="{ name: 'Donate'}"
-                    ><v-icon>mdi-currency-usd</v-icon></v-tab>
+                    >
+                        <v-icon>mdi-currency-usd</v-icon>
+                    </v-tab>
                 </v-tabs>
                 <v-toolbar-items>
                     <v-btn
@@ -78,7 +87,8 @@
                     <v-btn
                             icon
                             class="disable-login-btn d-flex d-sm-none"
-                    ><v-icon>mdi-account</v-icon>
+                    >
+                        <v-icon>mdi-account</v-icon>
                     </v-btn>
 
                     <v-btn
@@ -111,9 +121,14 @@
             BackToTop
         },
         computed: {
-            myPath: function() {return this.$route.name},
+            myPath: function () {
+                return this.$route.name
+            },
             isLoggedIn() {
                 return this.$store.getters.isLoggedIn
+            },
+            isSuperUser() {
+                return this.$store.getters.isSuperUser
             },
             username: {
                 get() {
@@ -136,7 +151,8 @@
         },
         mounted() {
             this.setUser()
-        }
+        },
+
     }
 </script>
 <style>
@@ -147,15 +163,18 @@
     .disable-login-btn {
         pointer-events: none;
     }
+
     .logo {
         cursor: pointer;
         position: relative;
         left: 25px;
         bottom: 2px;
     }
+
     #app {
         background: linear-gradient(to right, rgb(245, 245, 245) 0%, rgb(209, 209, 209) 100%);
     }
+
     .cardColor {
         background-color: rgba(255, 255, 255, 0.85) !important;
         border-color: white !important;

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        loading: true,
         myPage: 1,
         title: '',
         lang: {},
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         token: localStorage.getItem('token') || '',
         authError: false,
         username: '',
+        isSuperUser: false,
         status: '',
         searchItem: "",
         selectedSearch: {name: "book", title: "Поиск книги по названию"},
@@ -63,7 +65,9 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.status = 'success'
-            state.username = user
+            state.username = user.username
+            state.isSuperUser = user.is_superuser
+            state.loading = false
         }
     },
     actions: {
@@ -87,8 +91,8 @@ export default new Vuex.Store({
                         method: 'GET'
                     }
                 ).then(resp => {
-                        const username = resp.data.username
-                        commit('setUser', username)
+                        const user = resp.data
+                        commit('setUser', user)
                         resolve(resp)
                     }
                 ).catch(err => {
@@ -108,12 +112,12 @@ export default new Vuex.Store({
                         method: 'POST'
                     })
                     .then(resp => {
-                        const username = resp.data.username
+                        const user = resp.data
                         const token = resp.data.token
                         localStorage.setItem('token', token)
                         axios.defaults.headers.common['Authorization'] = token
                         commit('auth_success', token)
-                        commit('setUser', username)
+                        commit('setUser', user)
                         resolve(resp)
 
                     })
@@ -167,6 +171,8 @@ export default new Vuex.Store({
         searchItem: state => state.searchItem,
         authorsBook: state => state.authorsBook,
         isLoggedIn: state => !!state.token,
+        isSuperUser: state => state.isSuperUser,
+        loading: state => state.loading,
     },
     modules: {}
 })
