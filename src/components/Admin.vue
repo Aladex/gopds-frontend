@@ -2,10 +2,7 @@
     <v-container
             fluid
     >
-        <v-row
-                justify="center"
-        >
-        </v-row>
+
         <v-row
                 justify="center"
         >
@@ -20,9 +17,10 @@
                 <v-data-table
                         :headers="headers"
                         :items="users"
+                        :options.sync="options"
                         class="elevation-1"
                         hide-default-footer
-                        items-per-page="50"
+                        :items-per-page="itemsPerPage"
                 >
                     <template v-slot:item.is_superuser="{ item }">
                         <v-icon>{{ viewSU(item) }}</v-icon>
@@ -38,7 +36,6 @@
         </v-row>
         <div
                 class="text-center"
-
         >
             <v-pagination
                     v-model="pageLocal"
@@ -56,7 +53,9 @@
         name: "Admin",
         data() {
             return {
+                itemsPerPage: 50,
                 pagesLength: 1,
+                options: {},
                 users: [],
                 headers: [
                     {
@@ -68,8 +67,8 @@
                     { text: 'Пользователь', value: 'username', sortable: false },
                     { text: 'Суперпользователь', value: 'is_superuser', sortable: false },
                     { text: 'E-Mail', value: 'email', sortable: false },
-                    { text: 'Последний логин', value: 'last_login', sortable: false },
-                    { text: 'Дата регистрации', value: 'date_joined', sortable: false },
+                    { text: 'Последний логин', value: 'last_login' },
+                    { text: 'Дата регистрации', value: 'date_joined' },
                 ],
             }
         },
@@ -107,6 +106,8 @@
                 let requestBody = {
                     limit: 50,
                     offset: offset,
+                    order: this.options.sortBy[0],
+                    desc: this.options.sortDesc[0]
                 }
 
                 this.$http
@@ -138,6 +139,9 @@
         },
         watch: {
             pageLocal() {
+                this.getUsers()
+            },
+            options() {
                 this.getUsers()
             }
         }

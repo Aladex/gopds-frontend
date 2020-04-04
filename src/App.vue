@@ -44,38 +44,31 @@
                         class="d-none d-sm-block"
                         background-color="primary"
                         right
-                >
+                ><v-tabs-slider></v-tabs-slider>
                     <v-tab
-                            :to="{ name: 'Books'}"
-                    >Книги</v-tab>
-                    <v-tab
-                            :to="{ name: 'Donate'}"
-                    >Донат</v-tab>
-                    <v-tab
-                            v-if="isSuperUser"
-                            :to="{ name: 'Admin'}"
-                    >Админ</v-tab>
-                </v-tabs></span>
+                            v-for="m in menu"
+                            :key="m.name"
+                            :to="{ name: m.name}"
+                    >{{ m.title }}</v-tab>
+                </v-tabs>
+                </span>
                 <v-tabs
                         class="d-flex d-sm-none"
                         centered
-
-                >
+                ><v-tabs-slider></v-tabs-slider>
                     <v-tab
-                            :to="{ name: 'Books'}"
-
+                            v-for="m in menu"
+                            :key="m.name"
+                            :to="{ name: m.name }"
                     >
                         <v-img
+                                v-if="m.logo"
                                 src="@/assets/logo.png"
                                 max-height="36"
                                 max-width="36"
                                 contain
                         ></v-img>
-                    </v-tab>
-                    <v-tab
-                            :to="{ name: 'Donate'}"
-                    >
-                        <v-icon>mdi-currency-usd</v-icon>
+                        <v-icon>{{ m.icon }}</v-icon>
                     </v-tab>
                 </v-tabs>
                 <v-toolbar-items>
@@ -135,6 +128,17 @@
                     return this.$store.getters.user
                 },
             },
+            menu: function () {
+                let menu = [
+                    { name: 'Books', title: "Книги", logo: "../assets/logo.png" },
+                    { name: 'Donate', title: "Донат", icon: "mdi-currency-usd" },
+
+                ]
+                if (this.$store.getters.isSuperUser) {
+                    menu.push({ name: 'Admin', title: "Админ", icon: "mdi-tune" })
+                }
+                return menu
+            }
         },
         methods: {
             logout() {
