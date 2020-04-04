@@ -31,9 +31,21 @@
                     <template v-slot:item.date_joined="{ item }">
                         {{ toHumanDate(item.date_joined) }}
                     </template>
+                    <template v-slot:item.action="{ item }">
+                        <v-icon
+                                @click="editUser(item)"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                    </template>
                 </v-data-table>
             </v-col>
         </v-row>
+        <user-edit-form
+            :dialog="openEdit"
+            :user="editable"
+            @closed="closedDialog"
+        ></user-edit-form>
         <div
                 class="text-center"
         >
@@ -49,10 +61,16 @@
 </template>
 
 <script>
+    import UserEditForm from "@/components/utils/UserEditForm";
     export default {
+        components: {
+            UserEditForm
+        },
         name: "Admin",
         data() {
             return {
+                openEdit: false,
+                editable: {},
                 itemsPerPage: 50,
                 pagesLength: 1,
                 options: {},
@@ -69,6 +87,7 @@
                     { text: 'E-Mail', value: 'email', sortable: false },
                     { text: 'Последний логин', value: 'last_login' },
                     { text: 'Дата регистрации', value: 'date_joined' },
+                    { text: 'Действия', value: 'action', sortable: false, align: 'right'}
                 ],
             }
         },
@@ -83,6 +102,13 @@
             },
         },
         methods: {
+            closedDialog(value) {
+                this.openEdit = value
+            },
+            editUser(user) {
+                this.openEdit = true
+                this.editable = user
+            },
             viewSU(value) {
                 if (value.is_superuser) {
                     return 'mdi-checkbox-marked-circle-outline'
