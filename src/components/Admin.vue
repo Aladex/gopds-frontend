@@ -133,6 +133,7 @@
             },
         },
         mounted() {
+            this.pageLocal = 1
             this.getUsers()
         },
         watch: {
