@@ -87,7 +87,7 @@
                     user: user
                 }
                 this.$http({
-                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/admin/change-user',
+                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/admin/user',
                     data: bodyChange,
                     method: 'POST'
                 })
