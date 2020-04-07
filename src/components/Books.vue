@@ -44,22 +44,36 @@
                                 >
                                     <v-card-title>{{ b.title }}</v-card-title>
                                     <v-card-text>
-                                        <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
-                                        <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
-                                        <p
-                                                v-if="b.lang"
+                                        <v-row>
+                                            <v-col
+                                                    cols="auto">
+                                                <v-img
+                                                    :src="cover(b)"
+                                                    max-width="200px"
+                                                    min-width="200px"
+                                                >
 
-                                        ><b>Язык: </b>
-                                            <v-avatar
-                                                    color="primary"
-                                                    size="24"
-                                                    tile
-                                            >
-                                                <span class="white--text">{{ b.lang }}</span>
-                                            </v-avatar>
-                                        </p>
-                                        <div class="my-4 subtitle-1"><b>Авторы:</b>
-                                            <p>
+                                                </v-img>
+
+                                            </v-col>
+                                            <v-col
+                                                    cols="auto">
+                                                <p><b>Дата добавления:</b> <i>{{ toHumanDate(b.registerdate) }}</i></p>
+                                                <p><b>Дата документа:</b> <i>{{ docDatetoHumanDate(b.docdate) }}</i></p>
+                                                <p
+                                                        v-if="b.lang"
+
+                                                ><b>Язык: </b>
+                                                    <v-avatar
+                                                            color="primary"
+                                                            size="24"
+                                                            tile
+                                                    >
+                                                        <span class="white--text">{{ b.lang }}</span>
+                                                    </v-avatar>
+                                                </p>
+                                                <div class="my-4 subtitle-1"><b>Авторы:</b>
+                                                    <p>
                                          <span
                                                  v-for="a in b.authors"
                                                  :key="a.id"
@@ -71,12 +85,12 @@
                                              >{{ a.full_name }}
                                             </router-link>
                                         </span></p>
-                                        </div>
+                                                </div>
 
-                                        <div class="my-4 subtitle-1"
-                                             v-if="b.series !== null"
-                                        ><b>Серии:</b>
-                                            <p>
+                                                <div class="my-4 subtitle-1"
+                                                     v-if="b.series !== null"
+                                                ><b>Серии:</b>
+                                                    <p>
                                          <span
                                                  v-for="s in b.series"
                                                  :key="s.id"
@@ -88,7 +102,10 @@
                                              >{{ s.ser }}
                                             </router-link>
                                         </span></p>
-                                        </div>
+                                                </div>
+                                            </v-col>
+                                        </v-row>
+
 
 
                                         <div class="my-4 subtitle-1"><b>Описание:</b></div>
@@ -285,6 +302,14 @@
 
         },
         methods: {
+            cover(b) {
+                if (b.cover) {
+                    let path = b.path.replace(".", '-')
+                    let img = b.filename.replace(".", '-')
+                    return `/books/${path}/${img}.jpg`
+                }
+                return "/books/no-cover.png"
+            },
             makeShort(b) {
                 if (b.annotation === undefined) {
                     return ""
