@@ -132,12 +132,12 @@
             },
             menu: function () {
                 let menu = [
-                    { name: 'Books', title: "Книги", logo: "../assets/logo.png" },
-                    { name: 'Donate', title: "Донат", icon: "mdi-currency-usd" },
+                    {name: 'Books', title: "Книги", logo: "../assets/logo.png"},
+                    {name: 'Donate', title: "Донат", icon: "mdi-currency-usd"},
 
                 ]
                 if (this.$store.getters.isSuperUser) {
-                    menu.push({ name: 'Admin', title: "Админ", icon: "mdi-tune" })
+                    menu.push({name: 'Admin', title: "Админ", icon: "mdi-tune"})
                 }
                 return menu
             }

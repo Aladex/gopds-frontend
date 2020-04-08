@@ -48,11 +48,21 @@
                                             <v-col
                                                     cols="auto">
                                                 <v-img
-                                                    :src="cover(b)"
-                                                    max-width="200px"
-                                                    min-width="200px"
+                                                        :src="cover(b)"
+                                                        lazy-src="@/assets/cover-loading.png"
+                                                        max-width="200px"
+                                                        min-width="200px"
                                                 >
-
+                                                    <template v-slot:placeholder>
+                                                        <v-row
+                                                                class="fill-height ma-0"
+                                                                align="center"
+                                                                justify="center"
+                                                        >
+                                                            <v-progress-circular indeterminate
+                                                                                 color="grey lighten-5"></v-progress-circular>
+                                                        </v-row>
+                                                    </template>
                                                 </v-img>
 
                                             </v-col>
@@ -105,7 +115,6 @@
                                                 </div>
                                             </v-col>
                                         </v-row>
-
 
 
                                         <div class="my-4 subtitle-1"><b>Описание:</b></div>
