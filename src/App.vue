@@ -38,23 +38,10 @@
                         Библиотека
                     </router-link>
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
                 <span>
                 <v-tabs
-                        class="d-none d-sm-block"
-                        background-color="primary"
-                        right
-                ><v-tabs-slider></v-tabs-slider>
-                    <v-tab
-                            v-for="m in menu"
-                            :key="m.name"
-                            :to="{ name: m.name}"
-                    >{{ m.title }}</v-tab>
-                </v-tabs>
-                </span>
-                <v-tabs
                         class="d-flex d-sm-none"
-                        centered
+                        background-color="primary"
                 ><v-tabs-slider></v-tabs-slider>
                     <v-tab
                             v-for="m in menu"
@@ -70,7 +57,22 @@
                         ></v-img>
                         <v-icon>{{ m.icon }}</v-icon>
                     </v-tab>
+                </v-tabs></span>
+                <v-spacer></v-spacer>
+                <span>
+                <v-tabs
+                        class="d-none d-sm-block"
+                        background-color="primary"
+                        right
+                ><v-tabs-slider></v-tabs-slider>
+                    <v-tab
+                            v-for="m in menu"
+                            :key="m.name"
+                            :to="{ name: m.name}"
+                    >{{ m.title }}</v-tab>
                 </v-tabs>
+                </span>
+
                 <v-toolbar-items>
                     <v-btn
                             text
