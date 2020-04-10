@@ -187,7 +187,6 @@
             makeSelects(path) {
                 if (path === "findByAuthor") {
                     this.authorName = ""
-                    this.getAuthorName(this.$route.params.author);
                     this.searchItem = "";
                     this.authorsBook = "";
                     this.selects = this.searchVariants.slice();
@@ -225,7 +224,10 @@
                 this.makeSelects(path)
             },
             authorId() {
-                this.getAuthorName(this.$route.params.author)
+                if (this.authorId) {
+                    this.getAuthorName(this.$route.params.author)
+                }
+
             }
         },
         mounted() {
