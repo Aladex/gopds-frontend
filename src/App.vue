@@ -76,12 +76,14 @@
                 <v-toolbar-items>
                     <v-btn
                             text
-                            class="disable-login-btn d-none d-sm-block"
-                    >{{ username }}
+                            class="d-none d-sm-block"
+                            @click="openEdit = true"
+                    >{{ user.username }}
                     </v-btn>
                     <v-btn
                             icon
-                            class="disable-login-btn d-flex d-sm-none"
+                            class="d-flex d-sm-none"
+                            @click="openEdit = true"
                     >
                         <v-icon>mdi-account</v-icon>
                     </v-btn>
@@ -105,15 +107,27 @@
         <back-to-top
                 v-if="isLoggedIn"
         ></back-to-top>
+        <self-user-edit-form
+                :dialog="openEdit"
+                :user="user"
+                @closed="closedDialog"
+        ></self-user-edit-form>
 
     </v-app>
 </template>
 <script>
     import BackToTop from "@/components/utils/BackToTop";
+    import SelfUserEditForm from "@/components/utils/SelfUserEditForm";
 
     export default {
         components: {
-            BackToTop
+            BackToTop,
+            SelfUserEditForm
+        },
+        data () {
+            return {
+                openEdit: false,
+            }
         },
         computed: {
             myPath: function () {
@@ -122,10 +136,7 @@
             isLoggedIn() {
                 return this.$store.getters.isLoggedIn
             },
-            isSuperUser() {
-                return this.$store.getters.isSuperUser
-            },
-            username: {
+            user: {
                 get() {
                     return this.$store.getters.user
                 },
@@ -136,13 +147,17 @@
                     {name: 'Donate', title: "Донат", icon: "mdi-currency-usd"},
 
                 ]
-                if (this.$store.getters.isSuperUser) {
+                if (this.user.is_superuser) {
                     menu.push({name: 'Admin', title: "Админ", icon: "mdi-tune"})
                 }
                 return menu
             }
         },
         methods: {
+            closedDialog(value) {
+                this.openEdit = value
+                this.$store.dispatch('getMe')
+            },
             logout() {
                 this.$store.dispatch('logout')
                     .then(() => {
@@ -150,9 +165,7 @@
                     })
             },
             setUser() {
-                if (this.username === '') {
-                    this.$store.dispatch('getMe')
-                }
+                this.$store.dispatch('getMe')
             },
         },
         mounted() {

@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 
 const adminArea = (to, from, next) => {
   function proceed() {
-    if (!store.state.isSuperUser) {
+    if (!store.state.user.is_superuser) {
       next({
         path: '/404',
         query: {redirect: to.fullPath}
@@ -194,15 +194,7 @@ router.afterEach((to) => {
 })
 
 router.beforeEach((to, from, next) => {
-  // if (to.matched.some(record => record.meta.requiresAdmin)) {
-  //   console.log(store.state.isSuperUser)
-  //   if (!store.state.isSuperUser) {
-  //     next({
-  //       path: '/404',
-  //       query: {redirect: to.fullPath}
-  //     })
-  //   }
-  // }
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // этот путь требует авторизации, проверяем залогинен ли
     // пользователь, и если нет, перенаправляем на страницу логина

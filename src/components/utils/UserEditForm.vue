@@ -79,9 +79,7 @@
                 this.$emit('closed', dialog)
             },
             userChange(user) {
-                if (this.newPassword !== "") {
-                    user.password = this.newPassword
-                }
+                user.password = this.newPassword
                 let bodyChange = {
                     action: "update",
                     user: user

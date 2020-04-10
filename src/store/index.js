@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        user: {},
         loading: true,
         myPage: 1,
         title: '',
@@ -15,7 +16,6 @@ export default new Vuex.Store({
         token: localStorage.getItem('token') || '',
         authError: false,
         username: '',
-        isSuperUser: false,
         status: '',
         searchItem: "",
         selectedSearch: {name: "book", title: "Поиск книги по названию"},
@@ -65,8 +65,7 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.status = 'success'
-            state.username = user.username
-            state.isSuperUser = user.is_superuser
+            state.user = user
             state.loading = false
         }
     },
@@ -162,7 +161,6 @@ export default new Vuex.Store({
         title: state => state.title,
         lang: state => state.lang,
         langs: state => state.langs,
-        user: state => state.username,
         token: state => state.token,
         authError: state => state.authError,
         authStatus: state => state.status,
@@ -171,7 +169,7 @@ export default new Vuex.Store({
         searchItem: state => state.searchItem,
         authorsBook: state => state.authorsBook,
         isLoggedIn: state => !!state.token,
-        isSuperUser: state => state.isSuperUser,
+        user: state => state.user,
         loading: state => state.loading,
     },
     modules: {}
