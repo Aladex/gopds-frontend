@@ -49,6 +49,7 @@
                                                     cols="auto">
                                                 <v-img
                                                         :src="cover(b)"
+                                                        class="elevation-6"
                                                         lazy-src="@/assets/cover-loading.png"
                                                         max-width="200px"
                                                         min-width="200px"
