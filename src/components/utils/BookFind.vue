@@ -108,6 +108,9 @@
             }
         },
         computed: {
+            authorId: function () {
+                return this.$route.params.author
+            },
             myPath: function () {
                 return this.$route.name
             },
@@ -183,6 +186,7 @@
             },
             makeSelects(path) {
                 if (path === "findByAuthor") {
+                    this.authorName = ""
                     this.getAuthorName(this.$route.params.author);
                     this.searchItem = "";
                     this.authorsBook = "";
@@ -220,6 +224,9 @@
             myPath(path) {
                 this.makeSelects(path)
             },
+            authorId() {
+                this.getAuthorName(this.$route.params.author)
+            }
         },
         mounted() {
             this.makeSelects(this.myPath)
