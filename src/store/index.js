@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
@@ -38,7 +38,7 @@ export default new Vuex.Store({
             state.title = payload
         },
         logout(state) {
-            state.status = ''
+            state.status = '';
             state.token = ''
         },
         changeErrorAuth(state, payload) {
@@ -48,7 +48,7 @@ export default new Vuex.Store({
             state.status = 'loading'
         },
         auth_success(state, token) {
-            state.status = 'success'
+            state.status = 'success';
             state.token = token
         },
         auth_error(state) {
@@ -64,8 +64,8 @@ export default new Vuex.Store({
             state.authorsBook = item
         },
         setUser(state, user) {
-            state.status = 'success'
-            state.user = user
+            state.status = 'success';
+            state.user = user;
             state.loading = false
         }
     },
@@ -90,12 +90,12 @@ export default new Vuex.Store({
                         method: 'GET'
                     }
                 ).then(resp => {
-                        const user = resp.data
-                        commit('setUser', user)
+                        const user = resp.data;
+                        commit('setUser', user);
                         resolve(resp)
                     }
                 ).catch(err => {
-                        commit("logout")
+                        commit("logout");
                         reject(err)
                     }
                 )
@@ -103,7 +103,7 @@ export default new Vuex.Store({
         },
         login({commit}, user) {
             return new Promise((resolve, reject) => {
-                commit('auth_request')
+                commit('auth_request');
                 axios(
                     {
                         url: process.env.VUE_APP_BACKEND_API_URL + 'api/login',
@@ -111,18 +111,18 @@ export default new Vuex.Store({
                         method: 'POST'
                     })
                     .then(resp => {
-                        const user = resp.data
-                        const token = resp.data.token
-                        localStorage.setItem('token', token)
-                        axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token)
-                        commit('setUser', user)
+                        const user = resp.data;
+                        const token = resp.data.token;
+                        localStorage.setItem('token', token);
+                        axios.defaults.headers.common['Authorization'] = token;
+                        commit('auth_success', token);
+                        commit('setUser', user);
                         resolve(resp)
 
                     })
                     .catch(err => {
-                        commit('auth_error')
-                        localStorage.removeItem('token')
+                        commit('auth_error');
+                        localStorage.removeItem('token');
                         reject(err)
                     })
 
@@ -134,14 +134,14 @@ export default new Vuex.Store({
 
         logout({commit}) {
             return new Promise((resolve) => {
-                    commit('logout')
-                    localStorage.removeItem('token')
+                    commit('logout');
+                    localStorage.removeItem('token');
                     axios(
                         {
                             url: process.env.VUE_APP_BACKEND_API_URL + 'api/logout',
                             method: "GET"
                         },
-                    )
+                    );
                     resolve()
                 }
             )

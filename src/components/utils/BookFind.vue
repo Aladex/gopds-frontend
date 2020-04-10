@@ -1,95 +1,98 @@
 <template>
     <v-row justify="center">
         <v-col
-                cols="12"
-                sm="10"
-                md="10"
-                lg="8"
                 class="mt-4"
+                cols="12"
+                lg="8"
+                md="10"
+                sm="10"
         >
             <v-card>
-            <v-card-text>
-            <v-row justify="start">
+                <v-card-text>
+                    <v-row justify="start">
 
-                <v-col
-                        cols="12"
-                        sm="12"
-                        md="12"
-                        lg="3"
-                >
-                    <v-select
-                            v-model="selectedSearch"
-                            :items="selects"
-                            :item-text="itemText"
-                            label="Категория поиска"
-                            return-object
-                    ></v-select>
-                </v-col>
-                <v-col
-                        cols="12"
-                        sm="12"
-                        md="12"
-                        lg="3"
-                >
-
-                    <v-text-field
-                            v-model="searchItem"
-                            label="Что ищем?"
-                            single-line
-                            hide-details
-                            :clearable="(selectedSearch.name === 'authorsBook')"
-                            @keyup.enter="findByTitle"
-                            @click:clear="authorsBook = ''"
-                    >
-                    </v-text-field>
-                </v-col>
-                <v-col
-                        cols="6"
-                        sm="6"
-                        md="6"
-                        lg="3"
-                >
-                    <v-btn
-                            class="search-btn"
-                            @click="findByTitle"
-                    >
-                        Искать
-                    </v-btn>
-                </v-col>
-                <v-col
-                        cols="6"
-                        sm="6"
-                        md="6"
-                        lg="3"
-                >
-                    <v-row
-                        justify="end"
-                    >
                         <v-col
-                                cols="8"
-                                sm="8"
-                                md="8"
-                                lg="8"
+                                cols="12"
+                                lg="3"
+                                md="12"
+                                sm="12"
                         >
                             <v-select
-                                    class="lang-selector"
-                                    prepend-icon="mdi-web"
-                                    v-model="lang"
-                                    :items="langs"
-                                    :item-text="langText"
-                                    flat
-                                    label="Язык"
+                                    :hint="selectedSearch.name === 'authorsBook'? authorName : ''"
+                                    :item-text="itemText"
+                                    :items="selects"
+                                    label="Категория поиска"
+                                    persistent-hint
                                     return-object
+
+                                    v-model="selectedSearch"
                             ></v-select>
+                        </v-col>
+                        <v-col
+                                cols="12"
+                                lg="3"
+                                md="12"
+                                sm="12"
+                        >
+
+                            <v-text-field
+                                    :clearable="(selectedSearch.name === 'authorsBook')"
+                                    @click:clear="authorsBook = ''"
+                                    @keyup.enter="findByTitle"
+                                    hide-details
+                                    label="Что ищем?"
+                                    single-line
+                                    v-model="searchItem"
+                            >
+                            </v-text-field>
+                        </v-col>
+                        <v-col
+                                cols="6"
+                                lg="3"
+                                md="6"
+                                sm="6"
+                        >
+                            <v-btn
+                                    @click="findByTitle"
+                                    class="search-btn"
+                            >
+                                Искать
+                            </v-btn>
+                        </v-col>
+                        <v-col
+                                cols="6"
+                                lg="3"
+                                md="6"
+                                sm="6"
+                        >
+                            <v-row
+                                    justify="end"
+                            >
+                                <v-col
+                                        cols="8"
+                                        lg="8"
+                                        md="8"
+                                        sm="8"
+                                >
+                                    <v-select
+                                            :item-text="langText"
+                                            :items="langs"
+                                            class="lang-selector"
+                                            flat
+                                            label="Язык"
+                                            prepend-icon="mdi-web"
+                                            return-object
+                                            v-model="lang"
+                                    ></v-select>
+                                </v-col>
+
+                            </v-row>
+
                         </v-col>
 
                     </v-row>
-
-                </v-col>
-
-            </v-row>
-            </v-card-text>
-        </v-card>
+                </v-card-text>
+            </v-card>
         </v-col>
     </v-row>
 </template>
@@ -97,15 +100,17 @@
 <script>
     export default {
         name: "BookFind",
-        props: ["author"],
         data() {
             return {
+                authorName: "",
                 openSelect: false,
                 selects: [],
             }
         },
         computed: {
-            myPath: function() {return this.$route.name},
+            myPath: function () {
+                return this.$route.name
+            },
             lang: {
                 get() {
                     return this.$store.getters.lang
@@ -159,38 +164,57 @@
             langText: item => item.language,
             itemText: item => item.title,
             findByTitle() {
-                this.$store.dispatch('setPage', 1)
+                this.$store.dispatch('setPage', 1);
                 switch (this.selectedSearch.name) {
                     case "book":
                         this.$router.push(`/find/books/${this.searchItem}/1`).catch(() => {
-                        })
+                        });
                         break;
                     case "author":
                         this.$router.push(`/authors/${this.searchItem}/1`).catch(() => {
-                        })
+                        });
                         break;
                     case "authorsBook":
-                        this.authorsBook = this.searchItem
+                        this.authorsBook = this.searchItem;
                         this.$router.push(`/find/author/${this.$route.params.author}/1`).catch(() => {
-                        })
+                        });
                         break;
                 }
             },
             makeSelects(path) {
                 if (path === "findByAuthor") {
-                    this.searchItem = ""
-                    this.authorsBook = ""
-                    this.selects = this.searchVariants.slice()
-                    this.selects.push({name: "authorsBook", title: "Поиск книги у автора"})
+                    this.getAuthorName(this.$route.params.author);
+                    this.searchItem = "";
+                    this.authorsBook = "";
+                    this.selects = this.searchVariants.slice();
+                    this.selects.push(
+                        {
+                            name: "authorsBook",
+                            title: "Поиск книги у автора",
+                        }
+                    );
                     this.selectedSearch = this.selects[2]
                 } else {
-                    this.selects = this.searchVariants.slice()
+                    this.selects = this.searchVariants.slice();
                     if (!this.selects.includes(this.selectedSearch)) {
                         this.selectedSearch = this.searchVariants[0]
                     }
 
                 }
             },
+            getAuthorName(id) {
+                let authorId = Number.parseInt(id, 10);
+                this.$http({
+                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/books/author',
+                    data: {
+                        author_id: authorId
+                    },
+                    method: 'POST'
+                })
+                    .then(response => {
+                        this.authorName = response.data.full_name
+                    })
+            }
         },
         watch: {
             myPath(path) {
@@ -208,6 +232,7 @@
         position: relative;
         top: 12px;
     }
+
     .lang-selector {
         position: relative;
         bottom: 12px;

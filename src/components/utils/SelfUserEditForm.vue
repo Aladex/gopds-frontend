@@ -1,14 +1,14 @@
 <template>
     <div>
         <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="600px">
+            <v-dialog max-width="600px" persistent v-model="dialog">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Расскажи о себе, {{ user.username }}</span>
                     </v-card-title>
                     <v-card-text
-                            class="pointer"
                             @click="willChange = !willChange"
+                            class="pointer"
                     >
                         <small
                                 v-if="!willChange"
@@ -23,41 +23,41 @@
                                 <v-col cols="12"
                                        v-if="willChange">
                                     <v-text-field
-                                            v-model="password"
+                                            :error-messages="errorsText"
                                             label="Пароль"
                                             type="password"
-                                            :error-messages="errorsText"
+                                            v-model="password"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12"
                                        v-if="willChange">
                                     <v-text-field
-                                            v-model="newPassword"
-                                            label="Новый пароль"
-                                            type="password"
                                             :disabled="this.password === ''"
                                             :error-messages="errorsNPText"
+                                            label="Новый пароль"
+                                            type="password"
+                                            v-model="newPassword"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.first_name"
                                             label="Имя"
+                                            v-model="user.first_name"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.last_name"
                                             label="Фамилия"
+                                            v-model="user.last_name"
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn color="blue darken-1" text @click="onClose(false)">Закрыть</v-btn>
+                        <v-btn @click="onClose(false)" color="blue darken-1" text>Закрыть</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="red darken-1" text @click="userChange(user)">Изменить</v-btn>
+                        <v-btn @click="userChange(user)" color="red darken-1" text>Изменить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -93,12 +93,12 @@
                 }
             },
             onClose(dialog) {
-                this.willChange = false
+                this.willChange = false;
                 this.$emit('closed', dialog)
             },
             userChange(user) {
-                user.new_password = this.newPassword
-                user.password = this.password
+                user.new_password = this.newPassword;
+                user.password = this.password;
 
 
                 this.$http({
@@ -107,16 +107,16 @@
                     method: 'POST'
                 })
                     .then(() => {
-                        this.$store.dispatch('getMe')
+                        this.$store.dispatch('getMe');
                         this.onClose(false)
                     })
                     .catch(err => {
                         switch (err.response.status) {
                             case 400:
-                                this.errorsNPText = "Пароль должен быть больше 8 символов"
-                                break
+                                this.errorsNPText = "Пароль должен быть больше 8 символов";
+                                break;
                             case 403:
-                                this.errorsText = "Неправильный пароль"
+                                this.errorsText = "Неправильный пароль";
                                 break
                         }
                     })
@@ -126,8 +126,8 @@
         },
         watch: {
             willChange() {
-                this.password = ""
-                this.newPassword = ""
+                this.password = "";
+                this.newPassword = "";
                 this.errorsText = ""
             },
             newPassword(value) {

@@ -2,13 +2,14 @@
 .back-to-top-fade-leave-active {
     transition: opacity .7s;
 }
+
 .back-to-top-fade-enter,
 .back-to-top-fade-leave-to {
     opacity: 0;
 }
 
 .vue-back-to-top {
-    cursor:pointer;
+    cursor: pointer;
     position: fixed;
     z-index: 1000;
 }
@@ -23,8 +24,8 @@
     width: 160px;
 }
 
-.vue-back-to-top .default span{
-    color:#ffffff;
+.vue-back-to-top .default span {
+    color: #ffffff;
 }
 
 .vue-back-to-top--is-footer {

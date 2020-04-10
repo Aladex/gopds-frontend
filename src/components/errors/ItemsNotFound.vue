@@ -9,10 +9,10 @@
         >
             <v-col
                     cols="12"
-                    xs="10"
-                    sm="10"
-                    md="10"
                     lg="8"
+                    md="10"
+                    sm="10"
+                    xs="10"
             >
                 <v-card class="elevation-12"
                 >

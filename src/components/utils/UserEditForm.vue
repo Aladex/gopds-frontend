@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="600px">
+            <v-dialog max-width="600px" persistent v-model="dialog">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Изменить пользователя</span>
@@ -12,40 +12,40 @@
                                 <v-col cols="12">ID: {{ user.id }}</v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.username"
                                             label="Имя пользователя"
-                                            ></v-text-field>
+                                            v-model="user.username"
+                                    ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="newPassword"
                                             label="Пароль"
                                             type="password"
+                                            v-model="newPassword"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.email"
                                             label="Почта"
+                                            v-model="user.email"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.first_name"
                                             label="First Name"
+                                            v-model="user.first_name"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                            v-model="user.last_name"
                                             label="Last Name"
+                                            v-model="user.last_name"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-checkbox
-                                            v-model="user.is_superuser"
                                             label="Админ"
-                                            ></v-checkbox>
+                                            v-model="user.is_superuser"
+                                    ></v-checkbox>
                                 </v-col>
 
                             </v-row>
@@ -53,9 +53,9 @@
                         <small>*indicates required field</small>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn color="blue darken-1" text @click="onClose(false)">Закрыть</v-btn>
+                        <v-btn @click="onClose(false)" color="blue darken-1" text>Закрыть</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="red darken-1" text @click="userChange(user)">Изменить</v-btn>
+                        <v-btn @click="userChange(user)" color="red darken-1" text>Изменить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -74,16 +74,16 @@
             }
         },
         methods: {
-            onClose (dialog) {
-                this.newPassword = ""
+            onClose(dialog) {
+                this.newPassword = "";
                 this.$emit('closed', dialog)
             },
             userChange(user) {
-                user.password = this.newPassword
+                user.password = this.newPassword;
                 let bodyChange = {
                     action: "update",
                     user: user
-                }
+                };
                 this.$http({
                     url: process.env.VUE_APP_BACKEND_API_URL + 'api/admin/user',
                     data: bodyChange,

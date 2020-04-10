@@ -4,8 +4,8 @@
             fluid
     >
         <router-link
-                class="devito"
                 :to="{ name: 'Registration'}"
+                class="devito"
         ></router-link>
         <div class="books d-none d-lg-block"></div>
         <v-row
@@ -14,8 +14,8 @@
         >
             <v-col
                     cols="12"
-                    sm="8"
                     md="4"
+                    sm="8"
             >
                 <v-card class="elevation-12 cardColor"
                 >
@@ -28,39 +28,39 @@
                     </v-toolbar>
                     <v-card-text>
                         <v-form
+                                ref="form"
                                 v-model="valid"
                                 validation
-                                ref="form"
 
                         >
                             <v-text-field
+                                    :rules="emailRules"
+                                    @keyup.enter="login"
                                     label="Логин"
                                     name="login"
                                     prepend-icon="mdi-account"
                                     type="text"
                                     v-model="email"
-                                    :rules="emailRules"
-                                    @keyup.enter="login"
                             />
 
                             <v-text-field
+                                    :rules="passwordRules"
+                                    @keyup.enter="login"
                                     id="password"
                                     label="Пароль"
                                     name="password"
                                     prepend-icon="mdi-lock"
                                     type="password"
                                     v-model="password"
-                                    :rules="passwordRules"
-                                    @keyup.enter="login"
                             />
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer/>
                         <v-btn
-                                color="custom accent-4"
-                                @click="login"
                                 :disabled="!valid"
+                                @click="login"
+                                color="custom accent-4"
                         >Войти
                         </v-btn>
                     </v-card-actions>
@@ -90,11 +90,11 @@
 
         methods: {
             login() {
-                let username = this.email
-                let password = this.password
+                let username = this.email;
+                let password = this.password;
                 this.$store.dispatch('login', {username, password})
                     .then(() => {
-                        this.$store.dispatch('authChangeError', false)
+                        this.$store.dispatch('authChangeError', false);
                         this.$router.push('/')
                     })
                     .catch(() => {

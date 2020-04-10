@@ -1,7 +1,7 @@
 <template>
     <v-container
-            fluid
             class="fill-height"
+            fluid
     >
         <div class="devito"></div>
         <div class="books d-none d-lg-block"></div>
@@ -11,19 +11,19 @@
         >
             <v-col
                     cols="12"
-                    sm="8"
-                    md="4"
                     lg="4"
+                    md="4"
+                    sm="8"
             >
                 <v-row
-                        v-if="regError !== ''"
                         align="center"
                         justify="center"
+                        v-if="regError !== ''"
                 >
                     <v-col
                             cols="12"
-                            sm="12"
                             md="12"
+                            sm="12"
                     >
                         <v-card
                                 class="elevation-12"
@@ -41,8 +41,8 @@
                 >
                     <v-col
                             cols="12"
-                            sm="12"
                             md="12"
+                            sm="12"
                     >
                         <v-card class="elevation-12 cardColor"
                         >
@@ -55,47 +55,47 @@
                             </v-toolbar>
                             <v-card-text>
                                 <v-form
+                                        ref="form"
                                         v-model="valid"
                                         validation
-                                        ref="form"
 
                                 >
                                     <v-text-field
+                                            :rules="usernameRules"
+                                            @keyup.enter="register"
                                             label="Логин"
                                             name="username"
                                             prepend-icon="mdi-account"
                                             type="text"
                                             v-model="username"
-                                            :rules="usernameRules"
-                                            @keyup.enter="register"
                                     />
                                     <v-text-field
+                                            :rules="emailRules"
+                                            @keyup.enter="register"
                                             label="Электронная почта"
                                             name="email"
                                             prepend-icon="mdi-email"
                                             type="text"
                                             v-model="email"
-                                            :rules="emailRules"
-                                            @keyup.enter="register"
                                     />
 
                                     <v-text-field
+                                            :rules="passwordRules"
                                             id="password"
                                             label="Пароль"
                                             name="password"
                                             prepend-icon="mdi-lock"
                                             type="password"
                                             v-model="password"
-                                            :rules="passwordRules"
                                     />
                                     <v-text-field
+                                            :rules="inviteRules"
                                             id="invite"
                                             label="Инвайт"
                                             name="invite"
                                             prepend-icon="mdi-help"
                                             type="text"
                                             v-model="invite"
-                                            :rules="inviteRules"
                                     />
 
                                 </v-form>
@@ -106,14 +106,15 @@
                                 >
                                     <v-icon
                                             class="pointer"
-                                    >mdi-arrow-left</v-icon>
+                                    >mdi-arrow-left
+                                    </v-icon>
                                 </router-link>
 
                                 <v-spacer/>
                                 <v-btn
-                                        color="custom accent-4"
-                                        @click="register"
                                         :disabled="!valid"
+                                        @click="register"
+                                        color="custom accent-4"
                                 >Тыц!
                                 </v-btn>
                             </v-card-actions>
@@ -163,7 +164,7 @@
                     email: this.email,
                     password: this.password,
                     invite: this.invite
-                }
+                };
                 this.$http({
                     url: process.env.VUE_APP_BACKEND_API_URL + 'api/register',
                     data: registerData,
@@ -175,14 +176,14 @@
                     .catch(err => {
                         switch (err.response.data.message) {
                             case "bad invite":
-                                this.regError = "Такого инвайта нет. Сходи на лепру."
-                                break
+                                this.regError = "Такого инвайта нет. Сходи на лепру.";
+                                break;
                             case "bad form":
-                                this.regError = "Что-то не так с формой"
-                                break
+                                this.regError = "Что-то не так с формой";
+                                break;
                             case "user is already exists":
-                                this.regError = "Такой пользователь уже есть"
-                                break
+                                this.regError = "Такой пользователь уже есть";
+                                break;
                             default:
                                 this.regError = "Что-то пошло не так"
                         }

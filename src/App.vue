@@ -6,54 +6,54 @@
             <span><b>Неправильный логин или пароль</b></span>
         </v-system-bar>
         <v-card
-                v-if="isLoggedIn"
                 color="grey lighten-4"
                 flat
-                tile
                 height="50px"
+                tile
+                v-if="isLoggedIn"
         >
             <v-app-bar
                     color="primary"
-                    short
                     dark
                     fixed
+                    short
             >
                 <router-link
                         :to="{ name: 'Books'}"
                 >
                     <v-img
                             class="d-none d-sm-block logo"
-                            src="@/assets/logo.png"
+                            contain
                             max-height="36"
                             max-width="36"
-                            contain
+                            src="@/assets/logo.png"
                     ></v-img>
                 </router-link>
                 <v-toolbar-title class="d-none d-lg-block">
                     <router-link
                             :to="{ name: 'Books'}"
-                            tag="span"
                             class="pointer pl-8"
+                            tag="span"
                     >
                         Библиотека
                     </router-link>
                 </v-toolbar-title>
                 <span>
                 <v-tabs
-                        class="d-flex d-sm-none"
                         background-color="primary"
+                        class="d-flex d-sm-none"
                 ><v-tabs-slider></v-tabs-slider>
                     <v-tab
-                            v-for="m in menu"
                             :key="m.name"
                             :to="{ name: m.name }"
+                            v-for="m in menu"
                     >
                         <v-img
-                                v-if="m.logo"
-                                src="@/assets/logo.png"
+                                contain
                                 max-height="36"
                                 max-width="36"
-                                contain
+                                src="@/assets/logo.png"
+                                v-if="m.logo"
                         ></v-img>
                         <v-icon>{{ m.icon }}</v-icon>
                     </v-tab>
@@ -61,36 +61,36 @@
                 <v-spacer></v-spacer>
                 <span>
                 <v-tabs
-                        class="d-none d-sm-block"
                         background-color="primary"
+                        class="d-none d-sm-block"
                         right
                 ><v-tabs-slider></v-tabs-slider>
                     <v-tab
-                            v-for="m in menu"
                             :key="m.name"
                             :to="{ name: m.name}"
+                            v-for="m in menu"
                     >{{ m.title }}</v-tab>
                 </v-tabs>
                 </span>
 
                 <v-toolbar-items>
                     <v-btn
-                            text
-                            class="d-none d-sm-block"
                             @click="openEdit = true"
+                            class="d-none d-sm-block"
+                            text
                     >{{ user.username }}
                     </v-btn>
                     <v-btn
-                            icon
-                            class="d-flex d-sm-none"
                             @click="openEdit = true"
+                            class="d-flex d-sm-none"
+                            icon
                     >
                         <v-icon>mdi-account</v-icon>
                     </v-btn>
 
                     <v-btn
-                            icon
                             @click="logout"
+                            icon
                     >
                         <v-icon>mdi-export</v-icon>
                     </v-btn>
@@ -124,7 +124,7 @@
             BackToTop,
             SelfUserEditForm
         },
-        data () {
+        data() {
             return {
                 openEdit: false,
             }
@@ -146,7 +146,7 @@
                     {name: 'Books', title: "Книги", logo: "../assets/logo.png"},
                     {name: 'Donate', title: "Донат", icon: "mdi-currency-usd"},
 
-                ]
+                ];
                 if (this.user.is_superuser) {
                     menu.push({name: 'Admin', title: "Админ", icon: "mdi-tune"})
                 }
@@ -155,7 +155,7 @@
         },
         methods: {
             closedDialog(value) {
-                this.openEdit = value
+                this.openEdit = value;
                 this.$store.dispatch('getMe')
             },
             logout() {

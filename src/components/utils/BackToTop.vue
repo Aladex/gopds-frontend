@@ -1,18 +1,20 @@
 <template>
     <transition name="back-to-top-fade">
         <div
-                class="vue-back-to-top"
                 :style="`bottom:${this.bottom};right:${this.right};`"
-                v-show="visible"
-                @click="backToTop">
+                @click="backToTop"
+                class="vue-back-to-top"
+                v-show="visible">
 
-                    <v-btn
-                            color="warning"
-                            icon
-                            dark
-                            x-small
-                            fab
-                    ><v-icon dark>mdi-arrow-up</v-icon></v-btn>
+            <v-btn
+                    color="warning"
+                    dark
+                    fab
+                    icon
+                    x-small
+            >
+                <v-icon dark>mdi-arrow-up</v-icon>
+            </v-btn>
 
         </div>
     </transition>
@@ -40,19 +42,19 @@
                 default: '60px',
             },
         },
-        data () {
+        data() {
             return {
                 visible: false
             }
         },
-        mounted () {
+        mounted() {
             window.smoothscroll = () => {
-                let currentScroll = document.documentElement.scrollTop || document.body.scrollTop
+                let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
                 if (currentScroll > 0) {
-                    window.requestAnimationFrame(window.smoothscroll)
+                    window.requestAnimationFrame(window.smoothscroll);
                     window.scrollTo(0, Math.floor(currentScroll - (currentScroll / 5)))
                 }
-            }
+            };
             window.addEventListener('scroll', this.catchScroll)
         },
         methods: {
@@ -60,17 +62,17 @@
              * Catch window scroll event
              * @return {void}
              */
-            catchScroll () {
-                const pastTopOffset = window.pageYOffset > parseInt(this.visibleoffset)
-                const pastBottomOffset = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - parseInt(this.visibleoffsetbottom)
+            catchScroll() {
+                const pastTopOffset = window.pageYOffset > parseInt(this.visibleoffset);
+                const pastBottomOffset = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - parseInt(this.visibleoffsetbottom);
                 this.visible = parseInt(this.visibleoffsetbottom) > 0 ? pastTopOffset && !pastBottomOffset : pastTopOffset
             },
             /**
              * The function who make the magics
              * @return {void}
              */
-            backToTop () {
-                window.smoothscroll()
+            backToTop() {
+                window.smoothscroll();
                 this.$emit('scrolled')
             }
         },

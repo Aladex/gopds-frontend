@@ -9,14 +9,13 @@ import Axios from 'axios'
 import VueClipboard from 'vue-clipboard2'
 
 
-
-Vue.config.productionTip = false
-Vue.prototype.$http = Axios
-Vue.use(VueClipboard)
+Vue.config.productionTip = false;
+Vue.prototype.$http = Axios;
+Vue.use(VueClipboard);
 
 new Vue({
-  store,
-  router,
-  vuetify,
-  render: h => h(App),
-}).$mount('#app')
+    store,
+    router,
+    vuetify,
+    render: h => h(App),
+}).$mount('#app');

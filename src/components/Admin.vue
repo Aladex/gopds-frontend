@@ -8,19 +8,19 @@
         >
             <v-col
                     cols="12"
-                    xs="10"
-                    sm="10"
-                    md="10"
                     lg="8"
+                    md="10"
+                    sm="10"
+                    xs="10"
             >
                 <h1>Список пользователей</h1>
                 <v-data-table
                         :headers="headers"
                         :items="users"
+                        :items-per-page="itemsPerPage"
                         :options.sync="options"
                         class="elevation-1"
                         hide-default-footer
-                        :items-per-page="itemsPerPage"
                 >
                     <template v-slot:item.is_superuser="{ item }">
                         <v-icon>{{ viewSU(item) }}</v-icon>
@@ -42,18 +42,18 @@
             </v-col>
         </v-row>
         <user-edit-form
-            :dialog="openEdit"
-            :user="editable"
-            @closed="closedDialog"
+                :dialog="openEdit"
+                :user="editable"
+                @closed="closedDialog"
         ></user-edit-form>
         <div
                 class="text-center"
         >
             <v-pagination
-                    v-model="pageLocal"
                     :length="pagesLength"
                     :total-visible="6"
                     @input="toPage(pageLocal)"
+                    v-model="pageLocal"
 
             ></v-pagination>
         </div>
@@ -62,6 +62,7 @@
 
 <script>
     import UserEditForm from "@/components/utils/UserEditForm";
+
     export default {
         components: {
             UserEditForm
@@ -82,12 +83,12 @@
                         sortable: false,
                         value: 'id',
                     },
-                    { text: 'Пользователь', value: 'username', sortable: false },
-                    { text: 'Суперпользователь', value: 'is_superuser', sortable: false },
-                    { text: 'E-Mail', value: 'email', sortable: false },
-                    { text: 'Последний логин', value: 'last_login' },
-                    { text: 'Дата регистрации', value: 'date_joined' },
-                    { text: 'Действия', value: 'action', sortable: false, align: 'right'}
+                    {text: 'Пользователь', value: 'username', sortable: false},
+                    {text: 'Суперпользователь', value: 'is_superuser', sortable: false},
+                    {text: 'E-Mail', value: 'email', sortable: false},
+                    {text: 'Последний логин', value: 'last_login'},
+                    {text: 'Дата регистрации', value: 'date_joined'},
+                    {text: 'Действия', value: 'action', sortable: false, align: 'right'}
                 ],
             }
         },
@@ -106,7 +107,7 @@
                 this.openEdit = value
             },
             editUser(user) {
-                this.openEdit = true
+                this.openEdit = true;
                 this.editable = user
             },
             viewSU(value) {
@@ -125,8 +126,8 @@
                 })
             },
             getUsers() {
-                let numberedPage = Number.parseInt(this.pageLocal, 10)
-                let offset = numberedPage > 1 ? (numberedPage - 1) * 50 : 0
+                let numberedPage = Number.parseInt(this.pageLocal, 10);
+                let offset = numberedPage > 1 ? (numberedPage - 1) * 50 : 0;
 
 
                 let requestBody = {
@@ -134,24 +135,24 @@
                     offset: offset,
                     order: this.options.sortBy[0],
                     desc: this.options.sortDesc[0]
-                }
+                };
 
                 this.$http
                     .post(`${process.env.VUE_APP_BACKEND_API_URL}api/admin/users`, requestBody)
                     .then(response => {
-                        this.users = response.data.users
+                        this.users = response.data.users;
                         this.pagesLength = response.data.length
                     })
                     .catch(err => {
                         switch (err.response.status) {
                             case 401:
-                                this.logout()
-                                break
+                                this.logout();
+                                break;
                             case 404:
-                                this.$router.push("/404")
+                                this.$router.push("/404");
                                 break
                         }
-                    })
+                    });
                 window.scrollTo(0, 0)
             },
             toPage(page) {
@@ -160,7 +161,7 @@
             },
         },
         mounted() {
-            this.pageLocal = 1
+            this.pageLocal = 1;
             this.getUsers()
         },
         watch: {

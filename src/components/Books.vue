@@ -16,16 +16,16 @@
             >
             </v-row>
             <v-row
-                    v-for="b in books"
-                    justify="center"
                     :key="b.id"
+                    justify="center"
+                    v-for="b in books"
             >
                 <v-col
                         cols="12"
-                        xs="10"
-                        sm="10"
-                        md="10"
                         lg="8"
+                        md="10"
+                        sm="10"
+                        xs="10"
                 >
                     <v-skeleton-loader
                             :loading="loading"
@@ -38,9 +38,9 @@
                             <v-row class="mr-4">
                                 <v-col
                                         cols="12"
-                                        sm="12"
-                                        md="12"
                                         lg="10"
+                                        md="12"
+                                        sm="12"
                                 >
                                     <v-card-title>{{ b.title }}</v-card-title>
                                     <v-card-text>
@@ -56,12 +56,12 @@
                                                 >
                                                     <template v-slot:placeholder>
                                                         <v-row
-                                                                class="fill-height ma-0"
                                                                 align="center"
+                                                                class="fill-height ma-0"
                                                                 justify="center"
                                                         >
-                                                            <v-progress-circular indeterminate
-                                                                                 color="grey lighten-5"></v-progress-circular>
+                                                            <v-progress-circular color="grey lighten-5"
+                                                                                 indeterminate></v-progress-circular>
                                                         </v-row>
                                                     </template>
                                                 </v-img>
@@ -86,13 +86,13 @@
                                                 <div class="my-4 subtitle-1"><b>Авторы:</b>
                                                     <p>
                                          <span
-                                                 v-for="a in b.authors"
                                                  :key="a.id"
+                                                 v-for="a in b.authors"
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
-                                                     class="info-link"
                                                      :to="`/find/author/${a.id}/1`"
+                                                     class="info-link"
                                              >{{ a.full_name }}
                                             </router-link>
                                         </span></p>
@@ -103,13 +103,13 @@
                                                 ><b>Серии:</b>
                                                     <p>
                                          <span
-                                                 v-for="s in b.series"
                                                  :key="s.id"
+                                                 v-for="s in b.series"
                                          >
                                             &#8195;&#8226;&#8195;
                                              <router-link
-                                                     class="info-link"
                                                      :to="`/find/series/${s.id}/1`"
+                                                     class="info-link"
                                              >{{ s.ser }}
                                             </router-link>
                                         </span></p>
@@ -133,68 +133,68 @@
                                     </v-card-text>
                                 </v-col>
                                 <v-col
-                                        cols="12"
-                                        sm="12"
-                                        md="12"
-                                        lg="2"
                                         class="mt-4"
+                                        cols="12"
+                                        lg="2"
+                                        md="12"
+                                        sm="12"
                                 >
                                     <v-row
                                             class="ml-2"
                                     >
                                         <v-col
                                                 cols="6"
-                                                xs="6"
-                                                sm="6"
-                                                md="6"
                                                 lg="12"
+                                                md="6"
+                                                sm="6"
+                                                xs="6"
                                         >
                                             <v-btn
+                                                    @click="downloadFile(b, 'fb2')"
                                                     class="secondary"
                                                     width="100%"
-                                                    @click="downloadFile(b, 'fb2')"
                                             >FB2
                                             </v-btn>
                                         </v-col>
                                         <v-col
                                                 cols="6"
-                                                xs="6"
-                                                sm="6"
-                                                md="6"
                                                 lg="12"
+                                                md="6"
+                                                sm="6"
+                                                xs="6"
                                         >
                                             <v-btn
+                                                    @click="downloadFile(b, 'zip')"
                                                     class="secondary"
                                                     width="100%"
-                                                    @click="downloadFile(b, 'zip')"
                                             >FB2+ZIP
                                             </v-btn>
                                         </v-col>
                                         <v-col
                                                 cols="6"
+                                                lg="12"
+                                                md="6"
                                                 sm="6"
                                                 xs="6"
-                                                md="6"
-                                                lg="12"
                                         >
                                             <v-btn
+                                                    @click="downloadFile(b, 'epub')"
                                                     class="secondary"
                                                     width="100%"
-                                                    @click="downloadFile(b, 'epub')"
                                             >EPUB
                                             </v-btn>
                                         </v-col>
                                         <v-col
                                                 cols="6"
-                                                xs="6"
-                                                sm="6"
-                                                md="6"
                                                 lg="12"
+                                                md="6"
+                                                sm="6"
+                                                xs="6"
                                         >
                                             <v-btn
+                                                    @click="downloadFile(b, 'mobi')"
                                                     class="secondary"
                                                     width="100%"
-                                                    @click="downloadFile(b, 'mobi')"
                                             >MOBI
                                             </v-btn>
                                         </v-col>
@@ -214,16 +214,16 @@
 
         >
             <v-pagination
-                    v-model="pageLocal"
                     :length="pagesLength"
                     :total-visible="6"
                     @input="toPage(pageLocal)"
+                    v-model="pageLocal"
 
             ></v-pagination>
         </div>
         <v-dialog
-                v-model="disabled"
                 persistent
+                v-model="disabled"
                 width="300"
         >
             <v-card
@@ -233,9 +233,9 @@
                 <v-card-text>
                     Идёт подготовка книги
                     <v-progress-linear
-                            indeterminate
-                            color="white"
                             class="mb-0"
+                            color="white"
+                            indeterminate
                     ></v-progress-linear>
                 </v-card-text>
             </v-card>
@@ -314,8 +314,8 @@
         methods: {
             cover(b) {
                 if (b.cover) {
-                    let path = b.path.replace(".", '-')
-                    let img = b.filename.replace(".", '-')
+                    let path = b.path.replace(".", '-');
+                    let img = b.filename.replace(".", '-');
                     return `/books/${path}/${img}.jpg`
                 }
                 return "/books/no-cover.png"
@@ -324,7 +324,7 @@
                 if (b.annotation === undefined) {
                     return ""
                 }
-                let wordsList = b.annotation.split(" ")
+                let wordsList = b.annotation.split(" ");
                 if (wordsList.length < 40) {
                     return b.annotation
                 }
@@ -335,19 +335,19 @@
                 this.$store.dispatch('setPage', page)
             },
             toPage(page) {
-                this.$store.dispatch('setPage', page)
-                let thisPath = this.$router.currentRoute
+                this.$store.dispatch('setPage', page);
+                let thisPath = this.$router.currentRoute;
 
                 switch (thisPath.name) {
                     case "findBook":
-                        this.$router.push(`/find/books/${thisPath.params.title}/${page}`)
-                        break
+                        this.$router.push(`/find/books/${thisPath.params.title}/${page}`);
+                        break;
                     case "findByAuthor":
-                        this.$router.push(`/find/author/${thisPath.params.author}/${page}`)
-                        break
+                        this.$router.push(`/find/author/${thisPath.params.author}/${page}`);
+                        break;
                     case "findBySeries":
-                        this.$router.push(`/find/series/${thisPath.params.series}/${page}`)
-                        break
+                        this.$router.push(`/find/series/${thisPath.params.series}/${page}`);
+                        break;
                     default:
                         this.$router.push(`/page/${page}`)
                 }
@@ -367,19 +367,19 @@
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
-                })
+                });
                 if (dhd === "Invalid Date") {
                     return "Дата документа неизвестна"
                 }
                 return dhd
             },
             downloadFile(book, type) {
-                this.disabled = true
+                this.disabled = true;
                 let requestBody = {
                     book_id: book.id,
                     format: type,
-                }
-                let filename = book.title.toLowerCase().replace(/[^A-Za-z0-9а-яА-ЯёЁ]/g, "_")
+                };
+                let filename = book.title.toLowerCase().replace(/[^A-Za-z0-9а-яА-ЯёЁ]/g, "_");
                 this.$http.post(
                     `${process.env.VUE_APP_BACKEND_API_URL}api/books/file`,
                     requestBody,
@@ -399,12 +399,12 @@
                 })
             },
             getBooks() {
-                this.loading = true
-                this.opened = []
-                this.books = Array.from(Array(10).keys())
-                let numberedPage = Number.parseInt(this.pageLocal, 10)
-                let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0
-                let filterTitle = ""
+                this.loading = true;
+                this.opened = [];
+                this.books = Array.from(Array(10).keys());
+                let numberedPage = Number.parseInt(this.pageLocal, 10);
+                let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0;
+                let filterTitle = "";
                 if (this.$route.name === "findByAuthor") {
                     filterTitle = this.authorsBook
                 } else {
@@ -418,26 +418,26 @@
                     author: this.author,
                     series: this.series,
                     lang: this.lang.language
-                }
+                };
 
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
-                        this.books = response.data.books
-                        this.langs = response.data.langs
-                        this.pagesLength = response.data.length
+                        this.books = response.data.books;
+                        this.langs = response.data.langs;
+                        this.pagesLength = response.data.length;
                         this.loading = false
                     })
                     .catch(err => {
                         switch (err.response.status) {
                             case 401:
-                                this.logout()
-                                break
+                                this.logout();
+                                break;
                             case 404:
-                                this.$router.push("/404")
+                                this.$router.push("/404");
                                 break
                         }
-                    })
+                    });
                 window.scrollTo(0, 0)
             },
             logout() {
@@ -448,32 +448,32 @@
             },
         },
         mounted() {
-            this.setThisPage(this.page)
+            this.setThisPage(this.page);
             this.getBooks()
         },
         watch: {
             page() {
-                this.setThisPage(this.page)
+                this.setThisPage(this.page);
                 this.getBooks()
             },
             title() {
-                this.setThisPage(this.page)
+                this.setThisPage(this.page);
                 this.getBooks()
             },
             authorsBook() {
-                this.setThisPage(this.page)
+                this.setThisPage(this.page);
                 this.getBooks()
             },
             author() {
-                this.setThisPage(this.page)
+                this.setThisPage(this.page);
                 this.getBooks()
             },
             series() {
-                this.setThisPage(this.page)
+                this.setThisPage(this.page);
                 this.getBooks()
             },
             lang() {
-                this.toPage(1)
+                this.toPage(1);
                 this.getBooks()
             },
         }
