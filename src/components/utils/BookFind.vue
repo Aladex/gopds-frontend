@@ -186,7 +186,8 @@
             },
             makeSelects(path) {
                 if (path === "findByAuthor") {
-                    this.authorName = ""
+                    this.authorName = "";
+                    this.getAuthorName(this.$route.params.author);
                     this.searchItem = "";
                     this.authorsBook = "";
                     this.selects = this.searchVariants.slice();
@@ -223,9 +224,9 @@
             myPath(path) {
                 this.makeSelects(path)
             },
-            authorId() {
-                if (this.authorId) {
-                    this.getAuthorName(this.$route.params.author)
+            authorId(value) {
+                if (typeof value !== "undefined") {
+                    this.getAuthorName(value)
                 }
 
             }
