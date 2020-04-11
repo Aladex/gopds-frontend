@@ -7,7 +7,7 @@
                 v-show="visible">
 
             <v-btn
-                    color="warning"
+                    color="accent"
                     dark
                     fab
                     icon
