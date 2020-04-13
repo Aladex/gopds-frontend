@@ -111,9 +111,10 @@
                                                      :to="`/find/series/${s.id}/1`"
                                                      class="info-link"
                                              >{{ s.ser }}
-                                            </router-link>
+                                            </router-link><span v-if="s.ser_no !== 0"> #{{ s.ser_no }}</span>
                                         </span></p>
                                                 </div>
+
                                             </v-col>
                                         </v-row>
 
