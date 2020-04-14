@@ -6,9 +6,13 @@
                     <v-card-title>
                         <span class="headline">Расскажи о себе, {{ user.username }}</span>
                     </v-card-title>
-                    <v-card-text
+                    <v-card-text>
+                        <v-row
+                                justify="space-between"
+                        >
+                    <div
                             @click="willChange = !willChange"
-                            class="pointer"
+                            class="pointer ml-3"
                     >
                         <small
                                 v-if="!willChange"
@@ -16,10 +20,22 @@
                         <small
                                 v-if="willChange"
                         >Скрыть форму пароля</small>
+                    </div>
+
+                            <span
+                                    @click="dropSessions"
+                                    class="pointer mr-3"
+                            >
+                            <small
+                                    v-if="!willChange"
+                            >Выйти со всех устройств</small>
+                        </span>
+                        </v-row>
                     </v-card-text>
                     <v-card-text>
                         <v-container>
                             <v-row>
+
                                 <v-col cols="12"
                                        v-if="willChange">
                                     <v-text-field
@@ -81,6 +97,13 @@
             }
         },
         methods: {
+            dropSessions() {
+                this.$store.dispatch('dropSessions')
+                    .then(() => {
+                        this.onClose(false)
+                        this.$router.push('/login')
+                    })
+            },
             newPasswordErrorText(np) {
                 if (this.password !== "" && np === "") {
                     this.errorsNPText = "Обязательное поле"
@@ -132,7 +155,8 @@
             },
             newPassword(value) {
                 this.newPasswordErrorText(value)
-            }
+            },
+
         }
     }
 </script>

@@ -150,6 +150,20 @@ export default new Vuex.Store({
                 }
             )
         },
+        dropSessions({commit}) {
+            return new Promise((resolve) => {
+                    commit('logout');
+                    localStorage.removeItem('token');
+                    axios(
+                        {
+                            url: process.env.VUE_APP_BACKEND_API_URL + 'api/drop-sessions',
+                            method: "GET"
+                        },
+                    );
+                    resolve()
+                }
+            )
+        },
         searchSet({commit}, payload) {
             commit('searchSet', payload)
         },
