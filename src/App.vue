@@ -169,7 +169,9 @@
             },
         },
         mounted() {
-            this.setUser()
+            if (this.isLoggedIn) {
+                this.setUser()
+            }
         },
 
     }

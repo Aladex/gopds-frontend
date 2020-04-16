@@ -284,11 +284,6 @@
                     this.$store.dispatch('setLangs', langs)
                 }
             },
-            opdsURL: {
-                get() {
-                    return process.env.VUE_APP_OPDS
-                }
-            },
             pageLocal: {
                 get() {
                     return this.$store.getters.myPage
