@@ -5,6 +5,8 @@ import Registration from "@/components/auth/Registration";
 import NotFound from '../components/errors/NotFound.vue'
 import axios from 'axios'
 import store from '@/store/index';
+import Activation from "@/components/auth/Activation";
+import ForgetForm from "@/components/auth/ForgetForm";
 
 Vue.use(VueRouter);
 
@@ -164,6 +166,26 @@ const routes = [
         name: 'Registration',
         component: Registration,
         meta: {checkAuth: true, title: "Секретная страница"}
+    },
+    {
+        path: '/forget',
+        name: 'ForgetForm',
+        component: ForgetForm,
+        meta: {checkAuth: true, title: "Я забыл"}
+    },
+    {
+        path: '/activate/:token',
+        name: 'Activation',
+        component: Activation,
+        meta: {checkAuth: true, title: "Активировать учетную запись"},
+        props: (route) => ({ token: route.params.token, isRegister: true })
+    },
+    {
+        path: '/change-password/:token',
+        name: 'Activation',
+        component: Activation,
+        meta: {checkAuth: true, title: "Изменить пароль"},
+        props: (route) => ({ token: route.params.token, isRegister: true })
     },
     {
         path: '/logout',

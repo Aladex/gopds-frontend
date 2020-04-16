@@ -3,11 +3,6 @@
             class="fill-height"
             fluid
     >
-        <router-link
-                :to="{ name: 'Registration'}"
-                class="devito"
-        ></router-link>
-        <div class="books d-none d-lg-block"></div>
         <v-row
                 align="center"
                 justify="center"
@@ -34,18 +29,8 @@
 
                         >
                             <v-text-field
-                                    :rules="emailRules"
-                                    @keyup.enter="login"
-                                    label="Логин"
-                                    name="login"
-                                    prepend-icon="mdi-account"
-                                    type="text"
-                                    v-model="email"
-                            />
-
-                            <v-text-field
                                     :rules="passwordRules"
-                                    @keyup.enter="login"
+                                    @keyup.enter="setNewPassword"
                                     id="password"
                                     label="Пароль"
                                     name="password"
@@ -67,76 +52,53 @@
                         <v-spacer/>
                         <v-btn
                                 :disabled="!valid"
-                                @click="login"
+                                @click="setNewPassword"
                                 color="custom accent-4"
                         >Войти
                         </v-btn>
                     </v-card-actions>
+
                 </v-card>
             </v-col>
         </v-row>
+
     </v-container>
 </template>
 
 <script>
     export default {
-        name: "Login",
+        props: ["token", "isRegister"],
         data() {
             return {
-                email: "",
-                password: "",
                 valid: false,
-                emailRules: [
-                    v => !!v || 'Обязательное поле',
-                ],
+                message: "",
+                password: "",
                 passwordRules: [
-                    v => !!v || 'Пароль тоже нужен',
+                    v => !!v || 'Обязательное поле',
+                    v => (v.length > 7) || 'Пароль не менее 8 символов',
                 ],
-                expand: false,
             }
         },
-
+        name: "Reset",
         methods: {
-            login() {
-                let username = this.email;
-                let password = this.password;
-                this.$store.dispatch('login', {username, password})
-                    .then(() => {
-                        this.$store.dispatch('authChangeError', false);
-                        this.$router.push('/')
-                    })
-                    .catch(() => {
-                        this.$store.dispatch('authChangeError', true)
-                    })
+            setNewPassword() {
+                this.$http({
+                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/change-password',
+                    data: {
+                        password: this.password,
+                        token: this.token
+                    },
+                    method: 'POST'
+                }).then(() => {
+                    this.message = "Отлично, учетная запись активирована"
+                }).catch(() => {
+                    // this.$router.push("/404")
+                })
             }
         },
-        mounted() {
-            this.expand = true
-        }
-
     }
 </script>
 
 <style scoped>
-    .devito {
-        width: 500px;
-        height: 350px;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: url('../../assets/devito_back.png');
-        background-size: cover;
-    }
-
-    .books {
-        width: 300px;
-        height: 350px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: url('../../assets/books_back.png');
-        background-size: cover;
-    }
-
 
 </style>
