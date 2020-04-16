@@ -49,7 +49,7 @@
                                     color="custom accent-4"
                                     flat
                             >
-                                <v-toolbar-title>Сброс пароля</v-toolbar-title>
+                                <v-toolbar-title>{{ message }}</v-toolbar-title>
 
                             </v-toolbar>
                             <v-card-text>
@@ -57,17 +57,17 @@
                                         ref="form"
                                         v-model="valid"
                                         validation
-
                                 >
                                     <v-text-field
                                             :rules="passwordRules"
-                                            @keyup.enter="setNewPassword"
+                                            @keydown.enter.prevent="setNewPassword"
                                             id="password"
                                             label="Пароль"
                                             name="password"
                                             prepend-icon="mdi-lock"
                                             type="password"
                                             v-model="password"
+                                            required
                                     />
                                 </v-form>
                             </v-card-text>
@@ -116,15 +116,27 @@
         },
         name: "Reset",
         methods: {
-            setNewPassword() {
+            tokenValidation() {
                 this.$http({
-                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/change-password',
+                    url: process.env.VUE_APP_BACKEND_API_URL + 'api/token',
                     data: {
-                        password: this.password,
                         token: this.token
                     },
                     method: 'POST'
                 }).then(() => {
+                    this.message = "Сброс пароля"
+                }).catch(() => {
+                    this.$router.push("/404")
+                })
+            },
+            setNewPassword() {
+                this.$http.post(
+                    process.env.VUE_APP_BACKEND_API_URL + 'api/change-password',
+                    {
+                        password: this.password,
+                        token: this.token
+                    }
+                ).then(() => {
                     this.$router.push("/login")
                 }).catch(err => {
                     switch (err.response.data.message) {
@@ -137,6 +149,9 @@
                 })
             }
         },
+        mounted() {
+            this.tokenValidation()
+        }
     }
 </script>
 

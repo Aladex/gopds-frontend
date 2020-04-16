@@ -62,7 +62,7 @@
                                 >
                                     <v-text-field
                                             :rules="emailRules"
-                                            @keyup.enter="register"
+                                            @keydown.enter.prevent="changePassword"
                                             label="Электронная почта"
                                             name="email"
                                             prepend-icon="mdi-email"
@@ -85,7 +85,7 @@
                                 <v-spacer/>
                                 <v-btn
                                         :disabled="!valid"
-                                        @click="register"
+                                        @click="changePassword"
                                         color="custom accent-4"
                                 >Тыц!
                                 </v-btn>
@@ -116,7 +116,7 @@
         },
 
         methods: {
-            register() {
+            changePassword() {
                 let resetData = {
                     email: this.email,
                 };
@@ -131,13 +131,13 @@
                     .catch(err => {
                         switch (err.response.data.message) {
                             case "bad_form":
-                                this.regError = "Что-то не так с формой";
+                                this.resetError = "Что-то не так с формой";
                                 break;
-                            case "bad_user":
-                                this.regError = "Пользователя с такой почтой нет";
+                            case "invalid_user":
+                                this.resetError = "Пользователя с такой почтой нет";
                                 break;
                             default:
-                                this.regError = "Что-то пошло не так"
+                                this.resetError = "Что-то пошло не так"
                         }
                     })
             }
