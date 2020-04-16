@@ -61,7 +61,7 @@
                         >
                             <v-icon
                                     class="pointer"
-                            >mdi-help
+                            >mdi-lock-question
                             </v-icon>
                         </router-link>
                         <v-spacer/>
