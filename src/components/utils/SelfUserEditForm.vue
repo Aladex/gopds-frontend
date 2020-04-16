@@ -10,17 +10,17 @@
                         <v-row
                                 justify="space-between"
                         >
-                    <div
-                            @click="willChange = !willChange"
-                            class="pointer ml-3"
-                    >
-                        <small
-                                v-if="!willChange"
-                        >Поменять пароль</small>
-                        <small
-                                v-if="willChange"
-                        >Скрыть форму пароля</small>
-                    </div>
+                            <div
+                                    @click="willChange = !willChange"
+                                    class="pointer ml-3"
+                            >
+                                <small
+                                        v-if="!willChange"
+                                >Поменять пароль</small>
+                                <small
+                                        v-if="willChange"
+                                >Скрыть форму пароля</small>
+                            </div>
 
                             <span
                                     @click="dropSessions"

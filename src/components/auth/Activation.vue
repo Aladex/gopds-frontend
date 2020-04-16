@@ -58,7 +58,7 @@
             }
         },
         mounted() {
-           this.activateUser()
+            this.activateUser()
         }
     }
 </script>

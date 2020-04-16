@@ -7,6 +7,7 @@ import axios from 'axios'
 import store from '@/store/index';
 import Activation from "@/components/auth/Activation";
 import ForgetForm from "@/components/auth/ForgetForm";
+import Reset from "@/components/auth/Reset";
 
 Vue.use(VueRouter);
 
@@ -178,14 +179,14 @@ const routes = [
         name: 'Activation',
         component: Activation,
         meta: {checkAuth: true, title: "Активировать учетную запись"},
-        props: (route) => ({ token: route.params.token, isRegister: true })
+        props: (route) => ({token: route.params.token})
     },
     {
         path: '/change-password/:token',
-        name: 'Activation',
-        component: Activation,
+        name: 'Reset',
+        component: Reset,
         meta: {checkAuth: true, title: "Изменить пароль"},
-        props: (route) => ({ token: route.params.token, isRegister: true })
+        props: (route) => ({token: route.params.token})
     },
     {
         path: '/logout',
