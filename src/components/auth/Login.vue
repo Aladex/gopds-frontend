@@ -36,7 +36,7 @@
                             <v-text-field
                                     :rules="emailRules"
                                     @keyup.enter="login"
-                                    label="Логин"
+                                    label="Логин или почта"
                                     name="login"
                                     prepend-icon="mdi-account"
                                     type="text"
