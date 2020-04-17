@@ -392,6 +392,8 @@
                     document.body.appendChild(link);
                     link.click();
                     this.disabled = false
+                }).catch(() => {
+                    this.disabled = false
                 })
             },
             getBooks() {
