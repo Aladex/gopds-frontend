@@ -144,7 +144,7 @@
             menu: function () {
                 let menu = [
                     {name: 'Books', title: "Книги", logo: "../assets/logo.png"},
-                    {name: 'Donate', title: "Донат", icon: "mdi-currency-usd"},
+                    {name: 'Donate', title: "Донат", icon: "mdi-pirate"},
 
                 ];
                 if (this.user.is_superuser) {
