@@ -160,10 +160,10 @@
         methods: {
             register() {
                 let registerData = {
-                    username: this.username,
-                    email: this.email,
+                    username: this.username.trim(),
+                    email: this.email.trim(),
                     password: this.password,
-                    invite: this.invite
+                    invite: this.invite.trim()
                 };
                 this.$http({
                     url: process.env.VUE_APP_BACKEND_API_URL + 'api/register',

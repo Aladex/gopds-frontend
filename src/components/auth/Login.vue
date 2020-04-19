@@ -98,7 +98,7 @@
 
         methods: {
             login() {
-                let username = this.email;
+                let username = this.email.trim();
                 let password = this.password;
                 this.$store.dispatch('login', {username, password})
                     .then(() => {

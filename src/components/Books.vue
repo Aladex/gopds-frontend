@@ -49,7 +49,7 @@
                                                     cols="auto">
                                                 <v-img
                                                         :src="cover(b)"
-                                                        class="elevation-6"
+                                                        class="elevation-6 poster"
                                                         lazy-src="@/assets/cover-loading.png"
                                                         max-width="200px"
                                                         min-width="200px"
@@ -482,6 +482,10 @@
     .open-long {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    .poster {
+        border-radius: 6px;
     }
 
     .info-link {
