@@ -38,7 +38,7 @@
                 </v-col>
             </v-row>
 
-            <pagination></pagination>
+            <pagination v-if="!loading"></pagination>
         </div>
     </v-container>
 </template>
@@ -92,7 +92,6 @@
                 this.$router.push(`/authors/${thisPath.params.title}/${page}`)
             },
             getAuthors() {
-                this.pagesLength = 1
                 this.loading = true;
                 this.books = Array.from(Array(10).keys());
                 let numberedPage = Number.parseInt(this.pageLocal, 10);

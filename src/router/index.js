@@ -55,7 +55,6 @@ const routes = [
             {
                 path: "",
                 name: "Admin.Users",
-                beforeEnter: adminArea,
                 meta: {
                     title: "Управление пользователями",
                 },
@@ -64,7 +63,6 @@ const routes = [
             {
                 path: "invites",
                 name: "Admin.Invites",
-                beforeEnter: adminArea,
                 meta: {
                     title: "Управление инвайтами",
                 },

@@ -209,7 +209,7 @@
 
             </v-row>
         </div>
-        <pagination v-if="(books.length > 0)"></pagination>
+        <pagination v-if="!loading"></pagination>
         <v-dialog
                 persistent
                 v-model="disabled"
@@ -375,7 +375,6 @@
                 })
             },
             getBooks() {
-                this.pagesLength = 1
                 this.loading = true;
                 this.opened = [];
                 this.books = Array.from(Array(10).keys());
