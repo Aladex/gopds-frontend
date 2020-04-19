@@ -50,23 +50,35 @@ const routes = [
     },
     {
         path: '/admin',
-        name: 'Admin',
-        component: () => import(/* webpackChunkName: "books" */ '../components/Admin.vue'),
-        props: {
-            page: 1,
-            searchBar: false
-        },
+        component: () => import(/* webpackChunkName: "admin" */ '../components/Admin.vue'),
+        children: [
+            {
+                path: "",
+                name: "Admin.Users",
+                meta: {
+                    title: "Управление пользователями",
+                },
+                component: () => import(/* webpackChunkName: "users" */ '../components/admin/Users.vue'),
+            },
+            {
+                path: "invites",
+                name: "Admin.Invites",
+                meta: {
+                    title: "Управление инвайтами",
+                },
+                component: () => import(/* webpackChunkName: "invites" */ '../components/admin/Invites.vue'),
+            }
+        ],
         beforeEnter: adminArea,
         meta: {
             requiresAuth: true,
             requiresAdmin: true,
-            title: "Управление пользователями",
         }
     },
     {
         path: '/donate',
         name: 'Donate',
-        component: () => import(/* webpackChunkName: "books" */ '../components/Donate.vue'),
+        component: () => import(/* webpackChunkName: "donate" */ '../components/Donate.vue'),
         props: {
             page: 1,
             searchBar: true

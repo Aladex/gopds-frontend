@@ -10,6 +10,7 @@ export default new Vuex.Store({
         user: {},
         loading: true,
         myPage: 1,
+        length: 1,
         title: '',
         lang: {},
         langs: [],
@@ -68,6 +69,9 @@ export default new Vuex.Store({
             state.status = 'success';
             state.user = user;
             state.loading = false
+        },
+        setLength(state, length) {
+            state.length = length;
         }
     },
     actions: {
@@ -173,9 +177,13 @@ export default new Vuex.Store({
         authorsBook({commit}, payload) {
             commit('authorsBook', payload)
         },
+        setLength({commit}, payload) {
+            commit('setLength', payload)
+        },
     },
     getters: {
         myPage: state => state.myPage,
+        length: state => state.length,
         title: state => state.title,
         lang: state => state.lang,
         langs: state => state.langs,

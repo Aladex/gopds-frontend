@@ -209,19 +209,7 @@
 
             </v-row>
         </div>
-        <div
-                class="text-center"
-                v-if="(books.length > 0)"
-
-        >
-            <v-pagination
-                    :length="pagesLength"
-                    :total-visible="6"
-                    @input="toPage(pageLocal)"
-                    v-model="pageLocal"
-
-            ></v-pagination>
-        </div>
+        <pagination v-if="(books.length > 0)"></pagination>
         <v-dialog
                 persistent
                 v-model="disabled"
@@ -247,17 +235,18 @@
 <script>
     import BookFind from "@/components/utils/BookFind";
     import ItemsNotFound from "@/components/errors/ItemsNotFound";
+    import Pagination from "@/components/utils/Pagination";
 
     export default {
         name: "Books",
         props: ["page", "title", "searchBar", "author", "series"],
         components: {
             BookFind,
-            ItemsNotFound
+            ItemsNotFound,
+            Pagination
         },
         data() {
             return {
-                pagesLength: 1,
                 loading: true,
                 books: Array.from(Array(10).keys()),
                 searchSelect: "book",
@@ -290,6 +279,14 @@
                 },
                 set(page) {
                     this.$store.dispatch('setPage', page)
+                }
+            },
+            pagesLength: {
+                get() {
+                    return this.$store.getters.length
+                },
+                set(length) {
+                    this.$store.dispatch('setLength', length)
                 }
             },
             thisPath: {
@@ -330,25 +327,6 @@
             setThisPage(page) {
                 this.$store.dispatch('setPage', page)
             },
-            toPage(page) {
-                this.$store.dispatch('setPage', page);
-                let thisPath = this.$router.currentRoute;
-
-                switch (thisPath.name) {
-                    case "findBook":
-                        this.$router.push(`/find/books/${thisPath.params.title}/${page}`);
-                        break;
-                    case "findByAuthor":
-                        this.$router.push(`/find/author/${thisPath.params.author}/${page}`);
-                        break;
-                    case "findBySeries":
-                        this.$router.push(`/find/series/${thisPath.params.series}/${page}`);
-                        break;
-                    default:
-                        this.$router.push(`/page/${page}`)
-                }
-            },
-
             toHumanDate(value) {
                 return new Date(value).toLocaleDateString('ru-RU', {
                     year: 'numeric',
@@ -397,6 +375,7 @@
                 })
             },
             getBooks() {
+                this.pagesLength = 1
                 this.loading = true;
                 this.opened = [];
                 this.books = Array.from(Array(10).keys());
@@ -471,7 +450,6 @@
                 this.getBooks()
             },
             lang() {
-                this.toPage(1);
                 this.getBooks()
             },
         }

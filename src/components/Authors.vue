@@ -38,17 +38,7 @@
                 </v-col>
             </v-row>
 
-            <div class="text-center"
-                 v-if="(authors.length > 0)"
-            >
-                <v-pagination
-                        :length="pagesLength"
-                        :total-visible="6"
-                        @input="toPage(pageLocal)"
-                        v-model="pageLocal"
-
-                ></v-pagination>
-            </div>
+            <pagination></pagination>
         </div>
     </v-container>
 </template>
@@ -56,6 +46,7 @@
 <script>
     import BookFind from "@/components/utils/BookFind";
     import ItemsNotFound from "@/components/errors/ItemsNotFound";
+    import Pagination from "@/components/utils/Pagination";
 
 
     export default {
@@ -64,16 +55,24 @@
         name: "Authors",
         data() {
             return {
-                pagesLength: 1,
                 authors: Array.from(Array(10).keys()),
                 loading: true
             }
         },
         components: {
             BookFind,
-            ItemsNotFound
+            ItemsNotFound,
+            Pagination
         },
         computed: {
+            pagesLength: {
+                get() {
+                    return this.$store.getters.length
+                },
+                set(length) {
+                    this.$store.dispatch('setLength', length)
+                }
+            },
             pageLocal: {
                 get() {
                     return this.$store.getters.myPage
@@ -93,6 +92,7 @@
                 this.$router.push(`/authors/${thisPath.params.title}/${page}`)
             },
             getAuthors() {
+                this.pagesLength = 1
                 this.loading = true;
                 this.books = Array.from(Array(10).keys());
                 let numberedPage = Number.parseInt(this.pageLocal, 10);
