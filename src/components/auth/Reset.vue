@@ -65,9 +65,9 @@
                                             label="Пароль"
                                             name="password"
                                             prepend-icon="mdi-lock"
+                                            required
                                             type="password"
                                             v-model="password"
-                                            required
                                     />
                                 </v-form>
                             </v-card-text>
