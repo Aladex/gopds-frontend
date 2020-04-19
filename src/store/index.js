@@ -92,7 +92,10 @@ export default new Vuex.Store({
                 axios(
                     {
                         url: process.env.VUE_APP_BACKEND_API_URL + 'api/books/self-user',
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            "Authorization": localStorage.getItem('token')
+                        }
                     }
                 ).then(resp => {
                         const user = resp.data;
