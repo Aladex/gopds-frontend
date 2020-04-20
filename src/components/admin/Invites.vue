@@ -3,40 +3,43 @@
             fluid
     >
         <v-row
-            class="justify-end"
+                class="justify-end"
         >
             <v-icon
-                class="mr-3 pointer"
-                @click="editInvite({}, false)"
-            >mdi-plus</v-icon>
+                    @click="editInvite({}, false)"
+                    class="mr-3 pointer"
+            >mdi-plus
+            </v-icon>
         </v-row>
-        <v-row><v-col
-            cols="12"
-        >
-            <v-data-table
-                    :headers="headers"
-                    :items="invites"
-                    class="elevation-1"
+        <v-row>
+            <v-col
+                    cols="12"
             >
-                <template v-slot:item.action="{ item }">
-                    <v-icon
-                            @click="editInvite(item, true)"
-                    >
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon
-                            @click="inviteDelete(item)"
-                    >
-                        mdi-delete
-                    </v-icon>
-                </template>
-            </v-data-table>
+                <v-data-table
+                        :headers="headers"
+                        :items="invites"
+                        class="elevation-1"
+                >
+                    <template v-slot:item.action="{ item }">
+                        <v-icon
+                                @click="editInvite(item, true)"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                                @click="inviteDelete(item)"
+                        >
+                            mdi-delete
+                        </v-icon>
+                    </template>
+                </v-data-table>
 
-        </v-col></v-row>
+            </v-col>
+        </v-row>
         <invite
                 :dialog="openEdit"
-                :isEdit=isEdit
                 :invite="editable"
+                :isEdit=isEdit
                 @closed="closedDialog"
         ></invite>
     </v-container>
@@ -44,6 +47,7 @@
 
 <script>
     import Invite from "@/components/utils/Invite";
+
     export default {
         components: {
             Invite
@@ -97,7 +101,7 @@
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/admin/invites`)
                     .then(response => {
-                        this.invites = response.data;
+                        this.invites = response.data.result;
 
                     })
                     .catch(err => {

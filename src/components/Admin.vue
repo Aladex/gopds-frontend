@@ -14,14 +14,14 @@
             >
                 <v-card>
                     <v-tabs
-                            v-model="tab"
                             background-color="transparent"
                             grow
+                            v-model="tab"
                     >
                         <v-tab
-                                v-for="item in items"
                                 :key="item.name"
                                 :to="{ name: item.name}"
+                                v-for="item in items"
                         >
                             {{ item.title }}
                         </v-tab>
@@ -38,10 +38,10 @@
         name: "Admin",
         data() {
             return {
-                tab: { name: 'Admin.Users', title: "Пользователи" },
+                tab: {name: 'Admin.Users', title: "Пользователи"},
                 items: [
-                    { name: 'Admin.Users', title: "Пользователи" },
-                    { name: 'Admin.Invites', title: "Инвайты" },
+                    {name: 'Admin.Users', title: "Пользователи"},
+                    {name: 'Admin.Invites', title: "Инвайты"},
                 ]
             }
         },

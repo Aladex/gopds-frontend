@@ -22,7 +22,9 @@
                     <v-card-actions>
                         <v-btn @click="onClose(false)" color="blue darken-1" text>Закрыть</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn @click="inviteChange(invite)" color="red darken-1" text>Изменить</v-btn>
+                        <v-btn @click="inviteChange(invite)" color="red darken-1" text>{{ isEdit ? 'Изменить' :
+                            'Добавить' }}
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>

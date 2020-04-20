@@ -5,44 +5,52 @@
         <v-card-title>
             <v-row>
                 <v-col
-                    cols="4"
+                        cols="12"
+                        lg="4"
+                        md="4"
+                        sm="4"
+                        xs="4"
                 >
-            <v-text-field
-                    v-model="search"
-                    append-icon="mdi-database-search"
-                    label="Search"
-                    @click:append="searchUser"
-                    single-line
-                    hide-details
-            ></v-text-field></v-col>
+                    <v-text-field
+                            @click:append="searchUser"
+                            append-icon="mdi-database-search"
+                            hide-details
+                            label="Search"
+                            single-line
+                            v-model="search"
+                    ></v-text-field>
+                </v-col>
             </v-row>
         </v-card-title>
 
-                <v-data-table
-                        :headers="headers"
-                        :items="users"
-                        :items-per-page="itemsPerPage"
-                        :options.sync="options"
-                        class="elevation-1"
-                        hide-default-footer
+        <v-data-table
+                :headers="headers"
+                :items="users"
+                :items-per-page="itemsPerPage"
+                :options.sync="options"
+                class="elevation-1"
+                hide-default-footer
+        >
+            <template v-slot:item.is_superuser="{ item }">
+                <v-icon>{{ viewSU(item.is_superuser) }}</v-icon>
+            </template>
+            <template v-slot:item.active="{ item }">
+                <v-icon>{{ viewSU(item.active) }}</v-icon>
+            </template>
+            <template v-slot:item.last_login="{ item }">
+                {{ toHumanDate(item.last_login) }}
+            </template>
+            <template v-slot:item.date_joined="{ item }">
+                {{ toHumanDate(item.date_joined) }}
+            </template>
+            <template v-slot:item.action="{ item }">
+                <v-icon
+                        @click="editUser(item)"
                 >
-                    <template v-slot:item.is_superuser="{ item }">
-                        <v-icon>{{ viewSU(item) }}</v-icon>
-                    </template>
-                    <template v-slot:item.last_login="{ item }">
-                        {{ toHumanDate(item.last_login) }}
-                    </template>
-                    <template v-slot:item.date_joined="{ item }">
-                        {{ toHumanDate(item.date_joined) }}
-                    </template>
-                    <template v-slot:item.action="{ item }">
-                        <v-icon
-                                @click="editUser(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
-                    </template>
-                </v-data-table>
+                    mdi-pencil
+                </v-icon>
+            </template>
+        </v-data-table>
         <pagination class="mt-6"></pagination>
         <user-edit-form
                 :dialog="openEdit"
@@ -56,6 +64,7 @@
 <script>
     import UserEditForm from "@/components/utils/UserEditForm";
     import Pagination from "@/components/utils/Pagination";
+
     export default {
         components: {
             UserEditForm,
@@ -78,6 +87,7 @@
                         value: 'id',
                     },
                     {text: 'Пользователь', value: 'username', sortable: false},
+                    {text: 'Активен', value: 'active', sortable: false},
                     {text: 'Суперпользователь', value: 'is_superuser', sortable: false},
                     {text: 'E-Mail', value: 'email', sortable: false},
                     {text: 'Последний логин', value: 'last_login'},
@@ -117,7 +127,7 @@
                 this.editable = user
             },
             viewSU(value) {
-                if (value.is_superuser) {
+                if (value) {
                     return 'mdi-checkbox-marked-circle-outline'
                 }
                 return 'mdi-checkbox-blank-circle-outline'

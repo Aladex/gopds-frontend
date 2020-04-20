@@ -143,12 +143,12 @@
             },
             menu: function () {
                 let menu = [
-                    { name: 'Books', title: "Книги", logo: "../assets/logo.png" },
-                    { name: 'Donate', title: "Донат", icon: "mdi-pirate" },
+                    {name: 'Books', title: "Книги", logo: "../assets/logo.png"},
+                    {name: 'Donate', title: "Донат", icon: "mdi-pirate"},
 
                 ];
                 if (this.user.is_superuser) {
-                    menu.push({ name: 'Admin.Users', title: "Админ", icon: "mdi-tune" })
+                    menu.push({name: 'Admin.Users', title: "Админ", icon: "mdi-tune"})
                 }
                 return menu
             }
