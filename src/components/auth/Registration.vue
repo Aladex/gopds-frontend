@@ -175,13 +175,13 @@
                     })
                     .catch(err => {
                         switch (err.response.data.message) {
-                            case "bad invite":
+                            case "bad_invite":
                                 this.regError = "Такого инвайта нет. Сходи на лепру.";
                                 break;
-                            case "bad form":
+                            case "bad_form":
                                 this.regError = "Что-то не так с формой";
                                 break;
-                            case "user is already exists":
+                            case "user_exists":
                                 this.regError = "Такой пользователь уже есть";
                                 break;
                             default:

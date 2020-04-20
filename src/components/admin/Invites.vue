@@ -6,7 +6,7 @@
                 class="justify-end"
         >
             <v-icon
-                    @click="editInvite({}, false)"
+                    @click="editInvite({before_date: nowDate() }, false)"
                     class="mr-3 pointer"
             >mdi-plus
             </v-icon>
@@ -31,6 +31,9 @@
                         >
                             mdi-delete
                         </v-icon>
+                    </template>
+                    <template v-slot:item.before_date="{ item }">
+                        {{ toHumanDate(item.before_date) }}
                     </template>
                 </v-data-table>
 
@@ -66,12 +69,17 @@
                         value: 'id',
                     },
                     {text: 'Инвайт', value: 'invite', sortable: false},
+                    {text: 'Истекает', value: 'before_date', sortable: false},
                     {text: 'Действия', value: 'action', sortable: false, align: 'right'}
                 ],
                 invites: []
             }
         },
         methods: {
+            nowDate: () => {
+                let date = new Date(Date.now());
+                return date.toISOString()
+            },
             inviteDelete(invite) {
                 let bodyChange = {
                     action: "delete",
@@ -96,6 +104,16 @@
             },
             closedDialog(value) {
                 this.openEdit = value
+            },
+            toHumanDate(value) {
+                return new Date(value).toLocaleDateString('ru-RU', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                })
             },
             getInvites() {
                 this.$http

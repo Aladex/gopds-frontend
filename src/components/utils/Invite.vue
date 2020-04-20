@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row justify="center">
-            <v-dialog max-width="600px" persistent v-model="dialog">
+            <v-dialog max-width="300px" persistent v-model="dialog">
                 <v-card>
                     <v-card-title>
                         <span class="headline">{{ isEdit ? 'Изменить инвайт' : 'Добавить инвайт' }}</span>
@@ -15,6 +15,24 @@
                                             label="Инвайт"
                                             v-model="invite.invite"
                                     ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-datetime-picker
+                                            label="Время окончания"
+                                            v-model="dateInvite"
+                                            dateFormat="dd-MM-yyyy"
+                                            :datePickerProps="calenderProps"
+                                            :timePickerProps="timePicker"
+                                            clear-text="очистить"
+                                            required
+                                    >
+                                        <template slot="dateIcon">
+                                            <v-icon>mdi-calendar</v-icon>
+                                        </template>
+                                        <template slot="timeIcon">
+                                            <v-icon>mdi-clock</v-icon>
+                                        </template>
+                                    </v-datetime-picker>
                                 </v-col>
                             </v-row>
                         </v-container>
@@ -36,6 +54,27 @@
     export default {
         name: "Invite",
         props: ["invite", "dialog", "isEdit"],
+        data() {
+            return {
+                calenderProps: {
+                    locale: "ru-RU",
+                    'first-day-of-week': 1
+                },
+                timePicker: {
+                    format: "24hr"
+                }
+            }
+        },
+        computed: {
+            dateInvite: {
+                get() {
+                    return new Date(this.invite.before_date)
+                },
+                set(date) {
+                    this.invite.before_date = new Date(date).toISOString()
+                }
+            },
+        },
         methods: {
             onClose(dialog) {
                 this.$emit('closed', dialog)

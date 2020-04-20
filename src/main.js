@@ -7,11 +7,13 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import Axios from 'axios'
 import VueClipboard from 'vue-clipboard2'
+import DatetimePicker from 'vuetify-datetime-picker'
 
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = Axios;
 Vue.use(VueClipboard);
+Vue.use(DatetimePicker);
 
 new Vue({
     store,
