@@ -45,7 +45,6 @@
             toPage(page) {
                 this.$store.dispatch('setPage', page);
                 let thisPath = this.$router.currentRoute;
-                console.log(thisPath.name)
                 switch (thisPath.name) {
                     case "findBook":
                         this.$router.push(`/find/books/${thisPath.params.title}/${page}`);

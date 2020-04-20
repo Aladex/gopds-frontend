@@ -209,7 +209,7 @@
 
             </v-row>
         </div>
-        <pagination v-if="!loading"></pagination>
+        <pagination v-if="(books.length > 0)"></pagination>
         <v-dialog
                 persistent
                 v-model="disabled"

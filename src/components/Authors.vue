@@ -38,7 +38,7 @@
                 </v-col>
             </v-row>
 
-            <pagination v-if="!loading"></pagination>
+            <pagination v-if="(authors.length > 0)"></pagination>
         </div>
     </v-container>
 </template>
@@ -126,6 +126,7 @@
             },
         },
         mounted() {
+            this.setThisPage(this.page);
             this.getAuthors()
         },
         watch: {

@@ -3,6 +3,10 @@
             fluid
     >
         <v-card-title>
+            <v-row>
+                <v-col
+                    cols="4"
+                >
             <v-text-field
                     v-model="search"
                     append-icon="mdi-database-search"
@@ -10,7 +14,8 @@
                     @click:append="searchUser"
                     single-line
                     hide-details
-            ></v-text-field>
+            ></v-text-field></v-col>
+            </v-row>
         </v-card-title>
 
                 <v-data-table

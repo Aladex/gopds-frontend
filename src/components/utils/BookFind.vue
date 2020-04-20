@@ -168,6 +168,7 @@
             itemText: item => item.title,
             findByTitle() {
                 this.$store.dispatch('setPage', 1);
+                this.$store.dispatch('setLength', 1);
                 switch (this.selectedSearch.name) {
                     case "book":
                         this.$router.push(`/find/books/${this.searchItem}/1`).catch(() => {
