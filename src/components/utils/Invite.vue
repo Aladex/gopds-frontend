@@ -18,13 +18,13 @@
                                 </v-col>
                                 <v-col cols="12">
                                     <v-datetime-picker
-                                            label="Время окончания"
-                                            v-model="dateInvite"
-                                            dateFormat="dd-MM-yyyy"
                                             :datePickerProps="calenderProps"
                                             :timePickerProps="timePicker"
                                             clear-text="очистить"
+                                            dateFormat="dd-MM-yyyy"
+                                            label="Время окончания"
                                             required
+                                            v-model="dateInvite"
                                     >
                                         <template slot="dateIcon">
                                             <v-icon>mdi-calendar</v-icon>

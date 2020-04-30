@@ -2,10 +2,10 @@
     <div>
         <v-row justify="center">
             <v-dialog
+                    @click:outside="onClose(false)"
                     max-width="600px"
                     persistent
                     v-model="dialog"
-                    @click:outside="onClose(false)"
             >
                 <v-card>
                     <v-card-title>
