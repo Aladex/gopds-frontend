@@ -50,10 +50,11 @@ const routes = [
     },
     {
         path: '/admin',
+        redirect: '/admin/users',
         component: () => import(/* webpackChunkName: "admin" */ '../components/Admin.vue'),
         children: [
             {
-                path: "",
+                path: "users",
                 name: "Admin.Users",
                 meta: {
                     title: "Управление пользователями",
