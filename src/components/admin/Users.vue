@@ -13,6 +13,7 @@
                 >
                     <v-text-field
                             @click:append="searchUser"
+                            @keyup.enter="searchUser"
                             append-icon="mdi-database-search"
                             hide-details
                             label="Search"
