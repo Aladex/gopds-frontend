@@ -148,7 +148,7 @@
 
                 ];
                 if (this.user.is_superuser) {
-                    menu.push({name: 'Admin.Users', title: "Админ", icon: "mdi-tune"})
+                    menu.push({name: 'Admin', title: "Админ", icon: "mdi-tune"})
                 }
                 return menu
             }

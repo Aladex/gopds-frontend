@@ -1,7 +1,12 @@
 <template>
     <div>
         <v-row justify="center">
-            <v-dialog max-width="600px" persistent v-model="dialog">
+            <v-dialog
+                    max-width="600px"
+                    persistent
+                    v-model="dialog"
+                    @click:outside="onClose(false)"
+            >
                 <v-card>
                     <v-card-title>
                         <span class="headline">Расскажи о себе, {{ user.username }}</span>
