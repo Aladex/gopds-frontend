@@ -353,20 +353,18 @@
                     book_id: book.id,
                     format: type,
                 };
-                let filename = book.title.toLowerCase().replace(/[^A-Za-z0-9а-яА-ЯёЁ]/g, "_");
                 this.$http.post(
                     `${process.env.VUE_APP_BACKEND_API_URL}api/books/file`,
                     requestBody,
                     {
                         responseType: 'blob',
-                        headers: {'Accept': 'application/octet-stream'},
                     }
                 ).then((response) => {
+                    let fileName = response.headers["content-disposition"].split("filename=")[1];
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
-
-                    link.setAttribute('download', `${filename}.${type}`);
+                    link.setAttribute('download', `${fileName}`);
                     document.body.appendChild(link);
                     link.click();
                     this.disabled = false
