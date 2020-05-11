@@ -61,7 +61,9 @@
                     case "Admin.Users":
                         break;
                     default:
-                        this.$router.push(`/page/${page}`)
+                        if (this.$route.path !== `/page/${page}`) {
+                            this.$router.push(`/page/${page}`)
+                        }
                         break;
                 }
             },
