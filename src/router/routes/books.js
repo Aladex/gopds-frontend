@@ -1,3 +1,4 @@
+import Books from "@/components/Books";
 const booksRoutes = [
     {
         path: '/books',
@@ -9,7 +10,7 @@ const booksRoutes = [
             page: 1,
             searchBar: true
         },
-        component: () => import(/* webpackChunkName: "books" */ '@/components/Books.vue'),
+        component: Books,
         children: [
             {
                 path: "",
