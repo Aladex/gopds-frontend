@@ -19,7 +19,7 @@
                     short
             >
                 <router-link
-                        :to="{ name: 'Books'}"
+                        :to="{ name: 'Books.BooksView'}"
                 >
                     <v-img
                             class="d-none d-sm-block logo"
@@ -31,7 +31,7 @@
                 </router-link>
                 <v-toolbar-title class="d-none d-lg-block">
                     <router-link
-                            :to="{ name: 'Books'}"
+                            :to="{ name: 'Books.BooksView'}"
                             class="pointer pl-8"
                             tag="span"
                     >
@@ -143,7 +143,7 @@
             },
             menu: function () {
                 let menu = [
-                    {name: 'Books', title: "Книги", logo: "../assets/logo.png"},
+                    {name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png"},
                     {name: 'Donate', title: "Донат", icon: "mdi-pirate"},
 
                 ];

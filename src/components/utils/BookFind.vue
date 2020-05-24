@@ -171,16 +171,16 @@
                 this.$store.dispatch('setLength', 1);
                 switch (this.selectedSearch.name) {
                     case "book":
-                        this.$router.push(`/find/books/${this.searchItem}/1`).catch(() => {
+                        this.$router.push(`/books/find/books/${this.searchItem}/1`).catch(() => {
                         });
                         break;
                     case "author":
-                        this.$router.push(`/authors/${this.searchItem}/1`).catch(() => {
+                        this.$router.push(`/books/authors/${this.searchItem}/1`).catch(() => {
                         });
                         break;
                     case "authorsBook":
                         this.authorsBook = this.searchItem;
-                        this.$router.push(`/find/author/${this.$route.params.author}/1`).catch(() => {
+                        this.$router.push(`/books/find/author/${this.$route.params.author}/1`).catch(() => {
                         });
                         break;
                 }

@@ -7,10 +7,31 @@
         ></book-find>
 
         <items-not-found
-                v-if="(authors.length === 0)"
+                v-if="(authors.length === 0 && !loading)"
         ></items-not-found>
+        <v-row
+                justify="center"
+                v-if="loading"
+        >
+            <v-col
+                    cols="12"
+                    lg="8"
+                    md="10"
+                    sm="10"
+                    xs="10"
+                    v-for="a in 8"
+                    :key="a"
+            >
+                <v-skeleton-loader
 
-        <div v-if="(authors.length > 0)">
+                        boilerplate
+                        type="list-item"
+                        class="mx-auto"
+                ></v-skeleton-loader>
+            </v-col></v-row>
+
+
+        <div v-if="!loading && authors.length > 0">
             <v-row
                     justify="center"
             >
@@ -38,7 +59,7 @@
                 </v-col>
             </v-row>
 
-            <pagination v-if="(authors.length > 0)"></pagination>
+            <pagination></pagination>
         </div>
     </v-container>
 </template>
@@ -84,16 +105,15 @@
         },
         methods: {
             toAuthorPage(authorID) {
-                this.$router.push(`/find/author/${authorID}/1`)
+                this.$router.push(`/books/find/author/${authorID}/1`)
             },
             toPage(page) {
                 this.$store.dispatch('setPage', page);
                 let thisPath = this.$router.currentRoute;
-                this.$router.push(`/authors/${thisPath.params.title}/${page}`)
+                this.$router.push(`/books/authors/${thisPath.params.title}/${page}`)
             },
             getAuthors() {
                 this.loading = true;
-                this.books = Array.from(Array(10).keys());
                 let numberedPage = Number.parseInt(this.pageLocal, 10);
                 let offset = numberedPage > 1 ? (numberedPage - 1) * process.env.VUE_APP_ONPAGE : 0;
                 let requestBody = {

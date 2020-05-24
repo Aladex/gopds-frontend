@@ -47,22 +47,22 @@
                 let thisPath = this.$router.currentRoute;
                 switch (thisPath.name) {
                     case "findBook":
-                        this.$router.push(`/find/books/${thisPath.params.title}/${page}`);
+                        this.$router.push(`/books/find/books/${thisPath.params.title}/${page}`);
                         break;
                     case "findAuthor":
-                        this.$router.push(`/authors/${thisPath.params.title}/${page}`);
+                        this.$router.push(`/books/authors/${thisPath.params.title}/${page}`);
                         break;
                     case "findByAuthor":
-                        this.$router.push(`/find/author/${thisPath.params.author}/${page}`);
+                        this.$router.push(`/books/find/author/${thisPath.params.author}/${page}`);
                         break;
                     case "findBySeries":
-                        this.$router.push(`/find/series/${thisPath.params.series}/${page}`);
+                        this.$router.push(`/books/find/series/${thisPath.params.series}/${page}`);
                         break;
                     case "Admin.Users":
                         break;
                     default:
-                        if (this.$route.path !== `/page/${page}`) {
-                            this.$router.push(`/page/${page}`)
+                        if (this.$route.path !== `/books/page/${page}`) {
+                            this.$router.push(`/books/page/${page}`)
                         }
                         break;
                 }
