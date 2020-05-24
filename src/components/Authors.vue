@@ -14,21 +14,22 @@
                 v-if="loading"
         >
             <v-col
+                    :key="a"
                     cols="12"
                     lg="8"
                     md="10"
                     sm="10"
-                    xs="10"
                     v-for="a in 8"
-                    :key="a"
+                    xs="10"
             >
                 <v-skeleton-loader
 
                         boilerplate
-                        type="list-item"
                         class="mx-auto"
+                        type="list-item"
                 ></v-skeleton-loader>
-            </v-col></v-row>
+            </v-col>
+        </v-row>
 
 
         <div v-if="!loading && authors.length > 0">
