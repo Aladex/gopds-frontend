@@ -15,6 +15,15 @@ Vue.prototype.$http = Axios;
 Vue.use(VueClipboard);
 Vue.use(DatetimePicker);
 
+Axios.interceptors.response.use(null, function (error) {
+    if (error.response.status === 401) {
+        localStorage.removeItem('token')
+        store.dispatch('logout')
+        router.push('/login')
+    }
+    return Promise.reject(error)
+})
+
 new Vue({
     store,
     router,
