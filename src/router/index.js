@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
         } else {
 
             axios.defaults.headers.common['Authorization'] = token;
-            next({name: 'Books'})
+            next({name: 'Books.BooksView'})
 
         }
     } else {
