@@ -132,9 +132,6 @@
                     })
                     .catch(err => {
                         switch (err.response.status) {
-                            case 401:
-                                this.logout();
-                                break;
                             case 404:
                                 this.$router.push("/404");
                                 break
