@@ -7,7 +7,7 @@
                         <span class="headline">Изменить пользователя</span>
                     </v-card-title>
                     <v-card-text>
-                        <v-container>
+                        <v-main>
                             <v-row>
                                 <v-col cols="12">ID: {{ user.id }}</v-col>
                                 <v-col cols="12">
@@ -55,7 +55,7 @@
                                 </v-col>
 
                             </v-row>
-                        </v-container>
+                        </v-main>
                         <small>*indicates required field</small>
                     </v-card-text>
                     <v-card-actions>

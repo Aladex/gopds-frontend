@@ -38,7 +38,7 @@
                         </v-row>
                     </v-card-text>
                     <v-card-text>
-                        <v-container>
+                        <v-main>
                             <v-row>
 
                                 <v-col cols="12"
@@ -73,7 +73,7 @@
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
-                        </v-container>
+                        </v-main>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn @click="onClose(false)" color="blue darken-1" text>Закрыть</v-btn>

@@ -1,5 +1,5 @@
 <template>
-    <v-container
+    <v-main
             fluid
     >
         <book-find
@@ -62,7 +62,7 @@
 
             <pagination></pagination>
         </div>
-    </v-container>
+    </v-main>
 </template>
 
 <script>

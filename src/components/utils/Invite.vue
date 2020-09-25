@@ -7,7 +7,7 @@
                         <span class="headline">{{ isEdit ? 'Изменить инвайт' : 'Добавить инвайт' }}</span>
                     </v-card-title>
                     <v-card-text>
-                        <v-container>
+                        <v-main>
                             <v-row>
                                 <v-col cols="12" v-if="isEdit">ID: {{ invite.id }}</v-col>
                                 <v-col cols="12">
@@ -35,7 +35,7 @@
                                     </v-datetime-picker>
                                 </v-col>
                             </v-row>
-                        </v-container>
+                        </v-main>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn @click="onClose(false)" color="blue darken-1" text>Закрыть</v-btn>

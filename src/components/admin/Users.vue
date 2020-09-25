@@ -1,5 +1,5 @@
 <template>
-    <v-container
+    <v-main
             fluid
     >
         <v-card-title>
@@ -59,7 +59,7 @@
                 @closed="closedDialog"
         ></user-edit-form>
 
-    </v-container>
+    </v-main>
 </template>
 
 <script>
