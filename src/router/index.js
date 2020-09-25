@@ -44,7 +44,6 @@ router.beforeEach((to, from, next) => {
                 query: {redirect: to.fullPath}
             })
         } else {
-
             axios.defaults.headers.common['Authorization'] = token;
             next()
         }
@@ -53,10 +52,8 @@ router.beforeEach((to, from, next) => {
         if (token == null) {
             next()
         } else {
-
             axios.defaults.headers.common['Authorization'] = token;
             next({name: 'Books.BooksView'})
-
         }
     } else {
         next()

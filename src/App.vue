@@ -100,10 +100,10 @@
             </v-app-bar>
         </v-card>
 
-        <v-content>
+        <v-main>
 
             <router-view></router-view>
-        </v-content>
+        </v-main>
         <back-to-top
                 v-if="isLoggedIn"
         ></back-to-top>
