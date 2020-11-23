@@ -1,5 +1,5 @@
 <template>
-    <v-main>
+    <v-container>
         <book-find
                 v-if="searchBar"
         ></book-find>
@@ -227,7 +227,7 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
-    </v-main>
+    </v-container>
 </template>
 
 <script>

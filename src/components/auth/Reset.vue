@@ -1,5 +1,5 @@
 <template>
-    <v-main
+    <v-container
             class="fill-height"
             fluid
     >
@@ -96,7 +96,7 @@
         </v-row>
 
 
-    </v-main>
+    </v-container>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <v-main
+    <v-container
             fluid
     >
         <v-row
@@ -30,7 +30,7 @@
                 </v-card>
             </v-col>
         </v-row>
-    </v-main>
+    </v-container>
 </template>
 
 <script>

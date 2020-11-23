@@ -50,8 +50,8 @@
                     >
                         <v-img
                                 contain
-                                max-height="36"
-                                max-width="36"
+                                max-height="25"
+                                max-width="25"
                                 src="@/assets/logo.png"
                                 v-if="m.logo"
                         ></v-img>
@@ -69,6 +69,7 @@
                             :key="m.name"
                             :to="{ name: m.name}"
                             v-for="m in menu"
+
                     >{{ m.title }}</v-tab>
                 </v-tabs>
                 </span>
@@ -144,7 +145,8 @@
             menu: function () {
                 let menu = [
                     {name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png"},
-                    {name: 'Donate', title: "Донат", icon: "mdi-pirate"},
+                    {name: 'Opds', title: "OPDS", icon: "mdi-book"},
+                    {name: 'Donate', title: "Донат", icon: "mdi-wallet"},
 
                 ];
                 if (this.user.is_superuser) {

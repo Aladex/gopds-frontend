@@ -1,5 +1,5 @@
 <template>
-    <v-main
+    <v-container
             fluid
     >
         <v-row
@@ -45,7 +45,7 @@
                 :isEdit=isEdit
                 @closed="closedDialog"
         ></invite>
-    </v-main>
+    </v-container>
 </template>
 
 <script>
