@@ -96,6 +96,7 @@
                                   <v-btn
                                       class="mt-2"
                                       icon
+                                      :disabled="!have_favs"
                                       @click="fav = !fav"
                                   >
                                     <v-icon v-if="fav">mdi-star</v-icon>
@@ -142,6 +143,14 @@
               },
               set(fav) {
                 this.$store.dispatch('setFav', fav)
+              }
+            },
+            have_favs: {
+              get() {
+                return this.$store.getters.have_favs
+              },
+              set(have_favs) {
+                this.$store.dispatch('setHaveFavs', have_favs)
               }
             },
             langs: {

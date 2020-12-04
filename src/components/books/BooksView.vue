@@ -253,6 +253,7 @@
         },
         data() {
             return {
+                disable_fav: false,
                 loading: true,
                 books: Array.from(Array(10).keys()),
                 searchSelect: "book",
@@ -263,6 +264,14 @@
             }
         },
         computed: {
+            have_favs: {
+              get() {
+                return this.$store.getters.have_favs
+              },
+              set(have_favs) {
+                this.$store.dispatch('setHaveFavs', have_favs)
+              }
+            },
             fav: {
               get() {
                 return this.$store.getters.fav
@@ -374,7 +383,14 @@
             this.$http.post(
                 `${process.env.VUE_APP_BACKEND_API_URL}api/books/fav`,
                 requestBody,
-            )
+            ).then((response) => {
+              if (!response.data.have_favs) {
+                this.fav = false
+                this.have_favs = false
+              } else {
+                this.have_favs = true
+              }
+            })
           },
           downloadFile(book, type) {
                 this.disabled = true;
@@ -423,7 +439,6 @@
                     fav: this.fav,
                     lang: this.lang.language
                 };
-                console.log(requestBody)
 
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})

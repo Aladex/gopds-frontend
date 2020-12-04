@@ -14,6 +14,7 @@ export default new Vuex.Store({
         title: '',
         lang: {},
         fav: false,
+        have_favs: true,
         langs: [],
         authorsBook: "",
         token: localStorage.getItem('token') || '',
@@ -36,6 +37,9 @@ export default new Vuex.Store({
         },
         setFav(state, payload) {
             state.fav = payload
+        },
+        setHaveFavs(state, payload) {
+            state.have_favs = payload
         },
         setLangs(state, payload) {
             state.langs = payload
@@ -72,7 +76,8 @@ export default new Vuex.Store({
         setUser(state, user) {
             state.status = 'success';
             state.user = user;
-            state.loading = false
+            state.loading = false;
+            state.have_favs = user.have_favs;
         },
         setLength(state, length) {
             state.length = length;
@@ -87,6 +92,9 @@ export default new Vuex.Store({
         },
         setFav({commit}, payload) {
             commit('setFav', payload)
+        },
+        setHaveFavs({commit}, payload) {
+            commit('setHaveFavs', payload)
         },
         setLangs({commit}, payload) {
             commit('setLangs', payload)
@@ -197,6 +205,7 @@ export default new Vuex.Store({
         title: state => state.title,
         lang: state => state.lang,
         fav: state => state.fav,
+        have_favs: state => state.have_favs,
         langs: state => state.langs,
         token: state => state.token,
         authError: state => state.authError,

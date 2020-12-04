@@ -2,7 +2,6 @@ import Books from "@/components/Books";
 const booksRoutes = [
     {
         path: '/books',
-        name: 'Books',
         meta: {
             requiresAuth: true,
         },
