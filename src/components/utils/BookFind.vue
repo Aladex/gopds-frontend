@@ -187,6 +187,7 @@
             langText: item => item.language,
             itemText: item => item.title,
             findByTitle() {
+                this.fav = false
                 this.$store.dispatch('setPage', 1);
                 this.$store.dispatch('setLength', 1);
                 switch (this.selectedSearch.name) {

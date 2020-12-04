@@ -374,11 +374,7 @@
             this.$http.post(
                 `${process.env.VUE_APP_BACKEND_API_URL}api/books/fav`,
                 requestBody,
-            ).then((response) => {
-              console.log(response)
-            }).catch((err) => {
-              console.log(err)
-            })
+            )
           },
           downloadFile(book, type) {
                 this.disabled = true;
