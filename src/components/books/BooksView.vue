@@ -201,6 +201,14 @@
 
                                 </v-col>
                             </v-row>
+                          <v-card-actions><v-spacer></v-spacer>
+                            <v-btn
+                                icon
+                                @click="favBook(b)"
+                            >
+                            <v-icon v-if="b.fav">mdi-star</v-icon>
+                            <v-icon v-else>mdi-star-outline</v-icon>
+                          </v-btn></v-card-actions>
                         </v-card>
                     </v-skeleton-loader>
                 </v-col>
@@ -255,6 +263,14 @@
             }
         },
         computed: {
+            fav: {
+              get() {
+                return this.$store.getters.fav
+              },
+              set(fav) {
+                this.$store.dispatch('setFav', fav)
+              }
+            },
             lang: {
                 get() {
                     return this.$store.getters.lang
@@ -345,7 +361,26 @@
                 }
                 return dhd
             },
-            downloadFile(book, type) {
+          favBook(book) {
+            let requestBody = {
+              book_id: book.id,
+              fav: !book.fav
+            }
+            for (let i = 0; i < this.books.length; i++) {
+              if (this.books[i].id === book.id) {
+                this.books[i].fav = !book.fav
+              }
+            }
+            this.$http.post(
+                `${process.env.VUE_APP_BACKEND_API_URL}api/books/fav`,
+                requestBody,
+            ).then((response) => {
+              console.log(response)
+            }).catch((err) => {
+              console.log(err)
+            })
+          },
+          downloadFile(book, type) {
                 this.disabled = true;
                 let requestBody = {
                     book_id: book.id,
@@ -389,8 +424,10 @@
                     title: filterTitle,
                     author: this.author,
                     series: this.series,
+                    fav: this.fav,
                     lang: this.lang.language
                 };
+                console.log(requestBody)
 
                 this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
@@ -437,6 +474,10 @@
             author() {
                 this.setThisPage(this.page);
                 this.getBooks()
+            },
+            fav() {
+              this.setThisPage(this.page);
+              this.getBooks()
             },
             series() {
                 this.setThisPage(this.page);

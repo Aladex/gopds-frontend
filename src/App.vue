@@ -144,10 +144,9 @@
             },
             menu: function () {
                 let menu = [
-                    {name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png"},
-                    {name: 'Opds', title: "OPDS", icon: "mdi-book"},
-                    {name: 'Donate', title: "Донат", icon: "mdi-wallet"},
-
+                    { name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png" },
+                    { name: 'Opds', title: "OPDS", icon: "mdi-book" },
+                    { name: 'Donate', title: "Донат", icon: "mdi-wallet" },
                 ];
                 if (this.user.is_superuser) {
                     menu.push({name: 'Admin', title: "Админ", icon: "mdi-tune"})

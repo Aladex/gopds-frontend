@@ -24,7 +24,6 @@
                                     label="Категория поиска"
                                     persistent-hint
                                     return-object
-
                                     v-model="selectedSearch"
                             ></v-select>
                         </v-col>
@@ -84,12 +83,25 @@
                                             return-object
                                             v-model="lang"
                                     ></v-select>
+
                                 </v-col>
-
+                                <v-col
+                                    cols="4"
+                                    lg="4"
+                                    md="4"
+                                    sm="4"
+                                >
+                                  <v-btn
+                                      class="mt-2 ml-4"
+                                      icon
+                                      @click="fav = !fav"
+                                  >
+                                    <v-icon v-if="fav">mdi-star</v-icon>
+                                    <v-icon v-else>mdi-star-outline</v-icon>
+                                  </v-btn>
+                                </v-col>
                             </v-row>
-
                         </v-col>
-
                     </v-row>
                 </v-card-text>
             </v-card>
@@ -121,6 +133,14 @@
                 set(lang) {
                     this.$store.dispatch('setLang', lang)
                 }
+            },
+            fav: {
+              get() {
+                return this.$store.getters.fav
+              },
+              set(fav) {
+                this.$store.dispatch('setFav', fav)
+              }
             },
             langs: {
                 get() {
@@ -227,9 +247,11 @@
             },
             authorId(value) {
                 if (typeof value !== "undefined") {
-                    this.getAuthorName(value)
+                  this.getAuthorName(value)
                 }
-
+            },
+            fav() {
+              this.$router.push({name: "Books.BooksView"})
             }
         },
         mounted() {

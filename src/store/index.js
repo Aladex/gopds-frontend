@@ -13,6 +13,7 @@ export default new Vuex.Store({
         length: 1,
         title: '',
         lang: {},
+        fav: false,
         langs: [],
         authorsBook: "",
         token: localStorage.getItem('token') || '',
@@ -32,6 +33,9 @@ export default new Vuex.Store({
         },
         setLang(state, payload) {
             state.lang = payload
+        },
+        setFav(state, payload) {
+            state.fav = payload
         },
         setLangs(state, payload) {
             state.langs = payload
@@ -80,6 +84,9 @@ export default new Vuex.Store({
         },
         setLang({commit}, payload) {
             commit('setLang', payload)
+        },
+        setFav({commit}, payload) {
+            commit('setFav', payload)
         },
         setLangs({commit}, payload) {
             commit('setLangs', payload)
@@ -189,6 +196,7 @@ export default new Vuex.Store({
         length: state => state.length,
         title: state => state.title,
         lang: state => state.lang,
+        fav: state => state.fav,
         langs: state => state.langs,
         token: state => state.token,
         authError: state => state.authError,
