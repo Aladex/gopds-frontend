@@ -18,6 +18,7 @@
                                 sm="12"
                         >
                             <v-select
+                                    :disabled="fav"
                                     :hint="selectedSearch.name === 'authorsBook'? authorName : ''"
                                     :item-text="itemText"
                                     :items="selects"
@@ -35,6 +36,7 @@
                         >
 
                             <v-text-field
+                                    :disabled="fav"
                                     :clearable="(selectedSearch.name === 'authorsBook')"
                                     @click:clear="authorsBook = ''"
                                     @keyup.enter="findByTitle"
@@ -52,6 +54,7 @@
                                 sm="6"
                         >
                             <v-btn
+                                    :disabled="fav"
                                     @click="findByTitle"
                                     class="search-btn"
                             >
@@ -79,7 +82,6 @@
                                             class="lang-selector"
                                             flat
                                             label="Язык"
-                                            prepend-icon="mdi-web"
                                             return-object
                                             v-model="lang"
                                     ></v-select>
@@ -92,7 +94,7 @@
                                     sm="4"
                                 >
                                   <v-btn
-                                      class="mt-2 ml-4"
+                                      class="mt-2"
                                       icon
                                       @click="fav = !fav"
                                   >
