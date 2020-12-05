@@ -94,13 +94,13 @@
                                     sm="4"
                                 >
                                   <v-btn
-                                      class="mt-2"
+                                      class="mt-1"
                                       icon
                                       :disabled="!have_favs"
                                       @click="fav = !fav"
                                   >
-                                    <v-icon v-if="fav">mdi-star</v-icon>
-                                    <v-icon v-else>mdi-star-outline</v-icon>
+                                    <v-icon v-if="fav" large color="yellow darken-4">mdi-star-box</v-icon>
+                                    <v-icon v-else large>mdi-star-box-outline</v-icon>
                                   </v-btn>
                                 </v-col>
                             </v-row>
@@ -262,9 +262,6 @@
                   this.getAuthorName(value)
                 }
             },
-            fav() {
-              this.$router.push({name: "Books.BooksView"})
-            }
         },
         mounted() {
             this.makeSelects(this.myPath)
