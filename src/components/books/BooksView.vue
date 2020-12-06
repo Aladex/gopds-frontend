@@ -487,8 +487,10 @@
                 this.getBooks()
             },
             fav() {
-              this.setThisPage(this.page);
-              this.getBooks()
+                if (this.$route.path !== `/books/page/1`) {
+                  this.$router.push(`/books/page/1`)
+                }
+                this.getBooks()
             },
             series() {
                 this.setThisPage(this.page);

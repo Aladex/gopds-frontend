@@ -24,6 +24,14 @@
                     this.$store.dispatch('setLang', lang)
                 }
             },
+            fav: {
+              get() {
+                return this.$store.getters.fav
+              },
+              set(fav) {
+                this.$store.dispatch('setFav', fav)
+              }
+            },
             pageLocal: {
                 get() {
                     return this.$store.getters.myPage
@@ -71,7 +79,7 @@
         watch: {
             lang() {
                 this.toPage(1)
-            }
+            },
         }
     }
 </script>
