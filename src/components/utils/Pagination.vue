@@ -76,11 +76,11 @@
                 }
             },
         },
-        watch: {
-            lang() {
-                this.toPage(1)
-            },
-        }
+        // watch: {
+        //     lang() {
+        //         this.toPage(1)
+        //     },
+        // }
     }
 </script>
 

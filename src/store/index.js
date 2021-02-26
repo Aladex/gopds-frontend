@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         user: {},
+        langChange: false,
         loading: true,
         myPage: 1,
         length: 1,
@@ -43,6 +44,9 @@ export default new Vuex.Store({
         },
         setLangs(state, payload) {
             state.langs = payload
+        },
+        setLangChange(state, payload) {
+            state.langChange = payload
         },
         setTitle(state, payload) {
             state.title = payload
@@ -89,6 +93,9 @@ export default new Vuex.Store({
         },
         setLang({commit}, payload) {
             commit('setLang', payload)
+        },
+        setLangChange({commit}, payload) {
+            commit('setLangChange', payload)
         },
         setFav({commit}, payload) {
             commit('setFav', payload)
@@ -204,6 +211,7 @@ export default new Vuex.Store({
         length: state => state.length,
         title: state => state.title,
         lang: state => state.lang,
+        langChange: state => state.langChange,
         fav: state => state.fav,
         have_favs: state => state.have_favs,
         langs: state => state.langs,

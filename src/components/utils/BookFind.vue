@@ -129,9 +129,6 @@
                 return this.$store.getters.user
               },
             },
-            authorId: function () {
-                return this.$route.params.author
-            },
             myPath: function () {
                 return this.$route.name
             },
@@ -225,6 +222,11 @@
                     }
                   })
 
+                  if (this.$route.path !== `/books/page/1`) {
+                    this.$router.push(`/books/page/1`)
+                  } else {
+                    this.$store.dispatch('setLangChange', true)
+                  }
             },
             findByTitle() {
                 this.fav = false

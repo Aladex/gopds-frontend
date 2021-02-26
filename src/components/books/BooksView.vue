@@ -298,6 +298,14 @@
                     this.$store.dispatch('setLang', lang)
                 }
             },
+            langChange: {
+              get() {
+                return this.$store.getters.langChange
+              },
+              set(state) {
+                this.$store.dispatch('setLangChange', state)
+              }
+            },
             langs: {
                 get() {
                     return this.$store.getters.langs
@@ -426,6 +434,21 @@
                     this.disabled = false
                 })
             },
+            getLangs() {
+              return this.$http
+                  .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/langs`)
+                  .then(response => {
+                    this.langs = response.data.langs;
+                  })
+                  .catch(err => {
+                    switch (err.response.status) {
+
+                      case 404:
+                        this.$router.push("/404");
+                        break
+                    }
+                  });
+            },
             getBooks() {
                 this.loading = true;
                 this.opened = [];
@@ -452,7 +475,6 @@
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
                         this.books = response.data.books;
-                        this.langs = response.data.langs;
                         this.pagesLength = response.data.length;
                         this.loading = false
                     })
@@ -473,19 +495,30 @@
                         this.$router.push('/login')
                     })
             },
+          setUserLang() {
+              return new Promise(resolve => {
+                this.langs.forEach((l) => {
+                  if (l.language === this.user.books_lang) {
+                    this.lang = l
+                  }
+                })
+                resolve()
+              })
+          }
         },
 
         mounted() {
             this.setThisPage(this.page);
             this.$store.dispatch('getMe').then(() => {
-            this.getBooks().then(() => {
-              this.langs.forEach((l) => {
-                if (l.language === this.user.books_lang) {
-                  this.lang = l
-                }
+              this.getLangs().then(() => {
+                this.langs.forEach((l) => {
+                  if (l.language === this.user.books_lang) {
+                    this.lang = l
+                  }
+                })
+                this.getBooks()
               })
             })
-          })
         },
         watch: {
             page() {
@@ -514,8 +547,13 @@
                 this.setThisPage(this.page);
                 this.getBooks()
             },
-            userBooksLang() {
-                this.getBooks()
+            langChange() {
+              console.log(this.langChange)
+                if (this.langChange) {
+                  this.getBooks()
+                  this.$store.dispatch('setLangChange', false)
+                }
+
             },
         }
     }
