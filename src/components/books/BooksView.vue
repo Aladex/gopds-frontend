@@ -451,6 +451,7 @@
             },
             getBooks() {
                 this.loading = true;
+                window.scrollTo(0, 0)
                 this.opened = [];
                 this.books = Array.from(Array(10).keys());
                 let numberedPage = Number.parseInt(this.pageLocal, 10);
@@ -548,7 +549,6 @@
                 this.getBooks()
             },
             langChange() {
-              console.log(this.langChange)
                 if (this.langChange) {
                   this.getBooks()
                   this.$store.dispatch('setLangChange', false)

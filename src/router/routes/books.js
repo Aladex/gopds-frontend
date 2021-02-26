@@ -1,24 +1,17 @@
-import Books from "@/components/Books";
 const booksRoutes = [
     {
-        path: '/books',
+        path: '/books/',
+        name: 'Books',
         meta: {
             requiresAuth: true,
         },
-        props: {
-            page: 1,
-            searchBar: true
-        },
-        component: Books,
+        component: () => import(/* webpackChunkName: "books" */ '@/components/Books.vue'),
         children: [
             {
                 path: "",
                 name: "Books.BooksView",
                 component: () => import(/* webpackChunkName: "books-view" */ '@/components/books/BooksView.vue'),
-                props: {
-                    page: 1,
-                    searchBar: true
-                },
+                redirect: '/books/page/1',
                 meta: {
                     title: "Новые книги",
                 }

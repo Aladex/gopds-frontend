@@ -165,9 +165,6 @@
                         this.$router.push('/login')
                     })
             },
-            setUser() {
-                this.$store.dispatch('getMe')
-            },
         },
     }
 </script>
