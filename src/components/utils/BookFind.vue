@@ -84,6 +84,7 @@
                                             label="Язык"
                                             return-object
                                             v-model="lang"
+                                            @input="userBooksLanguage()"
                                     ></v-select>
 
                                 </v-col>
@@ -123,6 +124,11 @@
             }
         },
         computed: {
+            user: {
+              get() {
+                return this.$store.getters.user
+              },
+            },
             authorId: function () {
                 return this.$route.params.author
             },
@@ -197,6 +203,29 @@
         methods: {
             langText: item => item.language,
             itemText: item => item.title,
+            userBooksLanguage() {
+              let newUser = this.user
+              newUser.books_lang = this.lang.language
+              this.$http({
+                url: process.env.VUE_APP_BACKEND_API_URL + 'api/books/change-me',
+                data: newUser,
+                method: 'POST'
+              })
+                  .then(() => {
+                    this.$store.dispatch('getMe');
+                  })
+                  .catch(err => {
+                    switch (err.response.status) {
+                      case 400:
+                        this.errorsNPText = "Пароль должен быть больше 8 символов";
+                        break;
+                      case 403:
+                        this.errorsText = "Неправильный пароль";
+                        break
+                    }
+                  })
+
+            },
             findByTitle() {
                 this.fav = false
                 this.$store.dispatch('setPage', 1);

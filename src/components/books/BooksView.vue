@@ -264,6 +264,11 @@
             }
         },
         computed: {
+            user: {
+              get() {
+                return this.$store.getters.user
+              },
+            },
             have_favs: {
               get() {
                 return this.$store.getters.have_favs
@@ -279,6 +284,11 @@
               set(fav) {
                 this.$store.dispatch('setFav', fav)
               }
+            },
+            userBooksLang: {
+              get() {
+                return this.$store.getters.user.books_lang
+              },
             },
             lang: {
                 get() {
@@ -324,8 +334,7 @@
                 get() {
                     return this.$store.getters.authorsBook
                 },
-            }
-
+            },
         },
         methods: {
             cover(b) {
@@ -429,7 +438,6 @@
                 } else {
                     filterTitle = this.title
                 }
-
                 let requestBody = {
                     limit: process.env.VUE_APP_ONPAGE,
                     offset: offset,
@@ -437,10 +445,10 @@
                     author: this.author,
                     series: this.series,
                     fav: this.fav,
-                    lang: this.lang.language
+                    lang: this.user.books_lang
                 };
 
-                this.$http
+                return this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
                         this.books = response.data.books;
@@ -456,18 +464,28 @@
                                 break
                         }
                     });
-                window.scrollTo(0, 0)
+
             },
-            logout() {
+
+          logout() {
                 this.$store.dispatch('logout')
                     .then(() => {
                         this.$router.push('/login')
                     })
             },
         },
+
         mounted() {
             this.setThisPage(this.page);
-            this.getBooks()
+            this.$store.dispatch('getMe').then(() => {
+            this.getBooks().then(() => {
+              this.langs.forEach((l) => {
+                if (l.language === this.user.books_lang) {
+                  this.lang = l
+                }
+              })
+            })
+          })
         },
         watch: {
             page() {
@@ -496,7 +514,7 @@
                 this.setThisPage(this.page);
                 this.getBooks()
             },
-            lang() {
+            userBooksLang() {
                 this.getBooks()
             },
         }

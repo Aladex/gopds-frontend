@@ -169,12 +169,6 @@
                 this.$store.dispatch('getMe')
             },
         },
-        mounted() {
-            if (this.isLoggedIn) {
-                this.setUser()
-            }
-        },
-
     }
 </script>
 <style>

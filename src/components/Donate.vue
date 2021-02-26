@@ -22,7 +22,7 @@
                 >
                     <iframe allowtransparency="true"
                             frameborder="0" height="307" scrolling="no"
-                            src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9C%D0%BD%D0%B5%20%D0%BE%D1%87%D0%B5%D0%BD%D1%8C%20%D0%BD%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%81%D1%8F%20%D1%82%D0%BE%2C%20%D1%87%D1%82%D0%BE%20%D1%82%D1%8B%20%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D1%88%D1%8C!&targets-hint=&default-sum=&button-text=13&payment-type-choice=on&comment=on&hint=&successURL=&quickpay=shop&account=41001572304361"
+                            src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%9C%D0%BD%D0%B5%20%D0%BE%D1%87%D0%B5%D0%BD%D1%8C%20%D0%BD%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%81%D1%8F%20%D1%82%D0%BE%2C%20%D1%87%D1%82%D0%BE%20%D1%82%D1%8B%20%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D1%88%D1%8C!&targets-hint=&default-sum=&button-text=13&payment-type-choice=on&comment=on&hint=&successURL=&quickpay=shop&account=41001572304361"
                             width="100%"></iframe>
                 </v-col>
                 <v-col
