@@ -28,8 +28,8 @@
               get() {
                 return this.$store.getters.fav
               },
-              set(fav) {
-                this.$store.dispatch('setFav', fav)
+              set(state) {
+                this.$store.dispatch('setFav', state)
               }
             },
             pageLocal: {
@@ -76,11 +76,6 @@
                 }
             },
         },
-        // watch: {
-        //     lang() {
-        //         this.toPage(1)
-        //     },
-        // }
     }
 </script>
 

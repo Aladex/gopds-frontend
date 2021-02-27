@@ -91,8 +91,9 @@
                                              <router-link
                                                      :to="`/books/find/author/${a.id}/1`"
                                                      class="info-link"
+                                                     @click="fav = false"
                                              >{{ a.full_name }}
-                                            </router-link>
+                                             </router-link>
                                         </span></p>
                                                 </div>
 
@@ -109,7 +110,7 @@
                                                      :to="`/books/find/series/${s.id}/1`"
                                                      class="info-link"
                                              >{{ s.ser }}
-                                            </router-link><span v-if="s.ser_no !== 0"> #{{ s.ser_no }}</span>
+                                             </router-link><span v-if="s.ser_no !== 0"> #{{ s.ser_no }}</span>
                                         </span></p>
                                                 </div>
 
@@ -142,6 +143,20 @@
                                             class="ml-2"
                                     >
                                         <v-col
+                                          cols="6"
+                                          lg="12"
+                                          md="6"
+                                          sm="6"
+                                          xs="6"
+                                      >
+                                        <v-btn
+                                            @click="downloadFile(b, 'zip')"
+                                            class="secondary"
+                                            width="100%"
+                                        >FB2+ZIP
+                                        </v-btn>
+                                      </v-col>
+                                        <v-col
                                                 cols="6"
                                                 lg="12"
                                                 md="6"
@@ -153,20 +168,6 @@
                                                     class="secondary"
                                                     width="100%"
                                             >FB2
-                                            </v-btn>
-                                        </v-col>
-                                        <v-col
-                                                cols="6"
-                                                lg="12"
-                                                md="6"
-                                                sm="6"
-                                                xs="6"
-                                        >
-                                            <v-btn
-                                                    @click="downloadFile(b, 'zip')"
-                                                    class="secondary"
-                                                    width="100%"
-                                            >FB2+ZIP
                                             </v-btn>
                                         </v-col>
                                         <v-col
@@ -281,8 +282,8 @@
               get() {
                 return this.$store.getters.fav
               },
-              set(fav) {
-                this.$store.dispatch('setFav', fav)
+              set(state) {
+                this.$store.dispatch('setFav', state)
               }
             },
             userBooksLang: {
@@ -462,6 +463,7 @@
                 } else {
                     filterTitle = this.title
                 }
+
                 let requestBody = {
                     limit: process.env.VUE_APP_ONPAGE,
                     offset: offset,
@@ -471,7 +473,6 @@
                     fav: this.fav,
                     lang: this.user.books_lang
                 };
-
                 return this.$http
                     .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/list`, {params: requestBody})
                     .then(response => {
@@ -534,17 +535,21 @@
                 this.setThisPage(this.page);
                 this.getBooks()
             },
-            author() {
+            author(state) {
+                if (state !== undefined) { this.fav = false }
                 this.setThisPage(this.page);
                 this.getBooks()
             },
-            fav() {
-                if (this.$route.path !== `/books/page/1`) {
+            fav(state) {
+                if (this.$route.path !== `/books/page/1` && state) {
                   this.$router.push(`/books/page/1`)
+                } else if (this.author === undefined && this.series === undefined) {
+                  this.getBooks()
                 }
-                this.getBooks()
+                // this.getBooks()
             },
-            series() {
+            series(state) {
+                if (state !== undefined) { this.fav = false }
                 this.setThisPage(this.page);
                 this.getBooks()
             },
@@ -553,7 +558,6 @@
                   this.getBooks()
                   this.$store.dispatch('setLangChange', false)
                 }
-
             },
         }
     }
