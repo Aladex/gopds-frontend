@@ -91,7 +91,6 @@
                                              <router-link
                                                      :to="`/books/find/author/${a.id}/1`"
                                                      class="info-link"
-                                                     @click="fav = false"
                                              >{{ a.full_name }}
                                              </router-link>
                                         </span></p>
