@@ -22,7 +22,7 @@ export default new Vuex.Store({
         authError: false,
         username: '',
         status: '',
-        searchItem: "",
+        searchItem: null,
         selectedSearch: {name: "book", title: "Поиск книги по названию"},
         searchVariants: [
             {name: "book", title: "Поиск книги по названию"},

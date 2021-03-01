@@ -7,29 +7,29 @@
         </v-system-bar>
         <v-card
                 color="grey lighten-4"
-                flat
-                height="50px"
-                tile
                 v-if="isLoggedIn"
+                flat
+                tile
+                height="50px"
         >
             <v-app-bar
                     color="primary"
                     dark
                     fixed
                     short
-            >
+            ><v-app-bar-nav-icon v-show="mini" @click="drawer = true"></v-app-bar-nav-icon>
                 <router-link
                         :to="{ name: 'Books.BooksView'}"
                 >
                     <v-img
-                            class="d-none d-sm-block logo"
+                            class="d-none d-md-block logo ml-n6"
                             contain
                             max-height="36"
                             max-width="36"
                             src="@/assets/logo.png"
                     ></v-img>
                 </router-link>
-                <v-toolbar-title class="d-none d-lg-block">
+                <v-toolbar-title class="d-none d-lg-flex">
                     <router-link
                             :to="{ name: 'Books.BooksView'}"
                             class="pointer pl-8"
@@ -39,30 +39,12 @@
                     </router-link>
                 </v-toolbar-title>
                 <span>
-                <v-tabs
-                        background-color="primary"
-                        class="d-flex d-sm-none"
-                ><v-tabs-slider></v-tabs-slider>
-                    <v-tab
-                            :key="m.name"
-                            :to="{ name: m.name }"
-                            v-for="m in menu"
-                    >
-                        <v-img
-                                contain
-                                max-height="25"
-                                max-width="25"
-                                src="@/assets/logo.png"
-                                v-if="m.logo"
-                        ></v-img>
-                        <v-icon>{{ m.icon }}</v-icon>
-                    </v-tab>
-                </v-tabs></span>
+                </span>
                 <v-spacer></v-spacer>
                 <span>
                 <v-tabs
                         background-color="primary"
-                        class="d-none d-sm-block"
+                        class="d-none d-md-block"
                         right
                 ><v-tabs-slider></v-tabs-slider>
                     <v-tab
@@ -99,8 +81,35 @@
 
 
             </v-app-bar>
-        </v-card>
 
+
+        </v-card>
+        <v-navigation-drawer
+          v-model="drawer"
+          absolute
+          temporary
+      >
+        <v-list
+            nav
+            dense
+        >
+          <v-list-item-group
+              v-model="group"
+              active-class="text--accent-4"
+          >
+            <v-list-item
+                :key="m.name"
+                :to="{ name: m.name }"
+                v-for="m in menu"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ m.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>{{ m.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
         <v-main>
 
             <router-view></router-view>
@@ -127,10 +136,17 @@
         },
         data() {
             return {
+                drawer: false,
                 openEdit: false,
+                group: null,
             }
         },
         computed: {
+            mini: {
+              get() {
+                return this.$vuetify.breakpoint.smAndDown;
+              },
+            },
             myPath: function () {
                 return this.$route.name
             },
@@ -144,7 +160,7 @@
             },
             menu: function () {
                 let menu = [
-                    { name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png" },
+                    { name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png", icon: "mdi-home" },
                     { name: 'Opds', title: "OPDS", icon: "mdi-book" },
                     { name: 'Donate', title: "Донат", icon: "mdi-wallet" },
                 ];
