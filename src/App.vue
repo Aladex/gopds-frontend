@@ -86,12 +86,13 @@
         </v-card>
         <v-navigation-drawer
           v-model="drawer"
-          absolute
           temporary
+          class="fixedDrawer"
       >
         <v-list
             nav
             dense
+
         >
           <v-list-item-group
               v-model="group"
@@ -207,5 +208,8 @@
     .cardColor {
         background-color: rgba(255, 255, 255, 0.85) !important;
         border-color: white !important;
+    }
+    .fixedDrawer {
+      position: fixed;
     }
 </style>
