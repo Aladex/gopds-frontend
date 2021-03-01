@@ -37,7 +37,7 @@
 
                             <v-text-field
                                     :disabled="fav"
-                                    :clearable="(selectedSearch.name === 'authorsBook')"
+                                    clearable
                                     @click:clear="authorsBook = ''"
                                     @keyup.enter="findByTitle"
                                     hide-details
@@ -234,17 +234,22 @@
                 this.$store.dispatch('setLength', 1);
                 switch (this.selectedSearch.name) {
                     case "book":
-                        this.$router.push(`/books/find/books/${this.searchItem}/1`).catch(() => {
-                        });
+                        if (this.searchItem === null) {
+                          this.$router.push(`/books/page/1`)
+                        } else {
+                          this.$router.push(`/books/find/books/${this.searchItem}/1`);
+                        }
                         break;
                     case "author":
-                        this.$router.push(`/books/authors/${this.searchItem}/1`).catch(() => {
-                        });
+                        if (this.searchItem === null) {
+                          this.$router.push(`/books/page/1`)
+                        } else {
+                          this.$router.push(`/books/authors/${this.searchItem}/1`);
+                        }
                         break;
                     case "authorsBook":
                         this.authorsBook = this.searchItem;
-                        this.$router.push(`/books/find/author/${this.$route.params.author}/1`).catch(() => {
-                        });
+                        this.$router.push(`/books/find/author/${this.$route.params.author}/1`);
                         break;
                 }
             },
@@ -289,7 +294,7 @@
                 this.makeSelects(path)
             },
             authorId(value) {
-                if (typeof value !== "undefined") {
+                if (value !== undefined) {
                   this.getAuthorName(value)
                 }
             },
