@@ -53,7 +53,10 @@
 
 <script>
     export default {
-        name: "Donate"
+        name: "Donate",
+        mounted() {
+          window.scrollTo(0, 0)
+        }
     }
 </script>
 
