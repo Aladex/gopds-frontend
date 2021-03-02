@@ -102,6 +102,7 @@
                 :key="m.name"
                 :to="{ name: m.name }"
                 v-for="m in menu"
+                @click="drawer = false"
             >
               <v-list-item-icon>
                 <v-icon>{{ m.icon }}</v-icon>
