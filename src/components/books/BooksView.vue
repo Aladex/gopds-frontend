@@ -346,12 +346,7 @@
         },
         methods: {
             cover(b) {
-                if (b.cover) {
-                    let path = b.path.replace(".", '-');
-                    let img = b.filename.replace(".", '-');
-                    return `/books-posters/${path}/${img}.jpg`
-                }
-                return "/books-posters/no-cover.png"
+                return `${process.env.VUE_APP_BACKEND_API_URL}book-posters/${b.id}`
             },
             makeShort(b) {
                 if (b.annotation === undefined) {
