@@ -1,7 +1,7 @@
 <template>
     <v-row justify="center">
         <v-col
-                class="mt-4"
+                class="mt-4 mb-2"
                 cols="12"
                 lg="8"
                 md="10"
@@ -71,6 +71,7 @@
                                     justify="end"
                             >
                                 <v-col
+                                        class="mt-3"
                                         cols="8"
                                         lg="8"
                                         md="8"
@@ -95,7 +96,15 @@
                                     sm="4"
                                 >
                                   <v-btn
-                                      class="mt-1"
+                                      class="mt-4"
+                                      icon
+                                      v-if="user.is_superuser"
+                                      :to="`/books/unapproved/1`"
+                                  >
+                                   <v-icon large>mdi-ballot-outline</v-icon>
+                                  </v-btn>
+                                  <v-btn
+                                      class="mt-4"
                                       icon
                                       :disabled="!have_favs"
                                       @click="fav = !fav"

@@ -87,7 +87,7 @@
                                                  :key="a.id"
                                                  v-for="a in b.authors"
                                          >
-                                            &#8195;&#8226;&#8195;
+                                            &#8226;
                                              <router-link
                                                      :to="`/books/find/author/${a.id}/1`"
                                                      class="info-link"
@@ -104,7 +104,7 @@
                                                  :key="s.id"
                                                  v-for="s in b.series"
                                          >
-                                            &#8195;&#8226;&#8195;
+                                            &#8226;
                                              <router-link
                                                      :to="`/books/find/series/${s.id}/1`"
                                                      class="info-link"
@@ -203,6 +203,13 @@
                             </v-row>
                           <v-card-actions><v-spacer></v-spacer>
                             <v-btn
+                                @click="updateBook(b)"
+                                icon v-if="user.is_superuser"
+                            >
+                              <v-icon v-if="b.approved">mdi-checkbox-marked-circle</v-icon>
+                              <v-icon v-else>mdi-checkbox-marked-circle-outline</v-icon>
+                            </v-btn>
+                            <v-btn
                                 icon
                                 @click="favBook(b)"
                             >
@@ -245,7 +252,7 @@
 
     export default {
         name: "BooksView",
-        props: ["page", "title", "searchBar", "author", "series"],
+        props: ["page", "title", "searchBar", "author", "series", "unapproved"],
         components: {
             BookFind,
             ItemsNotFound,
@@ -260,7 +267,7 @@
                 searchSelects: ["book", "author"],
                 disabledButtons: [],
                 disabled: false,
-                opened: []
+                opened: [],
             }
         },
         computed: {
@@ -409,6 +416,20 @@
               }
             })
           },
+          updateBook(book) {
+            book.approved = !book.approved
+            for (let i = 0; i < this.books.length; i++) {
+              if (this.books[i].id === book.id) {
+                this.books[i].approved = book.approved
+              }
+            }
+            this.$http.post(
+                `${process.env.VUE_APP_BACKEND_API_URL}api/admin/update-book`,
+                book,
+            ).then((response) => {
+              console.log(response)
+            })
+          },
           downloadFile(book, type) {
                 this.disabled = true;
                 let requestBody = {
@@ -470,6 +491,7 @@
                     author: this.author,
                     series: this.series,
                     fav: this.fav,
+                    unapproved: this.unapproved,
                     lang: this.user.books_lang
                 };
                 return this.$http
@@ -545,7 +567,13 @@
                 } else if (this.author === undefined && this.series === undefined) {
                   this.getBooks()
                 }
-                // this.getBooks()
+            },
+            unapproved(state) {
+              if (this.$route.path !== `/books/unapproved/1` && state) {
+                this.$router.push(`/books/unapproved/1`)
+              } else if (this.author === undefined && this.series === undefined) {
+                this.getBooks()
+              }
             },
             series(state) {
                 if (state !== undefined) { this.fav = false }

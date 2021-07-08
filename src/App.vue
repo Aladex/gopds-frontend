@@ -163,6 +163,7 @@
             menu: function () {
                 let menu = [
                     { name: 'Books.BooksView', title: "Книги", logo: "../assets/logo.png", icon: "mdi-home" },
+                    { name: 'BookUpload', title: "Добавить книгу", icon: "mdi-home" },
                     { name: 'Opds', title: "OPDS", icon: "mdi-book" },
                     { name: 'Donate', title: "Донат", icon: "mdi-wallet" },
                 ];

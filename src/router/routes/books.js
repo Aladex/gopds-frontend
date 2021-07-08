@@ -91,10 +91,33 @@ const booksRoutes = [
                     title: "Поиск автора: ",
                 }
             },
+            {
+                path: 'unapproved/:page',
+                name: 'Admin.Unapproved',
+                component: () => import(/* webpackChunkName: "authors" */ '@/components/books/BooksView.vue'),
+                props: (route) => {
+                    const page = Number.parseInt(route.params.page, 10);
+                    if (Number.isNaN(page)) {
+                        return 1
+                    }
+                    return {page, unapproved: true, searchBar: true}
+                },
+                meta: {
+                    title: "Неподтвержденные",
+                }
+            },
         ],
 
     },
-
+    {
+        path: '/upload/',
+        name: 'BookUpload',
+        component: () => import(/* webpackChunkName: "гздщфв" */ '@/components/BookUpload.vue'),
+        meta: {
+            requiresAuth: true,
+            title: "Добавить книгу",
+        }
+    },
 ]
 
 export default booksRoutes
