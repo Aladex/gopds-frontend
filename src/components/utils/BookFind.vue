@@ -101,8 +101,8 @@
 //                                      v-if="user.is_superuser"
 //                                      :to="`/books/unapproved/1`"
 //                                  >
-                                   <v-icon large>mdi-ballot-outline</v-icon>
-                                  </v-btn>
+//                                   <v-icon large>mdi-ballot-outline</v-icon>
+//                                  </v-btn>
                                   <v-btn
                                       class="mt-4"
                                       icon
