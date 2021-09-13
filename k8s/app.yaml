@@ -64,7 +64,7 @@ spec:
           - 0
       containers:
         - name: booksdump
-          image: aladex/gopds-frontend:v0.0.2
+          image: aladex/gopds-frontend:v0.0.5
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -115,6 +115,7 @@ metadata:
   name: booksdump
   namespace: booksdump
   annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Disposition,Content-Type';
@@ -132,14 +133,21 @@ spec:
   - host: "booksdump.com"
     http:
       paths:
-      - path: /api
+      - path: "/api/.*"
         pathType: Prefix
         backend:
           service:
             name: external-gopds
             port:
               number: 80
-      - path: /
+      - path: "/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump
+            port:
+              number: 80
+      - path: "/books/"
         pathType: Prefix
         backend:
           service:
@@ -149,14 +157,14 @@ spec:
   - host: "www.booksdump.com"
     http:
       paths:
-      - path: /api
+      - path: "/api/.*"
         pathType: Prefix
         backend:
           service:
             name: external-gopds
             port:
               number: 80
-      - path: /
+      - path: "/.*"
         pathType: Prefix
         backend:
           service:
