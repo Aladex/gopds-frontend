@@ -42,13 +42,14 @@
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   labels:
     app: booksdump
   name: booksdump
   namespace: booksdump
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: booksdump
@@ -63,7 +64,7 @@ spec:
           - 0
       containers:
         - name: booksdump
-          image: aladex/gopds-frontend:latest
+          image: aladex/gopds-frontend:v0.0.5
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -114,7 +115,12 @@ metadata:
   name: booksdump
   namespace: booksdump
   annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Disposition,Content-Type';
+      proxy_set_header        X-Real-IP       $remote_addr;
+      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
     cert-manager.io/issuer: "letsencrypt-prod"
 
 spec:
@@ -127,7 +133,21 @@ spec:
   - host: "booksdump.com"
     http:
       paths:
-      - path: /
+      - path: "/api/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: external-gopds
+            port:
+              number: 80
+      - path: "/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump
+            port:
+              number: 80
+      - path: "/books/"
         pathType: Prefix
         backend:
           service:
@@ -137,7 +157,14 @@ spec:
   - host: "www.booksdump.com"
     http:
       paths:
-      - path: /
+      - path: "/api/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: external-gopds
+            port:
+              number: 80
+      - path: "/.*"
         pathType: Prefix
         backend:
           service:
