@@ -64,7 +64,7 @@ spec:
           - 0
       containers:
         - name: booksdump
-          image: aladex/gopds-frontend:v0.0.9
+          image: aladex/gopds-frontend:v0.0.10
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
