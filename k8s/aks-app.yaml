@@ -42,7 +42,7 @@
 
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   labels:
     app: booksdump
