@@ -24,3 +24,31 @@ subsets:
   - name: sopds-api
     port: 8085
     protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booksdump-static
+  namespace: booksdump
+spec:
+  ports:
+  - name: sopds-static
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: booksdump-static
+  namespace: booksdump
+subsets:
+- addresses:
+  - ip: 95.216.252.34
+  ports:
+  - name: sopds-static
+    port: 80
+    protocol: TCP

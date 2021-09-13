@@ -64,7 +64,7 @@ spec:
           - 0
       containers:
         - name: booksdump
-          image: aladex/gopds-frontend:v0.0.5
+          image: aladex/gopds-frontend:v0.0.7
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -133,6 +133,13 @@ spec:
   - host: "booksdump.com"
     http:
       paths:
+      - path: "/books-posters/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump-static
+            port:
+              number: 80
       - path: "/api/.*"
         pathType: Prefix
         backend:
@@ -157,6 +164,38 @@ spec:
   - host: "www.booksdump.com"
     http:
       paths:
+      - path: "/books-posters/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump-static
+            port:
+              number: 80
+      - path: "/api/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: external-gopds
+            port:
+              number: 80
+      - path: "/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump
+            port:
+              number: 80
+
+  - host: "cdn.booksdump.com"
+    http:
+      paths:
+      - path: "/books-posters/.*"
+        pathType: Prefix
+        backend:
+          service:
+            name: booksdump-static
+            port:
+              number: 80
       - path: "/api/.*"
         pathType: Prefix
         backend:
