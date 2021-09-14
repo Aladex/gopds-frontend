@@ -358,7 +358,7 @@
                     let img = b.filename.replace(".", '-');
                     return `${process.env.VUE_APP_CDN_URL}books-posters/${path}/${img}.jpg`
                 }
-                return "${process.env.VUE_APP_CDN_URL}books-posters/no-cover.png"
+                return `${process.env.VUE_APP_CDN_URL}books-posters/no-cover.png`
             },
             makeShort(b) {
                 if (b.annotation === undefined) {
