@@ -1,7 +1,7 @@
 # build stage
 FROM node:lts-alpine as build-stage
 WORKDIR /app
-ENV CDN_PATH="https://booksdump.com"
+ENV CDN_PATH="https://cdn.booksdump.com"
 COPY package*.json ./
 RUN npm install
 COPY . .
