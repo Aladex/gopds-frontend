@@ -132,6 +132,13 @@ spec:
   - host: "booksdump.com"
     http:
       paths:
+      - path: "/opds(/|$)(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: external-gopds
+            port:
+              number: 80
       - path: "/books-posters/.*"
         pathType: Prefix
         backend:
@@ -163,6 +170,13 @@ spec:
   - host: "www.booksdump.com"
     http:
       paths:
+      - path: "/opds(/|$)(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: external-gopds
+            port:
+              number: 80
       - path: "/books-posters/.*"
         pathType: Prefix
         backend:
@@ -193,13 +207,6 @@ spec:
         backend:
           service:
             name: booksdump-static
-            port:
-              number: 80
-      - path: "/api/.*"
-        pathType: Prefix
-        backend:
-          service:
-            name: external-gopds
             port:
               number: 80
       - path: "/.*"
