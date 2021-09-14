@@ -112,7 +112,7 @@ const booksRoutes = [
     {
         path: '/upload/',
         name: 'BookUpload',
-        component: () => import(/* webpackChunkName: "гздщфв" */ '@/components/BookUpload.vue'),
+        component: () => import(/* webpackChunkName: "upload" */ '@/components/BookUpload.vue'),
         meta: {
             requiresAuth: true,
             title: "Добавить книгу",
