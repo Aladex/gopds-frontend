@@ -3,7 +3,6 @@ FROM node:lts-alpine as build-stage
 WORKDIR /app
 ENV CDN_PATH="https://booksdump.com"
 COPY package*.json ./
-COPY vue.config.js ./
 RUN npm install
 COPY . .
 RUN npm run build
