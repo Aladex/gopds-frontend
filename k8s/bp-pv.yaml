@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-posters
+  namespace: booksdump
+  labels:
+    type: local
+    id: posters
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 400Gi
+  hostPath:
+    path: /home/books/static/books
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - 2989.vm.abcd.hosting
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-path
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-posters
+  namespace: booksdump
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 400Gi
+  selector:
+    matchLabels:
+      id: posters
