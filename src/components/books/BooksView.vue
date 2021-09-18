@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            @click="downloadFile(b, 'zip')"
+                                            @click="getLink(b, 'zip')"
                                             class="secondary"
                                             width="100%"
                                         >FB2+ZIP
@@ -163,7 +163,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="downloadFile(b, 'fb2')"
+                                                    @click="getLink(b, 'fb2')"
                                                     class="secondary"
                                                     width="100%"
                                             >FB2
@@ -177,7 +177,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="downloadFile(b, 'epub')"
+                                                    @click="getLink(b, 'epub')"
                                                     class="secondary"
                                                     width="100%"
                                             >EPUB
@@ -191,7 +191,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="downloadFile(b, 'mobi')"
+                                                    @click="getLink(b, 'mobi')"
                                                     class="secondary"
                                                     width="100%"
                                             >MOBI
@@ -429,6 +429,11 @@
             ).then((response) => {
               console.log(response)
             })
+          },
+          getLink(book, type) {
+              this.$http.get(
+                  `${process.env.VUE_APP_BACKEND_API_URL}api/get/${type}/${book.id}`
+              )
           },
           downloadFile(book, type) {
                 this.disabled = true;
