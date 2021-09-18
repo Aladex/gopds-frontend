@@ -432,7 +432,7 @@
           },
           getLink(book, type) {
               this.$http.get(
-                  `${process.env.VUE_APP_BACKEND_API_URL}api/get/${type}/${book.id}`
+                  `${process.env.VUE_APP_BACKEND_API_URL}api/books/get/${type}/${book.id}`
               )
           },
           downloadFile(book, type) {
