@@ -1,14 +1,11 @@
 # build stage
 FROM node:16-alpine3.11 as build-stage
-ARG NODE_ENV
-ARG VUE_APP_BACKEND_API_URL
-ARG VUE_APP_CDN_URL
-ARG VUE_APP_ONPAGE
+ARG BUILD
 WORKDIR /app
-COPY package.json yarn.lock ./
+COPY .env.* package.json yarn.lock ./
 RUN yarn
 COPY . ./
-RUN yarn build
+RUN yarn build $BUILD
 
 # production stage
 FROM nginx:stable-alpine as production-stage
