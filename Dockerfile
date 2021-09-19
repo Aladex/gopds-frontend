@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
 COPY . ./
-RUN yarn build ${BUILD}
+RUN yarn build $BUILD
 
 # production stage
 FROM nginx:stable-alpine as production-stage
