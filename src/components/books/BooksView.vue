@@ -149,9 +149,10 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            :href="filesUrl + 'api/books/get/zip/'+ b.id"
+                                            :href="filesUrl + 'api/books/get/zip/'+ b.id + '?token=' + token"
                                             class="secondary"
                                             width="100%"
+                                            target="_blank"
                                         >FB2+ZIP
                                         </v-btn>
                                       </v-col>
@@ -163,7 +164,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/fb2/' + b.id"
+                                                :href="filesUrl + 'api/books/get/fb2/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -178,7 +179,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/epub/' + b.id"
+                                                :href="filesUrl + 'api/books/get/epub/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -193,7 +194,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/mobi/' + b.id"
+                                                :href="filesUrl + 'api/books/get/mobi/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -275,6 +276,11 @@
             }
         },
         computed: {
+          token: {
+            get() {
+              return this.$store.getters.token
+            },
+          },
             user: {
               get() {
                 return this.$store.getters.user
