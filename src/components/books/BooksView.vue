@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            :href="filesUrl + 'api/books/get/zip/'+ b.id + '?token=' + token"
+                                            :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token"
                                             class="secondary"
                                             width="100%"
                                             target="_blank"
@@ -164,7 +164,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/fb2/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -179,7 +179,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/epub/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -194,7 +194,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'api/books/get/mobi/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
