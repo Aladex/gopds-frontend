@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            @click="getLink(b, 'zip')"
+                                            @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/zip/${b.id}`"
                                             class="secondary"
                                             width="100%"
                                         >FB2+ZIP
@@ -163,7 +163,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="getLink(b, 'fb2')"
+                                                @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/fb2/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
                                             >FB2
@@ -177,7 +177,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="getLink(b, 'epub')"
+                                                @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/epub/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
                                             >EPUB
@@ -191,7 +191,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                    @click="getLink(b, 'mobi')"
+                                                @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/mobi/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
                                             >MOBI
