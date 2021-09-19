@@ -152,6 +152,7 @@
                                             @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/zip/${b.id}`"
                                             class="secondary"
                                             width="100%"
+                                            target="_blank"
                                         >FB2+ZIP
                                         </v-btn>
                                       </v-col>
@@ -166,6 +167,7 @@
                                                 @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/fb2/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
+                                                target="_blank"
                                             >FB2
                                             </v-btn>
                                         </v-col>
@@ -180,6 +182,7 @@
                                                 @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/epub/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
+                                                target="_blank"
                                             >EPUB
                                             </v-btn>
                                         </v-col>
@@ -194,6 +197,7 @@
                                                 @href="`${process.env.VUE_APP_BACKEND_API_URL}api/books/get/mobi/${b.id}`"
                                                     class="secondary"
                                                     width="100%"
+                                                target="_blank"
                                             >MOBI
                                             </v-btn>
                                         </v-col>
