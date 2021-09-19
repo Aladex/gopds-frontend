@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            :href="process.env.VUE_APP_BACKEND_API_URL + 'api/books/get/zip/'+ b.id"
+                                            :href="filesUrl + 'api/books/get/zip/'+ b.id"
                                             class="secondary"
                                             width="100%"
                                             target="_blank"
@@ -164,7 +164,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="process.env.VUE_APP_BACKEND_API_URL + 'api/books/get/fb2/' + b.id"
+                                                :href="filesUrl + 'api/books/get/fb2/' + b.id"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -179,7 +179,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="process.env.VUE_APP_BACKEND_API_URL + 'api/books/get/epub/' + b.id"
+                                                :href="filesUrl + 'api/books/get/epub/' + b.id"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -194,7 +194,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="process.env.VUE_APP_BACKEND_API_URL + 'api/books/get/mobi/' + b.id"
+                                                :href="filesUrl + 'api/books/get/mobi/' + b.id"
                                                     class="secondary"
                                                     width="100%"
                                                 target="_blank"
@@ -272,6 +272,7 @@
                 disabledButtons: [],
                 disabled: false,
                 opened: [],
+                filesUrl: process.env.VUE_APP_BACKEND_API_URL
             }
         },
         computed: {
