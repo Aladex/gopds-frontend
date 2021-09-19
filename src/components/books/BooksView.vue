@@ -433,7 +433,10 @@
           getLink(book, type) {
               this.$http.get(
                   `${process.env.VUE_APP_BACKEND_API_URL}api/books/get/${type}/${book.id}`
-              )
+              ).then((response) => {
+                console.log(response.request.responseURL)
+                window.open(response.request.responseURL)
+              })
           },
           downloadFile(book, type) {
                 this.disabled = true;
