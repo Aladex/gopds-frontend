@@ -152,7 +152,6 @@
                                             :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token"
                                             class="secondary"
                                             width="100%"
-                                            target="_blank"
                                         >FB2+ZIP
                                         </v-btn>
                                       </v-col>
@@ -167,7 +166,6 @@
                                                 :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
-                                                target="_blank"
                                             >FB2
                                             </v-btn>
                                         </v-col>
@@ -182,7 +180,6 @@
                                                 :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
-                                                target="_blank"
                                             >EPUB
                                             </v-btn>
                                         </v-col>
@@ -197,7 +194,6 @@
                                                 :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token"
                                                     class="secondary"
                                                     width="100%"
-                                                target="_blank"
                                             >MOBI
                                             </v-btn>
                                         </v-col>
