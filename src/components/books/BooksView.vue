@@ -152,7 +152,6 @@
                                             :href="filesUrl + 'api/books/get/zip/'+ b.id"
                                             class="secondary"
                                             width="100%"
-                                            target="_blank"
                                         >FB2+ZIP
                                         </v-btn>
                                       </v-col>
