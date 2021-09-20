@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token"
+                                            :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token + '&ts=' + Number(new Date())"
                                             class="secondary"
                                             width="100%"
                                         >FB2+ZIP
@@ -163,7 +163,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
                                                     class="secondary"
                                                     width="100%"
                                             >FB2
@@ -177,7 +177,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
                                                     class="secondary"
                                                     width="100%"
                                             >EPUB
@@ -191,7 +191,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token"
+                                                :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
                                                     class="secondary"
                                                     width="100%"
                                             >MOBI
