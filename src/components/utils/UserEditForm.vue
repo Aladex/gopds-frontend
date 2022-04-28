@@ -41,12 +41,19 @@
                                             v-model="user.last_name"
                                     ></v-text-field>
                                 </v-col>
+                              <v-col cols="12">
+                                <v-text-field
+                                    label="Токен"
+                                    v-model="user.bot_token"
+                                ></v-text-field>
+                              </v-col>
                                 <v-col cols="6">
                                     <v-checkbox
                                             label="Активен"
                                             v-model="user.active"
                                     ></v-checkbox>
                                 </v-col>
+
                                 <v-col cols="6">
                                     <v-checkbox
                                             label="Админ"
