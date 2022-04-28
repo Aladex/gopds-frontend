@@ -93,6 +93,7 @@
                     {text: 'E-Mail', value: 'email', sortable: false},
                     {text: 'Последний логин', value: 'last_login'},
                     {text: 'Дата регистрации', value: 'date_joined'},
+                    {text: 'Токен бота', value: 'bot_token'},
                     {text: 'Действия', value: 'action', sortable: false, align: 'right'}
                 ],
             }
