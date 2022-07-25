@@ -94,6 +94,7 @@
                     {text: 'Последний логин', value: 'last_login'},
                     {text: 'Дата регистрации', value: 'date_joined'},
                     {text: 'Токен бота', value: 'bot_token'},
+                    {text: 'ID чата', value: 'telegram_id'},
                     {text: 'Действия', value: 'action', sortable: false, align: 'right'}
                 ],
             }
