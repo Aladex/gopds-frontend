@@ -149,7 +149,7 @@
                                           xs="6"
                                       >
                                         <v-btn
-                                            :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token + '&ts=' + Number(new Date())"
+                                            :href="filesUrl + 'files/books/get/zip/'+ b.id + '?token=' + token + '&ts=' + timestamp"
                                             class="secondary"
                                             width="100%"
                                         >FB2+ZIP
@@ -163,7 +163,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
+                                                :href="filesUrl + 'files/books/get/fb2/' + b.id + '?token=' + token + '&ts=' + timestamp"
                                                     class="secondary"
                                                     width="100%"
                                             >FB2
@@ -177,7 +177,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
+                                                :href="filesUrl + 'files/books/get/epub/' + b.id + '?token=' + token + '&ts=' + timestamp"
                                                     class="secondary"
                                                     width="100%"
                                             >EPUB
@@ -191,7 +191,7 @@
                                                 xs="6"
                                         >
                                             <v-btn
-                                                :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token + '&ts=' + Number(new Date())"
+                                                :href="filesUrl + 'files/books/get/mobi/' + b.id + '?token=' + token + '&ts=' + timestamp"
                                                     class="secondary"
                                                     width="100%"
                                             >MOBI
@@ -261,6 +261,7 @@
         data() {
             return {
                 disable_fav: false,
+                timestamp: Number(new Date()),
                 loading: true,
                 books: Array.from(Array(10).keys()),
                 searchSelect: "book",
@@ -358,6 +359,10 @@
             },
         },
         methods: {
+            // Async timestamp updater
+            async updateTimestamp() {
+                this.timestamp = Number(new Date())
+            },
             cover(b) {
                 if (b.cover) {
                     let path = b.path.replace(".", '-');
@@ -376,7 +381,6 @@
                 }
                 return wordsList.slice(0, 40).join(" ")
             },
-            itemText: item => item.language,
             setThisPage(page) {
                 this.$store.dispatch('setPage', page)
             },
@@ -436,39 +440,6 @@
               console.log(response)
             })
           },
-          getLink(book, type) {
-              this.$http.get(
-                  `${process.env.VUE_APP_BACKEND_API_URL}api/books/get/${type}/${book.id}`
-              ).then((response) => {
-                console.log(response.request.responseURL)
-                window.open(response.request.responseURL)
-              })
-          },
-          downloadFile(book, type) {
-                this.disabled = true;
-                let requestBody = {
-                    book_id: book.id,
-                    format: type,
-                };
-                this.$http.post(
-                    `${process.env.VUE_APP_BACKEND_API_URL}api/books/file`,
-                    requestBody,
-                    {
-                        responseType: 'blob',
-                    }
-                ).then((response) => {
-                    let fileName = response.headers["content-disposition"].split("filename=")[1];
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', `${fileName}`);
-                    document.body.appendChild(link);
-                    link.click();
-                    this.disabled = false
-                }).catch(() => {
-                    this.disabled = false
-                })
-            },
             getLangs() {
               return this.$http
                   .get(`${process.env.VUE_APP_BACKEND_API_URL}api/books/langs`)
@@ -532,16 +503,6 @@
                         this.$router.push('/login')
                     })
             },
-          setUserLang() {
-              return new Promise(resolve => {
-                this.langs.forEach((l) => {
-                  if (l.language === this.user.books_lang) {
-                    this.lang = l
-                  }
-                })
-                resolve()
-              })
-          }
         },
 
         mounted() {
@@ -556,6 +517,11 @@
                 this.getBooks()
               })
             })
+          // Update timestamp value every 5 seconds in background
+          setInterval(() => {
+            this.timestamp = Number(new Date())
+          }, 5000)
+
         },
         watch: {
             page() {
