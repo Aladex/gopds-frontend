@@ -26,17 +26,37 @@
                             width="100%"></iframe>
                 </v-col>
                 <v-col
+                          cols="12"
+                >
+                  <h3>Отправить деньги на Tinkoff</h3>
+                  <p>Номер карты: 5536 9139 9418 6852</p>
+                  <p>Или по ссылке<a href="https://www.tinkoff.ru/cf/634wAzuZc0Z">ссылке</a></p>
+                </v-col>
+                <v-col
+                          cols="12"
+                >
+                  <h3>Отправить донат криптовалютой</h3>
+                  <p>Bitcoin: bc1qrc9ltlw7mkd5reaazgtpwv3d2a70s5cj40yv97</p>
+                  <p>Ethereum: 0xDF0cdEAfF312241b2f156fCc5F180F9A7ad28a20</p>
+                  <p>USDT (ERC20): 0xDF0cdEAfF312241b2f156fCc5F180F9A7ad28a20</p>
+                  <p>Polkadot: 13tBZbbTFGHt7b1CDa3DkowLq7cxJFvuVraNx2McZUcqQpB1</p>
+                </v-col>
+                <v-col
+                          cols="12"
+                >
+                  <h3>Отправить донат через PayPal</h3>
+                  <p><a href="https://www.paypal.com/donate/?hosted_button_id=PJ9RC6X742T62">https://www.paypal.com/donate/?hosted_button_id=PJ9RC6X742T62</a></p>
+                </v-col>
+                <v-col
+                            cols="12"
+                >
+                  <h3>Отправить донат через BuyMeACoffee</h3>
+                  <p><a href="https://www.buymeacoffee.com/aladex">https://www.buymeacoffee.com/aladex</a></p>
+                </v-col>
+                <v-col
                         cols="12"
                 >
-                    <h3>Какие расходы требуются для содержания библиотеки?</h3>
-                    <ol>
-                        <li>12 евро раз в три месяца на оплату VDS</li>
-                        <li>Оплата интернет</li>
-                        <li>Иногда я кушаю</li>
-                        <li>Очень хочется добавить в библиотеку SSD на 1TB</li>
-                        <li>Было бы супер, если бы мы скинулись на новое железо</li>
-                    </ol>
-                    <p>Больше расходов и нет.</p>
+                    <h3>Многое поменялось со старта проекта, но он и дальше будет бесплатным, но я буду рад любым донатам</h3>
                 </v-col>
                 <v-col
                         class="text-center"
