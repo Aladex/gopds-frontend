@@ -11,7 +11,7 @@ const donateRoutes = [
     {
         path: '/catalog',
         name: 'Opds',
-        component: () => import(/* webpackChunkName: "opds" */ '@/components/Opds.vue'),
+        component: () => import(/* webpackChunkName: "catalog" */ '@/components/Opds.vue'),
         meta: {
             requiresAuth: true,
             title: "OPDS",
