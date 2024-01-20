@@ -9,7 +9,7 @@ const donateRoutes = [
         }
     },
     {
-        path: '/opds',
+        path: '/catalog',
         name: 'Opds',
         component: () => import(/* webpackChunkName: "opds" */ '@/components/Opds.vue'),
         meta: {
